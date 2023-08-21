@@ -1,33 +1,17 @@
 import Link from 'next/link';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import Image from 'next/image';
+import { Logo } from '../components/AppLayout/logo/Logo';
 
 export default function Home() {
-  const { user } = useUser();
-  console.log('🚀 ~ file: index.js:6 ~ Home ~ user:', user);
-
   return (
-    <div>
-      <h1>Home</h1>
-      <div>
-        {!!user ? (
-          <>
-            <div>
-              <Image
-                src={user.picture}
-                alt={user.name}
-                width={50}
-                height={50}
-              />
-              <div>{user.email}</div>
-               
-              <p>{user.name}</p>
-            </div>
-            <Link href="api/auth/logout">Logout</Link>
-          </>
-        ) : (
-          <Link href="api/auth/login">Login</Link>
-        )}
+    <div className="w-screen h-screen overflow-hidden flex justify-center items-center relative body-home">
+      <div className="relative z-10 text-white px-10 py-5 mx-3 text-center max-w-screen-md bg-slate-900/80 rounded-xl backdrop-blur-sm font-bold">
+        <Logo />
+        <p className="text-xl font-normal pb-5">
+          The AI-powered SAAS platform for content and image creation
+        </p>
+        <Link href="/post/new" className="btn ">
+          Begin
+        </Link>
       </div>
     </div>
   );
