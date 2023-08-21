@@ -1,6 +1,7 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { Configuration, OpenAIApi } from 'openai';
 import clientPromise from '../../lib/mongodb';
+import moment from 'moment';
 
 export default withApiAuthRequired(async function handler(req, res) {
   const { user } = await getSession(req, res);
@@ -18,6 +19,8 @@ export default withApiAuthRequired(async function handler(req, res) {
   const postContent = 'This is a mocked post content for testing purposes.';
   const title = 'Mocked Title';
   const metaDescription = 'Mocked meta description for the article.';
+  const topic = 'Mocked Topic';
+  const keywords = 'Mocked, Keywords';
 
   // const config = new Configuration({
   //   apiKey: process.env.OPENAI_API_KEY,
@@ -102,6 +105,7 @@ export default withApiAuthRequired(async function handler(req, res) {
   //   metaDescriptionResult.data.choices[0]?.message.content || '';
 
   console.log('POST CONTENT: ', postContent);
+
   console.log('TITLE: ', title);
   console.log('META DESCRIPTION: ', metaDescription);
   // console.log(postContentResult.data.choices[0]?.message.content);
@@ -117,18 +121,22 @@ export default withApiAuthRequired(async function handler(req, res) {
     }
   );
 
-  const post = db.collection('posts').insertOne({
-    postContent,
-    title,
-    metaDescription,
+  const currentDate = new Date();
+  const formattedDate = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a');
+
+  const post = await db.collection('posts').insertOne({
+    postContent: postContent || '',
+    title: title || '',
+    metaDescription: metaDescription || '',
+    topic,
+    keywords,
     userId: userProfile._id,
+    created: formattedDate,
   });
 
+  console.log('POST: ', post);
+
   res.status(200).json({
-    post: {
-      postContent,
-      title,
-      metaDescription,
-    },
+    postId: post.insertedId,
   });
 });

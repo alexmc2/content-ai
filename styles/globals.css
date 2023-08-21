@@ -2,13 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading my-6 font-bold;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
+  }
+
+  p {
+    @apply my-2;
+  }
+
+  ul,
+  ol {
+    @apply my-4;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    @apply my-2;
+  }
+}
 .body-home {
   @apply bg-cover;
   background-image: url('/background7.webp');
   background-position-x: center;
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
-  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @layer components {

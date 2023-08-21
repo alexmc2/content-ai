@@ -12,7 +12,9 @@ export default async function handler(req, res) {
   const userProfiles = await db.collection('users').updateOne(
     {
       auth0Id: user.sub,
+      email : user.email,
     },
+
     {
       $inc: {
         availableTokens: 10,
