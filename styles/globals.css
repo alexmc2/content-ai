@@ -2,7 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+.body-home {
+  @apply bg-cover;
+  background-image: url('/background7.webp');
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body {
+  @apply bg-gradient-to-b from-slate-800 to-slate-600;
+
+}
+
+
 @layer base {
+  a:hover {
+    @apply underline;
+  }
+
   h1,
   h2,
   h3,
@@ -31,6 +48,7 @@
 
   p {
     @apply my-2;
+    @apply text-lg;
   }
 
   ul,
@@ -49,13 +67,6 @@
   li {
     @apply my-2;
   }
-}
-.body-home {
-  @apply bg-cover;
-  background-image: url('/background7.webp');
-  background-position-x: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 @layer components {

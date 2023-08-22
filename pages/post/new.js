@@ -2,6 +2,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { AppLayout } from '../../components/AppLayout';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { getAppProps } from '../../utils/getAppProps';
 
 export default function NewPost(props) {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function NewPost(props) {
 
   return (
     <div>
+        <div className="bg-white p-8 border my-8 rounded-md mx-8 ">
       <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -56,6 +58,7 @@ export default function NewPost(props) {
         </button>
       </form>
     </div>
+    </div>
   );
 }
 
@@ -63,8 +66,11 @@ NewPost.getLayout = function getLayout(page, pageProps) {
   return <AppLayout {...pageProps}>{page}</AppLayout>;
 };
 
-export const getServerSideProps = withPageAuthRequired(() => {
-  return {
-    props: {},
-  };
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps(ctx) {
+    const props = await getAppProps(ctx);
+    return {
+      props,
+    };
+  },
 });

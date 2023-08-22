@@ -1,27 +1,31 @@
 import '../styles/globals.css';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
-import { DM_Sans, DM_Serif_Display } from '@next/font/google';
+import { DM_Sans, Roboto, Inter } from '@next/font/google';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
+// const dmSans = DM_Sans({
+//   weight: ['400', '500', '700'],
+//   subsets: ['latin'],
+//   variable: '--font-dm-sans',
+// });
 
-const dmSans = DM_Sans({
+// const roboto = Roboto({
+//   weight: ['400', '500', '700'],
+//   subsets: ['latin'],
+//   variable: '--font-roboto',
+// });
+
+const inter = Inter({
   weight: ['400', '500', '700'],
   subsets: ['latin'],
-  variable: '--font-dm-sans',
-});
-
-const dmSerifDisplay = DM_Serif_Display({
-  weight: ['400'],
-  subsets: ['latin'],
-  variable: '--font-dm-serif',
+  variable: '--font-inter',
 });
 
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
-
   return (
     <UserProvider>
-      <main className={`${dmSans.variable} font-body`}>
+      <main className={`${inter.variable} ${inter.variable} font-body`}>
         {getLayout(<Component {...pageProps} />, pageProps)}
       </main>
     </UserProvider>
