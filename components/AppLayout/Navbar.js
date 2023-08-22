@@ -14,7 +14,7 @@ export const StickyNavbar = (props) => {
 
   React.useEffect(() => {
     window.addEventListener(
-      "resize",
+      'resize',
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
@@ -37,24 +37,14 @@ export const StickyNavbar = (props) => {
         </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">{navList}</div>
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden"
-          >
-           
-          </Button>
+          <Button variant="gradient" size="sm" className="hidden"></Button>
           <IconButton
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
             ripple={true}
-            onClick={() => setOpenNav(!openNav)}
+            onClick={props.onMenuButtonClick}
           >
-            {openNav ? (
-              <Bars3Icon className="h-6 w-6" />
-            ) : (
-              <Bars3Icon className="h-6 w-6" />
-            )}
+            <Bars3Icon className="h-6 w-6" />
           </IconButton>
         </div>
       </div>

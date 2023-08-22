@@ -24,6 +24,7 @@ export const AppLayout = ({
 
   return (
     <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-300 ease-in-out">
+         {shown && (
       <div
         className={classNames({
           'bg-indigo-700 text-zinc-50 fixed md:static md:translate-x-0 z-20 h-full transition-all duration-300 ease-in-out': true,
@@ -108,6 +109,7 @@ export const AppLayout = ({
           </div>
         </div>
       </div>
+         )}
       <div className="flex-1 overflow-y-auto">
         <div>{children}</div>
       </div>
