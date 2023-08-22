@@ -1,78 +1,116 @@
-import Image from 'next/image';
+import React from 'react';
+import classNames from 'classnames';
 import Link from 'next/link';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoins } from '@fortawesome/free-solid-svg-icons';
-import { Logo } from './logo';
+import Image from 'next/image';
 
-export const AppLayout = ({ children, availableTokens, posts, postId }) => {
+import { Logo } from './logo';
+import {
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+} from '@heroicons/react/24/outline';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { Button } from '@material-tailwind/react';
+
+export const AppLayout = ({
+  children,
+  availableTokens,
+  shown,
+  posts,
+  postId,
+}) => {
   const { user } = useUser();
+  const [collapsed, setCollapsed] = React.useState(false);
+  const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
 
   return (
-    <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-      <div className="flex flex-col text-white overflow-hidden">
-        <div className="bg-slate-900 px-2">
-          <Logo />
-          <Link
-            href="/post/new"
-            className="bg-green-500 tracking-wider w-full text-center text-white font-bold cursor-pointer uppercase px-4 py-2 rounded-md hover:bg-green-600 transition-colors block"
+    <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-300 ease-in-out">
+      <div
+        className={classNames({
+          'bg-indigo-700 text-zinc-50 fixed md:static md:translate-x-0 z-20 h-full transition-all duration-300 ease-in-out': true,
+          'w-[300px]': !collapsed,
+          'w-16': collapsed,
+          '-translate-x-full': !shown,
+        })}
+      >
+        <div
+          className={classNames({
+            'flex flex-col justify-between h-screen sticky inset-0 w-full': true,
+          })}
+        >
+          <div
+            className={classNames({
+              'flex items-center border-b border-b-indigo-800 transition-none': true,
+              'p-4 justify-between': !collapsed,
+              'py-4 justify-center': collapsed,
+            })}
           >
-            New Post
-          </Link>
-          <Link href="/token-topup" className="block mt-2 text-center py-2">
-            <FontAwesomeIcon icon={faCoins} className=" text-yellow-500" />
-            <span className="pl-1">{availableTokens} Tokens </span>
-            Available
-          </Link>
-        </div>
-        <div className="px-4 flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-800">
-          {posts.map((post) => (
-            <Link
-              key={post._id}
-              href={`/post/${post._id}`}
-              className={`py-1 border border-white/0 block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
-                postId === post._id ? 'bg-white/20 border-white' : ''
-              }`}
+            {!collapsed && <Logo />}
+            <button
+              className="grid place-content-center hover:bg-indigo-800 w-10 h-10 rounded-full opacity-0 md:opacity-100"
+              onClick={() => setCollapsed(!collapsed)}
             >
-              {post.topic}
-            </Link>
-          ))}
-          {/* {!noMorePosts && (
-            <div
-              onClick={() => {
-                getPosts({ lastPostDate: posts[posts.length - 1].created });
-              }}
-              className="hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4"
+              <Icon className="w-5 h-5" />
+            </button>
+          </div>
+          <nav className="flex-grow">
+            <ul
+              className={classNames({
+                'my-2 flex flex-col gap-2 items-stretch': true,
+              })}
             >
-              Load more posts
-            </div>
-          )} */}
-        </div>
-        <div className="bg-blue-600 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
-          {!!user ? (
-            <>
-              <div className="min-w-[50px]">
-                <Image
-                  src={user.picture}
-                  alt={user.name}
-                  height={50}
-                  width={50}
-                  className="rounded-full"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="font-bold">{user.email}</div>
-                <Link className="text-sm" href="/api/auth/logout">
-                  Logout
+              <Button className="px-3 py-3 mx-8 text-sm">
+                <Link href="/post/new">New Post</Link>
+              </Button>
+              <li>
+                <Link
+                  href="/token-topup"
+                  className="block mt-2 text-center py-2"
+                >
+                  <span className="pl-1">{availableTokens} Tokens </span>
+                  Available
                 </Link>
-              </div>
-            </>
-          ) : (
-            <Link href="/api/auth/login">Login</Link>
-          )}
+              </li>
+              {posts.map((post) => (
+                <Link
+                  key={post._id}
+                  href={`/post/${post._id}`}
+                  className={`py-1 border border-white/0 block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
+                    postId === post._id ? 'bg-white/20 border-white' : ''
+                  }`}
+                >
+                  {post.topic}
+                </Link>
+              ))}
+            </ul>
+          </nav>
+          <div className="bg-indigo-700 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
+            {!!user ? (
+              <>
+                <div className="min-w-[50px]">
+                  <Image
+                    src={user.picture}
+                    alt={user.name}
+                    height={50}
+                    width={50}
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="font-bold">{user.email}</div>
+                  <Link className="text-sm" href="/api/auth/logout">
+                    Logout
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <Link href="/api/auth/login">Login</Link>
+            )}
+          </div>
         </div>
       </div>
-      {children}
+      <div className="flex-1 overflow-y-auto">
+        <div>{children}</div>
+      </div>
     </div>
   );
 };

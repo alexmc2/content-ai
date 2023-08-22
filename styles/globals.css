@@ -10,10 +10,9 @@
   background-attachment: fixed;
 }
 body {
-  @apply bg-gradient-to-b from-slate-800 to-slate-600;
-
+  /* @apply bg-gradient-to-b from-slate-950 to-slate-800; */
+  @apply bg-gray-200;
 }
-
 
 @layer base {
   a:hover {

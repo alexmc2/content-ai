@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { DM_Sans, Roboto, Inter } from '@next/font/google';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { ThemeProvider } from '@material-tailwind/react';
 
 // const dmSans = DM_Sans({
 //   weight: ['400', '500', '700'],
@@ -24,11 +25,13 @@ const inter = Inter({
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
-    <UserProvider>
-      <main className={`${inter.variable} ${inter.variable} font-body`}>
-        {getLayout(<Component {...pageProps} />, pageProps)}
-      </main>
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <main className={`${inter.variable} ${inter.variable} font-body`}>
+          {getLayout(<Component {...pageProps} />, pageProps)}
+        </main>
+      </UserProvider>
+    </ThemeProvider>
   );
 }
 

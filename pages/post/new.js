@@ -1,5 +1,5 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { AppLayout } from '../../components/AppLayout';
+import { Layout } from '../../components/AppLayout/Layout';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
@@ -27,43 +27,44 @@ export default function NewPost(props) {
   };
 
   return (
-    <div>
-        <div className="bg-white p-8 border my-8 rounded-md mx-8 ">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            <strong>Generate a new aticle on the topic of:</strong>
-          </label>
-          <textarea
-            className="resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-sm"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-            maxLength={80}
-          />
-        </div>
-        <div>
-          <label>
-            <strong>Targeting the following keywords:</strong>
-          </label>
-          <textarea
-            className="resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-sm"
-            value={keywords}
-            onChange={(e) => setKeywords(e.target.value)}
-            maxLength={80}
-          />
-        </div>
-        <div></div>
-        <button type="submit" className="btn">
-          Generate
-        </button>
-      </form>
-    </div>
+    // <div className="container h-screen flex justify-center items-center">
+    //   <div className="bg-white p-8 border rounded-md max-w-xl w-full ">
+    <div className="flex justify-center items-center h-screen">
+      <div className="bg-white p-8 border my-8 rounded-md mx-8 w-full max-w-xl">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="text-gray-700 text-md block mb-2">
+              <strong>Generate a new article on the topic of:</strong>
+            </label>
+            <textarea
+              className="resize-none border w-full py-2 px-3 text-gray-700 leading-tight rounded"
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              maxLength={120}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="text-gray-700 text-md block mb-2">
+              <strong>Targeting the following keywords:</strong>
+            </label>
+            <textarea
+              className="resize-none border w-full py-2 px-3 text-gray-700 leading-tight rounded"
+              value={keywords}
+              onChange={(e) => setKeywords(e.target.value)}
+              maxLength={120}
+            />
+          </div>
+          <button type="submit" className="btn">
+            Generate
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
 
 NewPost.getLayout = function getLayout(page, pageProps) {
-  return <AppLayout {...pageProps}>{page}</AppLayout>;
+  return <Layout {...pageProps}>{page}</Layout>;
 };
 
 export const getServerSideProps = withPageAuthRequired({
