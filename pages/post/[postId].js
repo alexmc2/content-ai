@@ -11,9 +11,9 @@ export default function Post(props) {
   console.log('props', props);
 
   return (
-    <div className="overflow-auto h-full">
-      <div className="max-w-screen-md mx-auto">
-        <div className="bg-white p-8 border my-8 rounded-md ">
+    <div className="overflow-auto h-full  ">
+      <div className="max-w-screen-md mx-auto py-8 ">
+        <div className="bg-white p-8 border my-8  rounded-md ">
           <div className="text-md font-bold mt-2 p-2 px-4 bg-stone-200 rounded-sm">
             SEO title and meta description
           </div>

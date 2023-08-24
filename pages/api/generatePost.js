@@ -114,8 +114,8 @@ Discover the amazing history, personalities, and different types of dogs. From t
 
 `;
 
-  const topic = 'The joys of owning a goldfish';
-  const keywords = 'goldfish, pet, fish, aquarium, water, tank, food, care';
+  const topic = 'The joys of visiting the Metropolitan Museum of Art';
+  const keywords = 'garden, park, museum, art, history, culture';
 
   // const config = new Configuration({
   //   apiKey: process.env.OPENAI_API_KEY,
@@ -198,8 +198,6 @@ Discover the amazing history, personalities, and different types of dogs. From t
   // const title = titleResult.data.choices[0]?.message.content || '';
   // const metaDescription =
   //   metaDescriptionResult.data.choices[0]?.message.content || '';
-
-
 
   // console.log(postContentResult.data.choices[0]?.message.content);
 

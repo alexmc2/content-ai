@@ -1,8 +1,9 @@
 
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { StickyNavbar } from './Navbar';
+import { BurgerIcon } from './Navbar';
 import { AppLayout } from './AppLayout';
+
 
 // export const Layout = (props) => {
 //   const [collapsed, setSidebarCollapsed] = useState(false);
@@ -47,10 +48,10 @@ export const Layout = (props) => {
         shown={showSidebar}
         {...props} // Pass down all props from Layout to AppLayout
       >
-        <div className="">
-          <StickyNavbar
+          <BurgerIcon
             onMenuButtonClick={() => setShowSidebar((prev) => !prev)}
           />
+        <div className="">
           {props.children}
         </div>
       </AppLayout>

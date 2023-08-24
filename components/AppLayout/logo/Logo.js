@@ -4,8 +4,10 @@ import { faBrain } from '@fortawesome/free-solid-svg-icons';
 
 export const Logo = () => {
   return (
-    <div className="text-4xl text-center py-5 font-heading">
+    <div className="text-3xl mx-4 text-center font-heading ">
+    
       CONTENT-AI
+ 
      
     </div>
   );

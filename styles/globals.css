@@ -11,7 +11,7 @@
 }
 body {
   /* @apply bg-gradient-to-b from-slate-950 to-slate-800; */
-  @apply bg-gray-200;
+  @apply bg-gradient-to-b from-slate-800 to-sky-700;
 }
 
 @layer base {
@@ -73,3 +73,12 @@ body {
     @apply bg-green-500 tracking-wider w-full text-center text-white font-bold cursor-pointer uppercase px-4 py-2 mt-2 rounded-md hover:bg-green-600 transition-colors block;
   }
 }
+
+.opacity-0 {
+  opacity: 1 !important;
+}
+
+
+/* .w-full {
+  width: 0% !important; 
+} */

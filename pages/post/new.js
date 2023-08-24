@@ -3,6 +3,7 @@ import { Layout } from '../../components/AppLayout/Layout';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
+import { Button } from '@material-tailwind/react';
 
 export default function NewPost(props) {
   const router = useRouter();
@@ -54,9 +55,13 @@ export default function NewPost(props) {
               maxLength={120}
             />
           </div>
-          <button type="submit" className="btn">
+          <Button
+            type="submit"
+            color="green"
+            className=" text-md uppercase  w-full "
+          >
             Generate
-          </button>
+          </Button>
         </form>
       </div>
     </div>
