@@ -39,7 +39,7 @@ export const AppLayout = ({
   const [collapsed, setCollapsed] = React.useState(false);
   const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
   const [open, setOpen] = React.useState(0);
- 
+  
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);

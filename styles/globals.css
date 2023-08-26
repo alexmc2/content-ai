@@ -78,7 +78,34 @@ body {
   opacity: 1 !important;
 }
 
-
 /* .w-full {
   width: 0% !important; 
 } */
+
+.navbar {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: flex;
+
+  background-color: transparent !important;
+  transition: all 0.5s ease-in-out !important;
+}
+
+.navbar-sticky {
+  background-color: #006a48 !important;
+  opacity: 0.99 !important;
+}
+
+.animate-spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
