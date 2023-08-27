@@ -4,17 +4,8 @@ import { DM_Sans, Roboto, Inter } from '@next/font/google';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { ThemeProvider } from '@material-tailwind/react';
 
-// const dmSans = DM_Sans({
-//   weight: ['400', '500', '700'],
-//   subsets: ['latin'],
-//   variable: '--font-dm-sans',
-// });
 
-// const roboto = Roboto({
-//   weight: ['400', '500', '700'],
-//   subsets: ['latin'],
-//   variable: '--font-roboto',
-// });
+
 
 const inter = Inter({
   weight: ['400', '500', '700'],

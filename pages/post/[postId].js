@@ -12,7 +12,7 @@ export default function Post(props) {
 
   return (
     <div className="overflow-auto h-full m-4 ">
-      <div className="max-w-screen-md mx-auto py-8 ">
+      <div className="max-w-screen-lg mx-auto py-8 ">
         <div className="bg-white p-8 border  rounded-md ">
           <div className="text-md font-bold mt-2 p-2 px-4 bg-stone-200 rounded-sm">
             SEO title and meta description
@@ -71,6 +71,7 @@ export const getServerSideProps = withPageAuthRequired({
       };
     }
     return {
+      
       props: {
         postContent: post.postContent,
         title: post.title,

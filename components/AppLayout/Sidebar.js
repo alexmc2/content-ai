@@ -28,7 +28,7 @@ import {
   AccordionBody,
 } from '@material-tailwind/react';
 
-export const AppLayout = ({
+export const Sidebar = ({
   children,
   availableTokens,
   shown,
@@ -48,7 +48,7 @@ export const AppLayout = ({
   return (
     <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
       <div
-        className={`bg-slate-500 text-zinc-50 fixed md:static z-20 h-full transition-width duration-500 ease-in-out ${
+        className={`bg-gradient-to-b from-cyan-950 to-blue-500 text-zinc-50 fixed md:static z-20 h-full transition-width duration-500 ease-in-out ${
           collapsed ? 'w-16' : 'w-[300px]'
         } ${shown ? 'translate-x-0' : '-translate-x-full'}`}
       >
