@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { Logo } from '../components/AppLayout/logo/Logo';
-import { useRouter } from 'next/router';
 import { Button } from '@material-tailwind/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrain } from '@fortawesome/free-solid-svg-icons';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function Home() {
-  const router = useRouter();
-  const handleNavigation = () => {
-    router.push('/post/new');
-  };
+  const { user, error, isLoading } = useUser();
+  console.log('Is loading:', isLoading);
+  console.log('Error:', error);
+  console.log('User:', user);
 
   return (
     <div className="w-screen h-screen overflow-hidden flex justify-center items-center relative body-home">
@@ -19,13 +19,11 @@ export default function Home() {
         <div className="text-xl font-normal py-4">
           The AI-powered SAAS platform for content and image creation
         </div>
-        <Button
-          color="green"
-          className="px-10 w-full text-md mt-4 "
-          onClick={handleNavigation}
-        >
-          Begin
-        </Button>
+        <Link href="/post/new">
+          <div className="btn px-10 w-full text-md mt-4 text-left bg-green-500 hover:bg-green-600 rounded">
+            Begin
+          </div>
+        </Link>
       </div>
     </div>
   );

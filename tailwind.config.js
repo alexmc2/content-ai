@@ -27,8 +27,9 @@ module.exports = withMT({
       },
       fontFamily: {
         body: 'var(--font-inter)',
+        
 
-        heading: 'var(--font-inter)',
+        heading: 'var(--font-monospace)',
       },
       colors: {
         slate: {

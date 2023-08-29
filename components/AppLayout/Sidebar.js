@@ -1,17 +1,21 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Logo } from './logo';
 import {
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   PencilSquareIcon,
   CircleStackIcon,
   ChevronDownIcon,
-  ChevronRightIcon,
   ChevronUpIcon,
   FolderIcon,
+  DocumentPlusIcon,
+  PowerIcon,
+  PhotoIcon,
+  HomeIcon
 } from '@heroicons/react/24/outline';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import {
@@ -35,20 +39,36 @@ export const Sidebar = ({
   posts,
   postId,
 }) => {
-  const { user } = useUser();
+  const { user, error, isLoading } = useUser();
+
+  console.log('Error:', error);
+  console.log('User:', user);
+  console.log('Is loading:', isLoading);
+
   const [collapsed, setCollapsed] = React.useState(false);
-  const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
+  const Icon = collapsed ? ChevronRightIcon : ChevronLeftIcon;
   const [open, setOpen] = React.useState(0);
-  
+
+  const router = useRouter();
+  const isOnNewPostPage = router.asPath === '/post/new';
+  const isOnTokensPage = router.asPath === '/token-topup';
+  const isOnHistoryPage = router.asPath === '/history';
+  const isOnImagePage = router.asPath === '/image';
+  const isOnProfilePage = router.asPath === '/profile';
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
 
+  const handleLogout = () => {
+    // Redirect to the index page upon logging out
+    window.location.href = '/api/auth/logout';
+  };
+
   return (
     <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
-      <div
-        className={`bg-gradient-to-b from-cyan-950 to-blue-500 text-zinc-50 fixed md:static z-20 h-full transition-width duration-500 ease-in-out ${
+      <Card
+        className={` fixed md:static z-20 h-full transition-width duration-500 ease-in-out rounded-none ${
           collapsed ? 'w-16' : 'w-[300px]'
         } ${shown ? 'translate-x-0' : '-translate-x-full'}`}
       >
@@ -59,14 +79,14 @@ export const Sidebar = ({
         >
           <div
             className={classNames({
-              'flex items-center border-b border-b-indigo-800 transition-none': true,
+              'flex items-center border-b border-b-slate-600  transition-none': true,
               'p-4 justify-between': !collapsed,
               'py-4 justify-center': collapsed,
             })}
           >
             {!collapsed && <Logo />}
             <button
-              className="grid place-content-center hover:bg-indigo-800 w-10 h-10 rounded-full opacity-0 md:opacity-100"
+              className=" hover:bg-slate-200 w-10 h-10 rounded-full opacity-0 md:opacity-100"
               onClick={() => setCollapsed(!collapsed)}
             >
               <Icon className="w-5 h-5 mx-auto" />
@@ -77,91 +97,113 @@ export const Sidebar = ({
               className={classNames({
                 'my-2 flex flex-col gap-2 items-stretch': true,
               })}
-            >
+            ><Button
+            className={`${
+              collapsed ? 'mx-auto  ' : 'mx-8'
+            } px-3 mt-5 text-md ${
+              isOnProfilePage ? 'bg-gray-100' : 'bg-transparent'
+            } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+          >
+            <Link href="/profile">
+              {collapsed ? (
+                <HomeIcon className="w-6 h-6 " />
+              ) : (
+                <div className="flex items-center gap-3 ">
+                  <HomeIcon className="w-5 h-5" />
+                  Home
+                </div>
+              )}
+            </Link>
+          </Button>
               <Button
-                color="green"
                 className={`${
-                  collapsed ? 'mx-auto ' : 'mx-8'
-                } px-3 py-3 my-1 mt-5 text-sm`}
+                  collapsed ? 'mx-auto  ' : 'mx-8'
+                } px-3 mt-1 text-md ${
+                  isOnNewPostPage ? 'bg-gray-100' : 'bg-transparent'
+                } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/post/new">
                   {collapsed ? (
                     <PencilSquareIcon className="w-5 h-5" />
                   ) : (
-                    'New Post'
+                    <div className="flex items-center gap-3 ">
+                      <PencilSquareIcon className="w-5 h-5" />
+                      New Post
+                    </div>
                   )}
                 </Link>
               </Button>
               <Button
-                color="blue"
                 className={`${
-                  collapsed ? 'mx-auto' : 'mx-8'
-                } px-3 py-3 my-1 text-sm`}
+                  collapsed ? 'mx-auto  ' : 'mx-8'
+                } px-3 mt-1 text-md ${
+                  isOnImagePage ? 'bg-gray-100' : 'bg-transparent'
+                } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+              >
+                <Link href="/post/image">
+                  {collapsed ? (
+                    <PhotoIcon className="w-6 h-6 " />
+                  ) : (
+                    <div className="flex items-center gap-3 ">
+                      <PhotoIcon className="w-5 h-5" />
+                      New Image
+                    </div>
+                  )}
+                </Link>
+              </Button>
+              <Button
+                className={`${
+                  collapsed ? 'mx-auto  ' : 'mx-8'
+                } px-3 mt-1 text-md ${
+                  isOnTokensPage ? 'bg-gray-100' : 'bg-transparent'
+                } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/token-topup">
                   {collapsed ? (
                     <CircleStackIcon className="w-5 h-5" />
                   ) : (
-                    <>
-                      <span className="pl-1">{availableTokens} Tokens </span>
-                      Available
-                    </>
+                    <div className="flex items-center gap-3 ">
+                      <CircleStackIcon className="w-5 h-5" />
+                      <span className="">Tokens ({availableTokens}) </span>
+                    </div>
                   )}
                 </Link>
               </Button>
-
-              {collapsed ? (
-                <Button
-                  className="mx-auto px-3 py-3 my-1 text-sm bg-gray-300 text-gray-900"
-                  onClick={() => handleOpen(3)}
-                >
-                  <FolderIcon className="w-5 h-5" />
-                </Button>
-              ) : (
-                <Card className="w-full shadow-xl mx-8 w-300 bg-gray-300 my-1">
-                  <Accordion
-                    className="w-full "
-                    open={open === 3}
-                    icon={
-                      <ChevronUpIcon
-                        strokeWidth={2.5}
-                        className={` mx-8 h-4 w-4 ${
-                          open === 3 ? 'rotate-180' : ''
-                        }`}
-                      />
-                    }
-                  >
-                    <ListItem className="p-0 " selected={open === 3}>
-                      <AccordionHeader
-                        onClick={() => handleOpen(3)}
-                        className="border-b-0 "
-                      >
-                        <Typography className="mr-auto font-bold text-slate-950 text-sm uppercase mx-8">
-                          History
-                        </Typography>
-                      </AccordionHeader>
-                    </ListItem>
-                    <AccordionBody>
-                      <List className="p-0 ">
-                        {posts.map((post) => (
-                          <ListItem key={post._id}>
-                            <Link
-                              href={`/post/${post._id}`}
-                              className={`py-1 text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 ${
-                                postId === post._id
-                                  ? 'bg-white/20 border-white'
-                                  : ''
-                              }`}
-                            >
-                              {post.topic}
-                            </Link>
-                          </ListItem>
-                        ))}
-                      </List>
-                    </AccordionBody>
-                  </Accordion>
-                </Card>
-              )}
+              <Button
+                className={`${
+                  collapsed ? 'mx-auto  ' : 'mx-8'
+                } px-3 mt-1 text-md ${
+                  isOnHistoryPage ? 'bg-gray-100' : 'bg-transparent'
+                } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+              >
+                <Link href="/history">
+                  {collapsed ? (
+                    <FolderIcon className="w-5 h-5" />
+                  ) : (
+                    <div className="flex items-center gap-3 ">
+                      <FolderIcon className="w-5 h-5" />
+                      History
+                    </div>
+                  )}
+                </Link>
+              </Button>
+              <Button
+                className={`${
+                  collapsed ? 'mx-auto  ' : 'mx-8'
+                } px-3 mt-1 text-md bg-transparent hover:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+              >
+                <Link href="/api/auth/logout">
+                  {collapsed ? (
+                    <PowerIcon className="w-5 h-5" />
+                  ) : (
+                    <div className="flex items-center gap-3 ">
+                      <PowerIcon className="w-5 h-5" />
+                      Logout
+                    </div>
+                  )}
+                </Link>
+              </Button>
+              
             </ul>
           </nav>
           <div className="`5 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
@@ -178,9 +220,6 @@ export const Sidebar = ({
                 </div>
                 <div className="flex-1">
                   <div className="font-bold">{user.email}</div>
-                  <Link className="text-sm" href="/api/auth/logout">
-                    Logout
-                  </Link>
                 </div>
               </>
             ) : (
@@ -188,7 +227,7 @@ export const Sidebar = ({
             )}
           </div>
         </div>
-      </div>
+      </Card>
 
       <div className="flex-1 overflow-y-auto">
         <div>{children}</div>

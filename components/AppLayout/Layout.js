@@ -1,11 +1,7 @@
-
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { BurgerIcon } from './BurgerIcon';
 import { Sidebar } from './Sidebar';
-
-
-
 
 export const Layout = (props) => {
   const [collapsed, setSidebarCollapsed] = useState(false);
@@ -19,12 +15,13 @@ export const Layout = (props) => {
         shown={showSidebar}
         {...props} // Pass down all props from Layout to Sidebar
       >
-        <BurgerIcon onMenuButtonClick={() => setShowSidebar((prev) => !prev)} />
-        <div className="">
-          {props.children}
+        <div className="absolute top-0 right-0 p-2">
+          <BurgerIcon
+            onMenuButtonClick={() => setShowSidebar((prev) => !prev)}
+          />
         </div>
+        <div className="">{props.children}</div>
       </Sidebar>
     </div>
   );
 };
-

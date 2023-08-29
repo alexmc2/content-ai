@@ -15,11 +15,11 @@ export const BurgerIcon = (props) => {
   return (
     <IconButton
       variant="text"
-      className=" h-8 w-8 mr-5 mt-5  text-grey-200 hover:bg-transparent focus:bg-transparent active:bg-transparent  text-white"
+      className=" h-9 w-9  text-white focus:bg-transparent active:bg-transparent  "
       ripple={true}
       onClick={props.onMenuButtonClick}
     >
-      <Bars3Icon className="h-6 w-6" />
+      <Bars3Icon className="h-8 w-8 bg-blue-900 rounded-lg p-1 " />
     </IconButton>
   );
 };
