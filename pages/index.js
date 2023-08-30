@@ -13,18 +13,19 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen overflow-hidden flex justify-center items-center relative body-home">
-      <div className="relative z-10 text-white px-10 py-8 mx-3 text-center max-w-screen-md bg-slate-900/80 rounded-xl backdrop-blur-sm font-bold ">
-        <Logo />
+      <div className="relative z-10 text-white  px-10 py-8 mx-3 text-center max-w-screen-md bg-slate-900/80 rounded-xl backdrop-blur-sm font-bold ">
+        <div className="text-5xl py-3">
+       Content AI
+       </div>
         {/* <FontAwesomeIcon icon={faBrain} className="text-white-500 px-3" /> */}
-        <div className="text-xl font-normal py-4">
+        <div className="text-xl font-normal py-3">
           The AI-powered SAAS platform for content and image creation
         </div>
-        <Link href="/post/new">
-          <div className="btn px-10 w-full text-md mt-4 text-left bg-green-500 hover:bg-green-600 rounded">
-            Begin
-          </div>
-        </Link>
+        <Button className="px-10 text-md mt-4 bg-blue-600 ">
+          <Link href="/profile">Begin</Link>
+        </Button>
       </div>
     </div>
   );
 }
+
