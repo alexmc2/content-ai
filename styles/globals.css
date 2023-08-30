@@ -24,6 +24,22 @@ body {
   h3,
   h4,
   h5,
+  h6,
+  p,
+  ul,
+  ol,
+  li {
+    @apply prose;
+  }
+
+
+}
+
+/* h1,
+  h2,
+  h3,
+  h4,
+  h5,
   h6 {
     @apply font-heading my-6 font-bold;
   }
@@ -65,14 +81,9 @@ body {
 
   li {
     @apply my-2;
-  }
-}
+  } */
 
-@layer components {
-  .btn {
-    @apply bg-green-500 tracking-wider w-full text-center text-white font-bold cursor-pointer uppercase px-4 py-2 mt-2 rounded-md hover:bg-green-600 transition-colors block;
-  }
-}
+
 
 .opacity-0 {
   opacity: 1 !important;
@@ -82,20 +93,6 @@ body {
   width: 0% !important; 
 } */
 
-.navbar {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: flex;
-
-  background-color: transparent !important;
-  transition: all 0.5s ease-in-out !important;
-}
-
-.navbar-sticky {
-  background-color: #006a48 !important;
-  opacity: 0.99 !important;
-}
 
 .animate-spin {
   animation: spin 2s linear infinite;
@@ -109,3 +106,12 @@ body {
     transform: rotate(359deg);
   }
 }
+
+button {
+  text-transform: none !important;
+}
+
+html {
+  font-size: 110%;
+}
+

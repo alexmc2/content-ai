@@ -14,7 +14,7 @@ export const BurgerIcon = (props) => {
 
   return (
 <Button
-      className="h-9 w-9 text-white bg-blue-900 rounded-md p-1"
+      className="h-9 w-9 text-white bg-blue-900 rounded-md p-1 md:hidden"
       onClick={props.onMenuButtonClick}
     >
       <Bars3Icon  />

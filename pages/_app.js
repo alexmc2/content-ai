@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider>
       <UserProvider>
         <main
-          className={`${roboto_Mono.variable} font-heading ${inter.variable} font-body`}
+          className={`${inter.variable} font-heading ${inter.variable} font-body`}
         >
           {getLayout(<Component {...pageProps} />, pageProps)}
         </main>

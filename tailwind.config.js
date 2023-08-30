@@ -6,7 +6,6 @@ module.exports = withMT({
     './app/**/*.{js,ts,jsx,tsx,mdx}', // Note the addition of the `app` directory.
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    
 
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
@@ -27,9 +26,8 @@ module.exports = withMT({
       },
       fontFamily: {
         body: 'var(--font-inter)',
-        
 
-        heading: 'var(--font-monospace)',
+        heading: 'var(--font-inter)',
       },
       colors: {
         slate: {
@@ -182,5 +180,5 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 });

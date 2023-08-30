@@ -15,7 +15,7 @@ import {
   DocumentPlusIcon,
   PowerIcon,
   PhotoIcon,
-  HomeIcon
+  HomeIcon,
 } from '@heroicons/react/24/outline';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import {
@@ -80,7 +80,7 @@ export const Sidebar = ({
           <div
             className={classNames({
               'flex items-center border-b border-b-slate-600  transition-none': true,
-              'p-4 justify-between': !collapsed,
+              'p-4  justify-between': !collapsed,
               'py-4 justify-center': collapsed,
             })}
           >
@@ -89,45 +89,46 @@ export const Sidebar = ({
               className=" hover:bg-slate-200 w-10 h-10 rounded-full opacity-0 md:opacity-100"
               onClick={() => setCollapsed(!collapsed)}
             >
-              <Icon className="w-5 h-5 mx-auto" />
+              <Icon className="w-6 -h-6 mx-auto" />
             </button>
           </div>
-          <nav className="flex-grow">
-            <ul
+          <nav className="flex-grow ">
+            <div
               className={classNames({
-                'my-2 flex flex-col gap-2 items-stretch': true,
+                'my-2 flex flex-col gap-2 items-stretch px-0 ': true,
               })}
-            ><Button
-            className={`${
-              collapsed ? 'mx-auto  ' : 'mx-8'
-            } px-3 mt-5 text-md ${
-              isOnProfilePage ? 'bg-gray-100' : 'bg-transparent'
-            } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
-          >
-            <Link href="/profile">
-              {collapsed ? (
-                <HomeIcon className="w-6 h-6 " />
-              ) : (
-                <div className="flex items-center gap-3 ">
-                  <HomeIcon className="w-5 h-5" />
-                  Home
-                </div>
-              )}
-            </Link>
-          </Button>
+            >
               <Button
                 className={`${
-                  collapsed ? 'mx-auto  ' : 'mx-8'
+                  collapsed ? 'mx-auto  ' : 'mx-4'
+                } px-3 mt-5 text-md ${
+                  isOnProfilePage ? 'bg-gray-100' : 'bg-transparent'
+                } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+              >
+                <Link href="/profile">
+                  {collapsed ? (
+                    <HomeIcon className="w-6 -h-6  " />
+                  ) : (
+                    <div className="flex items-center gap-3 ">
+                      <HomeIcon className="w-6 -h-6" />
+                      Home
+                    </div>
+                  )}
+                </Link>
+              </Button>
+              <Button
+                className={`${
+                  collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-3 mt-1 text-md ${
                   isOnNewPostPage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/post/new">
                   {collapsed ? (
-                    <PencilSquareIcon className="w-5 h-5" />
+                    <PencilSquareIcon className="w-6 -h-6" />
                   ) : (
                     <div className="flex items-center gap-3 ">
-                      <PencilSquareIcon className="w-5 h-5" />
+                      <PencilSquareIcon className="w-6 -h-6" />
                       New Post
                     </div>
                   )}
@@ -135,17 +136,17 @@ export const Sidebar = ({
               </Button>
               <Button
                 className={`${
-                  collapsed ? 'mx-auto  ' : 'mx-8'
+                  collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-3 mt-1 text-md ${
                   isOnImagePage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/post/image">
                   {collapsed ? (
-                    <PhotoIcon className="w-6 h-6 " />
+                    <PhotoIcon className="w-6 -h-6 " />
                   ) : (
                     <div className="flex items-center gap-3 ">
-                      <PhotoIcon className="w-5 h-5" />
+                      <PhotoIcon className="w-6 -h-6" />
                       New Image
                     </div>
                   )}
@@ -153,17 +154,17 @@ export const Sidebar = ({
               </Button>
               <Button
                 className={`${
-                  collapsed ? 'mx-auto  ' : 'mx-8'
+                  collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-3 mt-1 text-md ${
                   isOnTokensPage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/token-topup">
                   {collapsed ? (
-                    <CircleStackIcon className="w-5 h-5" />
+                    <CircleStackIcon className="w-6 -h-6" />
                   ) : (
                     <div className="flex items-center gap-3 ">
-                      <CircleStackIcon className="w-5 h-5" />
+                      <CircleStackIcon className="w-6 -h-6" />
                       <span className="">Tokens ({availableTokens}) </span>
                     </div>
                   )}
@@ -171,17 +172,17 @@ export const Sidebar = ({
               </Button>
               <Button
                 className={`${
-                  collapsed ? 'mx-auto  ' : 'mx-8'
+                  collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-3 mt-1 text-md ${
                   isOnHistoryPage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/history">
                   {collapsed ? (
-                    <FolderIcon className="w-5 h-5" />
+                    <FolderIcon className="w-6 -h-6" />
                   ) : (
                     <div className="flex items-center gap-3 ">
-                      <FolderIcon className="w-5 h-5" />
+                      <FolderIcon className="w-6 -h-6" />
                       History
                     </div>
                   )}
@@ -189,22 +190,21 @@ export const Sidebar = ({
               </Button>
               <Button
                 className={`${
-                  collapsed ? 'mx-auto  ' : 'mx-8'
+                  collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-3 mt-1 text-md bg-transparent hover:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/api/auth/logout">
                   {collapsed ? (
-                    <PowerIcon className="w-5 h-5" />
+                    <PowerIcon className="w-6 -h-6" />
                   ) : (
                     <div className="flex items-center gap-3 ">
-                      <PowerIcon className="w-5 h-5" />
+                      <PowerIcon className="w-6 -h-6" />
                       Logout
                     </div>
                   )}
                 </Link>
               </Button>
-              
-            </ul>
+            </div>
           </nav>
           <div className="`5 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
             {!!user ? (
@@ -218,9 +218,11 @@ export const Sidebar = ({
                     className="rounded-full"
                   />
                 </div>
-                <div className="flex-1">
-                  <div className="font-bold">{user.email}</div>
-                </div>
+                {!collapsed && (
+                  <div className="flex-1">
+                    <div className="font-bold">{user.name}</div>
+                  </div>
+                )}
               </>
             ) : (
               <Link href="/api/auth/login">Login</Link>

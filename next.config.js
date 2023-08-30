@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
- 
+
   images: {
     remotePatterns: [
       {
@@ -10,11 +10,11 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    domains: ['lh3.googleusercontent.com'],
   },
 };
 
 module.exports = nextConfig;
-
 
 // /** @type {import('next').NextConfig} */
 // const nextConfig = {

@@ -11,37 +11,32 @@ export default function Post(props) {
   console.log('props', props);
 
   return (
-    <div className="overflow-auto h-full m-4 ">
+    <div className="flex    h-screen p-4">
       <div className="max-w-screen-lg mx-auto py-8 ">
-        <div className="bg-white p-8 border  rounded-md ">
-          <div className="text-md font-bold mt-2 p-2 px-4 bg-stone-200 rounded-sm">
-            SEO title and meta description
-          </div>
-          <div className="p-4 my-4 border border-stone-200 rounded-md">
-            <div className="text-blue-600 text-2xl font-bold">
-              {props.title}
+        <div className="bg-white p-8 border rounded-md ">
+          <article className="prose">
+            <h2>SEO title and meta description</h2>
+            <div className="p-4 my-4 border border-stone-200 rounded-md">
+            <div className="text-blue-600 text-2xl font-bold">{props.title}</div>
             </div>
-            <div className="mt-2 text-lg">{props.metaDescription}</div>
-          </div>
-          <div className="text-md font-bold my-4 mt-6 p-2 px-4 bg-stone-200 rounded-sm">
-            Keywords
-          </div>
-          <div className="flex flex-wrap pt-2 gap-1">
-            {props.keywords.split(',').map((keyword, i) => (
-              <div key={i} className="p-2 rounded-full bg-slate-800 text-white">
-                <FontAwesomeIcon icon={faHashtag} /> {keyword}
-              </div>
-            ))}
-          </div>
-          <div className="text-md font-bold mt-6 p-2 px-4 bg-stone-200 rounded-sm">
-            Generated on {date} at {time}
-          </div>
-          <div dangerouslySetInnerHTML={{ __html: props.postContent || '' }} />
+            <p>{props.metaDescription}</p>
+            <h2>Keywords</h2>
+            <div className="flex flex-wrap pt-2 gap-1">
+              {props.keywords.split(',').map((keyword, i) => (
+                <span key={i} className="p-2 rounded-full bg-slate-800 text-white">
+                  <FontAwesomeIcon icon={faHashtag} /> {keyword}
+                </span>
+              ))}
+            </div>
+            <p>Generated on {date} at {time}</p>
+            <div dangerouslySetInnerHTML={{ __html: props.postContent || '' }} />
+          </article>
         </div>
       </div>
     </div>
   );
 }
+
 
 Post.getLayout = function getLayout(page, pageProps) {
   return <Layout {...pageProps}>{page}</Layout>;
@@ -71,7 +66,6 @@ export const getServerSideProps = withPageAuthRequired({
       };
     }
     return {
-      
       props: {
         postContent: post.postContent,
         title: post.title,
