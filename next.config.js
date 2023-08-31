@@ -4,13 +4,13 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
+    domains: [
+      'lh3.googleusercontent.com',
+      'images.unsplash.com',
+      'cdn.sanity.io',
+      's.gravatar.com',
+      'platform-lookaside.fbsbx.com',
     ],
-    domains: ['lh3.googleusercontent.com'],
   },
 };
 

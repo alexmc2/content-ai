@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Logo } from './logo';
+import { Logo } from '../logo';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -31,6 +31,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from '@material-tailwind/react';
+import PopoverBox from './Popover';
 
 export const Sidebar = ({
   children,
@@ -54,7 +55,7 @@ export const Sidebar = ({
   const isOnTokensPage = router.asPath === '/token-topup';
   const isOnHistoryPage = router.asPath === '/history';
   const isOnImagePage = router.asPath === '/image';
-  const isOnProfilePage = router.asPath === '/profile';
+  const isOnHomePage = router.asPath === '/profile';
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -102,10 +103,10 @@ export const Sidebar = ({
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-3 mt-5 text-md ${
-                  isOnProfilePage ? 'bg-gray-100' : 'bg-transparent'
+                  isOnHomePage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
-                <Link href="/profile">
+                <Link href="/home">
                   {collapsed ? (
                     <HomeIcon className="w-6 -h-6  " />
                   ) : (
@@ -191,7 +192,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-1 text-md bg-transparent hover:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                } px-3 mt-1 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/api/auth/logout">
                   {collapsed ? (
@@ -210,17 +211,21 @@ export const Sidebar = ({
             {!!user ? (
               <>
                 <div className="min-w-[50px]">
-                  <Image
-                    src={user.picture}
-                    alt={user.name}
-                    height={50}
-                    width={50}
-                    className="rounded-full"
-                  />
+                  <Link href="/profile">
+                    <Image
+                      src={user.picture}
+                      alt={user.name}
+                      height={50}
+                      width={50}
+                      className="rounded-full"
+                    />
+                  </Link>
                 </div>
                 {!collapsed && (
                   <div className="flex-1">
-                    <div className="font-bold">{user.name}</div>
+                    <Link href="/profile">
+                      <div className="font-bold">{user.name}</div>
+                    </Link>
                   </div>
                 )}
               </>

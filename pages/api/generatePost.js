@@ -272,6 +272,11 @@ Discover the amazing history, personalities, and different types of dogs. From t
 
   // const { topic, keywords } = req.body;
 
+  if (!topic || !keywords) {
+    res.status(422);
+    return;
+  }
+
   // const postContentResult = await openai.createChatCompletion({
   //   model: 'gpt-3.5-turbo',
   //   messages: [

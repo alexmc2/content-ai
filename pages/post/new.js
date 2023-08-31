@@ -47,8 +47,8 @@ export default function NewPost(props) {
                 className="resize-none border w-full py-2 px-3 text-gray-700 leading-tight rounded"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                maxLength={120}
-              />
+                maxLength={150}
+              /> 
             </div>
             <div className="mb-4">
               <label className="text-gray-700 text-md block mb-2">
@@ -58,13 +58,14 @@ export default function NewPost(props) {
                 className="resize-none border w-full py-2 px-3 text-gray-700 leading-tight rounded"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
-                maxLength={120}
+                maxLength={150}
               />
             </div>
             <Button
               type="submit"
               color="green"
               className="text-md uppercase w-full"
+              disabled={!keywords.trim() || !topic.trim()}
             >
               Generate
             </Button>
@@ -82,6 +83,15 @@ NewPost.getLayout = function getLayout(page, pageProps) {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
     const props = await getAppProps(ctx);
+
+    if (!props.availableTokens) {
+      return {
+        redirect: {
+          destination: '/token-topup',
+          permanent: false,
+        },
+      };
+    }
     return {
       props,
     };

@@ -21,7 +21,7 @@ export const getAppProps = async (ctx) => {
     .find({
       userId: user._id,
     })
-    .limit(20)
+    .limit(10)
     .sort({
       created: -1,
     })
