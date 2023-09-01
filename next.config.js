@@ -10,17 +10,11 @@ const nextConfig = {
       'cdn.sanity.io',
       's.gravatar.com',
       'platform-lookaside.fbsbx.com',
+      'replicate.com',
+      'replicate.delivery',
+      'pbxt.replicate.delivery',
     ],
   },
 };
 
 module.exports = nextConfig;
-
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   reactStrictMode: true,
-//   swcMinify: true,
-//   images: { domains: ['lh3.googleusercontent.com'] },
-// };
-
-// module.exports = nextConfig;

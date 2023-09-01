@@ -1,11 +1,12 @@
 import { useContext, useEffect } from 'react';
 import { PostsContext } from '../context/postsContext';
 import { useUser } from '@auth0/nextjs-auth0/client';
-
+import moment from 'moment';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../components/AppLayout/Layout';
 import clientPromise from '../lib/mongodb';
 import { getAppProps } from '../utils/getAppProps';
+
 import Link from 'next/link';
 import {
   MagnifyingGlassIcon,
@@ -32,7 +33,7 @@ import {
 export const History = ({ posts: postsFromSSR }) => {
   const { user } = useUser();
 
-  const { setPostsFromSSR, posts } = useContext(PostsContext);
+  const { setPostsFromSSR, posts, getPosts } = useContext(PostsContext);
 
   const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Created', ''];
   useEffect(() => {
@@ -138,7 +139,7 @@ export const History = ({ posts: postsFromSSR }) => {
                         color="blue-gray"
                         className="text-md"
                       >
-                        {post.created}
+                        {moment(post.created).format('MMMM Do YYYY, h:mm a')}
                       </Typography>
                     </td>
                     <td className="p-4">
@@ -161,7 +162,13 @@ export const History = ({ posts: postsFromSSR }) => {
               <Button variant="outlined" size="sm">
                 Previous
               </Button>
-              <Button variant="outlined" size="sm">
+              <Button
+                onClick={() => {
+                  getPosts({ lastPostDate: posts[posts.length - 1].created });
+                }}
+                variant="outlined"
+                size="sm"
+              >
                 Next
               </Button>
             </div>

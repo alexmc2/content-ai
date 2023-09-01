@@ -38,79 +38,79 @@
 //   const title = 'Mocked Title';
 //   const metaDescription = 'Mocked meta description content.';
 
-  // const postContentResult = await openai.createChatCompletion({
-  //   model: 'gpt-3.5-turbo',
-  //   messages: [
-  //     {
-  //       role: 'system',
-  //       content: 'You are a blog post generator.',
-  //     },
-  //     {
-  //       role: 'user',
-  //       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
-  //     The response should be formatted in SEO-friendly HTML,
-  //     limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
-  //     },
-  //   ],
-  //   temperature: 0,
-  // });
+// const postContentResult = await openai.createChatCompletion({
+//   model: 'gpt-3.5-turbo',
+//   messages: [
+//     {
+//       role: 'system',
+//       content: 'You are a blog post generator.',
+//     },
+//     {
+//       role: 'user',
+//       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
+//     The response should be formatted in SEO-friendly HTML,
+//     limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
+//     },
+//   ],
+//   temperature: 0,
+// });
 
-  // const postContent = postContentResult.data.choices[0]?.message.content;
+// const postContent = postContentResult.data.choices[0]?.message.content;
 
-  // const titleResult = await openai.createChatCompletion({
-  //   model: 'gpt-3.5-turbo',
-  //   messages: [
-  //     {
-  //       role: 'system',
-  //       content: 'You are a blog post generator.',
-  //     },
-  //     {
-  //       role: 'user',
-  //       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
-  //     The response should be formatted in SEO-friendly HTML,
-  //     limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
-  //     },
-  //     {
-  //       role: 'assistant',
-  //       content: postContent,
-  //     },
-  //     {
-  //       role: 'user',
-  //       content: 'Generate appropriate title tag text for the above blog post',
-  //     },
-  //   ],
-  //   temperature: 0,
-  // });
+// const titleResult = await openai.createChatCompletion({
+//   model: 'gpt-3.5-turbo',
+//   messages: [
+//     {
+//       role: 'system',
+//       content: 'You are a blog post generator.',
+//     },
+//     {
+//       role: 'user',
+//       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
+//     The response should be formatted in SEO-friendly HTML,
+//     limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
+//     },
+//     {
+//       role: 'assistant',
+//       content: postContent,
+//     },
+//     {
+//       role: 'user',
+//       content: 'Generate appropriate title tag text for the above blog post',
+//     },
+//   ],
+//   temperature: 0,
+// });
 
-  // const metaDescriptionResult = await openai.createChatCompletion({
-  //   model: 'gpt-3.5-turbo',
-  //   messages: [
-  //     {
-  //       role: 'system',
-  //       content: 'You are a blog post generator.',
-  //     },
-  //     {
-  //       role: 'user',
-  //       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
-  //     The response should be formatted in SEO-friendly HTML,
-  //     limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
-  //     },
-  //     {
-  //       role: 'assistant',
-  //       content: postContent,
-  //     },
-  //     {
-  //       role: 'user',
-  //       content:
-  //         'Generate SEO-friendly meta description content for the above blog post',
-  //     },
-  //   ],
-  //   temperature: 0,
-  // });
+// const metaDescriptionResult = await openai.createChatCompletion({
+//   model: 'gpt-3.5-turbo',
+//   messages: [
+//     {
+//       role: 'system',
+//       content: 'You are a blog post generator.',
+//     },
+//     {
+//       role: 'user',
+//       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
+//     The response should be formatted in SEO-friendly HTML,
+//     limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
+//     },
+//     {
+//       role: 'assistant',
+//       content: postContent,
+//     },
+//     {
+//       role: 'user',
+//       content:
+//         'Generate SEO-friendly meta description content for the above blog post',
+//     },
+//   ],
+//   temperature: 0,
+// });
 
-  // const title = titleResult.data.choices[0]?.message.content;
-  // const metaDescription =
-  //   metaDescriptionResult.data.choices[0]?.message.content;
+// const title = titleResult.data.choices[0]?.message.content;
+// const metaDescription =
+//   metaDescriptionResult.data.choices[0]?.message.content;
 
 //   console.log('POST CONTENT: ', postContent);
 //   console.log('TITLE: ', title);
@@ -144,7 +144,6 @@
 //     postId: post.insertedId,
 //   });
 // });
-
 
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { Configuration, OpenAIApi } from 'openai';
@@ -252,8 +251,8 @@ export default withApiAuthRequired(async function handler(req, res) {
 `;
 
   const title = `
+  The joys of visiting the Metropolitan Museum of Art
 
-How Amazing Dogs Are: History, Personality, and Different Types of Dogs
 
 `;
 
@@ -366,7 +365,7 @@ Discover the amazing history, personalities, and different types of dogs. From t
   );
 
   const currentDate = new Date();
-  const formattedDate = moment(currentDate).format('MMMM Do YYYY, h:mm a');
+  // const formattedDate = moment(currentDate).format('MMMM Do YYYY, h:mm a');
 
   const post = await db.collection('posts').insertOne({
     postContent: postContent || '',
@@ -375,7 +374,7 @@ Discover the amazing history, personalities, and different types of dogs. From t
     topic,
     keywords,
     userId: userProfile._id,
-    created: formattedDate,
+    created: currentDate,
   });
 
   console.log('POST: ', post);

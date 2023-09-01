@@ -16,6 +16,7 @@ import {
   PowerIcon,
   PhotoIcon,
   HomeIcon,
+  FlagIcon,
 } from '@heroicons/react/24/outline';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import {
@@ -30,8 +31,13 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  CardBody,
+  CardFooter,
 } from '@material-tailwind/react';
-import PopoverBox from './Popover';
+import { UserPopover } from './Popover';
 
 export const Sidebar = ({
   children,
@@ -40,14 +46,12 @@ export const Sidebar = ({
   posts,
   postId,
 }) => {
-  const { user, error, isLoading } = useUser();
-
-  console.log('Error:', error);
-  console.log('User:', user);
-  console.log('Is loading:', isLoading);
+  const { user } = useUser();
 
   const [collapsed, setCollapsed] = React.useState(false);
   const Icon = collapsed ? ChevronRightIcon : ChevronLeftIcon;
+  const [popover, setPopover] = React.useState(false);
+  const IconPop = popover ? ChevronRightIcon : ChevronRightIcon;
   const [open, setOpen] = React.useState(0);
 
   const router = useRouter();
@@ -67,10 +71,10 @@ export const Sidebar = ({
   };
 
   return (
-    <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
+    <div className="flex flex-col-[minmax(16px,280px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
       <Card
         className={` fixed md:static z-20 h-full transition-width duration-500 ease-in-out rounded-none ${
-          collapsed ? 'w-16' : 'w-[300px]'
+          collapsed ? 'w-16' : 'w-[280px]'
         } ${shown ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div
@@ -207,27 +211,44 @@ export const Sidebar = ({
               </Button>
             </div>
           </nav>
-          <div className="`5 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
+          <div className=" flex items-center gap-2 py-0 border-t border-t-black/50 h-20 px-2">
             {!!user ? (
               <>
-                <div className="min-w-[50px]">
-                  <Link href="/profile">
-                    <Image
-                      src={user.picture}
-                      alt={user.name}
-                      height={50}
-                      width={50}
-                      className="rounded-full"
-                    />
-                  </Link>
-                </div>
-                {!collapsed && (
-                  <div className="flex-1">
-                    <Link href="/profile">
-                      <div className="font-bold">{user.name}</div>
-                    </Link>
-                  </div>
-                )}
+                <Button
+                  onClick={() => setPopover(!popover)}
+                  className={`${
+                    collapsed ? 'mx-auto  ' : 'mx-3 w-full'
+                  } text-slate-900 px-2 mt-1 text-md bg-transparent hover:bg-gray-200 shadow-none`}
+                >
+                  <Popover placement="right">
+                    <PopoverHandler>
+                      <div className="flex items-center gap-3 ">
+                        <Image
+                          src={user.picture}
+                          alt={user.name}
+                          height={40}
+                          width={40}
+                          className="rounded-full p-0"
+                        />
+                        {!collapsed && (
+                          <div className="font-bold">{user.name}</div>
+                        )}
+                        {!!popover && (
+                          <IconPop className="w-6 -h-6 mx-auto text-transparent" />
+                        )}
+                      </div>
+                    </PopoverHandler>
+                    <PopoverContent className="z-30 py-6  ">
+                      <div className="mr-6 ">
+                        <div className="flex items-center gap-3 text-lg ">
+                          <FlagIcon className="w-6 -h-6" />
+                          <Link href="/profile">Profile</Link>
+                        </div>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                </Button>
+                {/* <UserPopover user={user} /> */}
               </>
             ) : (
               <Link href="/api/auth/login">Login</Link>

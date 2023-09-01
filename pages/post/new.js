@@ -3,7 +3,7 @@ import { Layout } from '../../components/AppLayout/Layout';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
-import { Button, Spinner } from '@material-tailwind/react';
+import { Button, Spinner, Card, Textarea, Input} from '@material-tailwind/react';
 
 export default function NewPost(props) {
   const router = useRouter();
@@ -32,30 +32,31 @@ export default function NewPost(props) {
   return (
     <div className="flex justify-center items-center h-screen">
       {loading ? (
-        <div className="text-white ">
-          <Spinner className="h-16 w-16 text-white mb-4 " />
-          Generating...
+        <div className="text-gray-700 mx-auto">
+          <Spinner className="h-16 w-16 text-white mb-6 mx-auto" />
+          Generating your article. This may take a few minutes.
         </div>
       ) : (
-        <div className="bg-white p-8 border my-8 rounded-md mx-8 w-full max-w-xl">
+        <Card className="bg-white/60 p-8 border border-sky-100 my-8 mx-8 w-full prose shadow-none ">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="text-gray-700 text-md block mb-2">
-                <strong>Generate a new article on the topic of:</strong>
-              </label>
-              <textarea
-                className="resize-none border w-full py-2 px-3 text-gray-700 leading-tight rounded"
+              <div className="text-md mb-2 ">
+                <div>Describe your topic</div>
+              </div>
+              
+              <Textarea
+                className=" border border-sky-100 h-24 w-full py-2 px-3 text-gray-900 bg-white"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 maxLength={150}
-              /> 
+              />
             </div>
-            <div className="mb-4">
-              <label className="text-gray-700 text-md block mb-2">
-                <strong>Targeting the following keywords:</strong>
-              </label>
-              <textarea
-                className="resize-none border w-full py-2 px-3 text-gray-700 leading-tight rounded"
+            <div className="my-4">
+              <div className="text-md block mb-2 ">
+                <div>Primary keywords</div>
+              </div>
+              <Input
+                className="resize-none border border-sky-100 w-full py-2 px-3 text-gray-900 leading-tight rounded bg-white  "
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
                 maxLength={150}
@@ -63,14 +64,13 @@ export default function NewPost(props) {
             </div>
             <Button
               type="submit"
-              color="green"
-              className="text-md uppercase w-full"
+              className="text-md uppercase w-full bg-blue-900 my-4"
               disabled={!keywords.trim() || !topic.trim()}
             >
               Generate
             </Button>
           </form>
-        </div>
+        </Card>
       )}
     </div>
   );
