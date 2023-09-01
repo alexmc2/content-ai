@@ -15,9 +15,9 @@ body {
 }
 
 @layer base {
-  a:hover {
+  /* a:hover {
     @apply underline;
-  }
+  } */
 
   h1,
   h2,

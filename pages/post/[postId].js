@@ -5,38 +5,48 @@ import { ObjectId } from 'mongodb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag } from '@fortawesome/free-solid-svg-icons';
 import { getAppProps } from '../../utils/getAppProps';
+import { Card } from '@material-tailwind/react';
+import moment from 'moment';
 
 export default function Post(props) {
   const [date, time] = props.postCreated.split(',');
+  const formattedDate = moment(date).format('MMMM Do YYYY');
+  const formattedTime = moment(time).format('h:mm a');
   console.log('props', props);
 
   return (
-    <div className="flex    h-screen p-4">
-      <div className="max-w-screen-lg mx-auto py-8 ">
-        <div className="bg-white p-8 border rounded-md ">
-          <article className="prose">
-            <h2>SEO title and meta description</h2>
-            <div className="p-4 my-4 border border-stone-200 rounded-md">
-            <div className="text-blue-600 text-2xl font-bold">{props.title}</div>
+    <div className="flex m-2 sm:m-6 h-screen py-2 sm:py-10">
+      <div className="sm:max-w-screen-auto max-w-auto mx-auto py-8  ">
+        <div className="bg-white sm:px-20 py-10 sm:my-2 my-16 px-8 border rounded-md  ">
+          <div className="prose">
+            <h1 className="pt-10">{props.title}</h1>
+
+            <p className="pb-10">{props.metaDescription}</p>
+
+            <div
+              dangerouslySetInnerHTML={{ __html: props.postContent || '' }}
+            />
+          </div>
+          <div className="flex flex-wrap pt-2 gap-1 pb-2  text-gray-600">
+            <div>Keywords:</div>
+            {props.keywords.split(',').map((keyword, i, arr) => (
+              <span key={i} className="bg-transparent">
+                {keyword}
+                {i !== arr.length - 1 ? ',' : ''}
+              </span>
+            ))}
+          </div>
+
+          <div>
+            <div className=" text-gray-600">
+              Generated on {formattedDate} at {formattedTime}
             </div>
-            <p>{props.metaDescription}</p>
-            <h2>Keywords</h2>
-            <div className="flex flex-wrap pt-2 gap-1">
-              {props.keywords.split(',').map((keyword, i) => (
-                <span key={i} className="p-2 rounded-full bg-slate-800 text-white">
-                  <FontAwesomeIcon icon={faHashtag} /> {keyword}
-                </span>
-              ))}
-            </div>
-            <p>Generated on {date} at {time}</p>
-            <div dangerouslySetInnerHTML={{ __html: props.postContent || '' }} />
-          </article>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
 
 Post.getLayout = function getLayout(page, pageProps) {
   return <Layout {...pageProps}>{page}</Layout>;

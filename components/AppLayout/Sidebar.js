@@ -96,6 +96,7 @@ export const Sidebar = ({
             >
               <Icon className="w-6 -h-6 mx-auto" />
             </button>
+           
           </div>
           <nav className="flex-grow ">
             <div
@@ -106,7 +107,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-5 text-md ${
+                } px-2 mt-5 text-md ${
                   isOnHomePage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
@@ -124,7 +125,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-1 text-md ${
+                } px-2 mt-1 text-md ${
                   isOnNewPostPage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
@@ -142,7 +143,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-1 text-md ${
+                } px-2 mt-1 text-md ${
                   isOnImagePage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
@@ -160,7 +161,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-1 text-md ${
+                } px-2 mt-1 text-md ${
                   isOnTokensPage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
@@ -178,7 +179,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-1 text-md ${
+                } px-2 mt-1 text-md ${
                   isOnHistoryPage ? 'bg-gray-100' : 'bg-transparent'
                 } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
@@ -196,7 +197,7 @@ export const Sidebar = ({
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-3 mt-1 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                } px-2 mt-1 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/api/auth/logout">
                   {collapsed ? (
@@ -211,14 +212,14 @@ export const Sidebar = ({
               </Button>
             </div>
           </nav>
-          <div className=" flex items-center gap-2 py-0 border-t border-t-black/50 h-20 px-2">
+          <div className=" flex items-center gap-2 py-0 border-t border-t-black/50 h-15 px-0">
             {!!user ? (
               <>
                 <Button
                   onClick={() => setPopover(!popover)}
                   className={`${
                     collapsed ? 'mx-auto  ' : 'mx-3 w-full'
-                  } text-slate-900 px-2 mt-1 text-md bg-transparent hover:bg-gray-200 shadow-none`}
+                  } text-slate-800 px-2 mt-1 text-md bg-transparent hover:bg-gray-200 shadow-lg hover:shadow-sm`}
                 >
                   <Popover placement="right">
                     <PopoverHandler>
@@ -231,7 +232,7 @@ export const Sidebar = ({
                           className="rounded-full p-0"
                         />
                         {!collapsed && (
-                          <div className="font-bold">{user.name}</div>
+                          <div className=" text-slate-800">{user.name}</div>
                         )}
                         {!!popover && (
                           <IconPop className="w-6 -h-6 mx-auto text-transparent" />
