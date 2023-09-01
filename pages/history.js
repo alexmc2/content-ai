@@ -1,9 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../context/postsContext';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import moment from 'moment';
+// import moment from 'moment';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../components/AppLayout/Layout';
+import { useRouter } from 'next/router';
 import clientPromise from '../lib/mongodb';
 import { getAppProps } from '../utils/getAppProps';
 
@@ -12,7 +13,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from '@heroicons/react/24/outline';
-import { PencilIcon, UserPlusIcon } from '@heroicons/react/24/solid';
+import { PencilIcon, UserPlusIcon, TrashIcon } from '@heroicons/react/24/solid';
 import {
   Card,
   CardHeader,
@@ -28,17 +29,50 @@ import {
   Avatar,
   IconButton,
   Tooltip,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
 } from '@material-tailwind/react';
 
 export const History = ({ posts: postsFromSSR }) => {
   const { user } = useUser();
 
   const { setPostsFromSSR, posts, getPosts } = useContext(PostsContext);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { deletePost } = useContext(PostsContext);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const router = useRouter();
+ 
 
-  const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Created', ''];
+
+  const handleOpen = () => setOpen(!open);
+
+  const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Date Created', ''];
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);
   }, [postsFromSSR, setPostsFromSSR]);
+
+  const handleDeleteConfirm = async (postId) => {
+    try {
+      console.log("Deleting post with ID:", postId);
+      const response = await fetch(`/api/deletePost`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ postId: postId }),
+      });
+      const json = await response.json();
+      if (json.success) {
+        deletePost(postId);
+      }
+    } catch (e) {
+      console.log('ERROR TRYING TO DELETE A POST: ', e);
+      setError('Failed to delete the post. Please try again.');
+    }
+  };
 
   return (
     <div className="overflow-auto h-full m-4">
@@ -65,8 +99,6 @@ export const History = ({ posts: postsFromSSR }) => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              {/* If you have categories or filters for posts, you can use the Tabs component here. 
-         Otherwise, you can remove the Tabs and just keep the search input. */}
               <div className="w-full md:w-72">
                 <Input
                   label="Search Posts"
@@ -104,8 +136,8 @@ export const History = ({ posts: postsFromSSR }) => {
               <tbody>
                 {posts.map((post) => (
                   <tr key={post._id}>
-                    <Link href={`/post/${post._id}`}>
-                      <td className="p-4">
+                    <td className="p-4">
+                      <Link href={`/post/${post._id}`}>
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -113,8 +145,8 @@ export const History = ({ posts: postsFromSSR }) => {
                         >
                           {post.title}
                         </Typography>
-                      </td>
-                    </Link>
+                      </Link>
+                    </td>
                     <td className="p-4">
                       <Typography
                         variant="small"
@@ -139,15 +171,39 @@ export const History = ({ posts: postsFromSSR }) => {
                         color="blue-gray"
                         className="text-md"
                       >
-                        {moment(post.created).format('MMMM Do YYYY, h:mm a')}
+                        {post.created}
                       </Typography>
                     </td>
                     <td className="p-4">
-                      <Tooltip content="Edit Post">
-                        <IconButton variant="text">
-                          <PencilIcon className="h-4 w-4" />
+                      <Tooltip content="Delete Post">
+                        <IconButton onClick={handleOpen} variant="gradient">
+                          <TrashIcon className="h-5 w-5" />
                         </IconButton>
                       </Tooltip>
+
+                      <Dialog open={open} handler={handleOpen}>
+                        <DialogHeader>Are you sure?</DialogHeader>
+                        <DialogBody divider>
+                          This action is irreversible.
+                        </DialogBody>
+                        <DialogFooter>
+                          <Button
+                            variant="text"
+                            color="red"
+                            onClick={handleOpen}
+                            className="mr-1"
+                          >
+                            <span>Cancel</span>
+                          </Button>
+                          <Button
+                            variant="gradient"
+                            color="green"
+                            onClick={() => handleDeleteConfirm(post._id)}
+                          >
+                            <span>Confirm</span>
+                          </Button>
+                        </DialogFooter>
+                      </Dialog>
                     </td>
                   </tr>
                 ))}

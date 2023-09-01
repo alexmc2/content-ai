@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag } from '@fortawesome/free-solid-svg-icons';
 import { getAppProps } from '../../utils/getAppProps';
 import { Card } from '@material-tailwind/react';
-import moment from 'moment';
+
 
 export default function Post(props) {
   const [date, time] = props.postCreated.split(',');
-  const formattedDate = moment(date).format('MMMM Do YYYY');
-  const formattedTime = moment(time).format('h:mm a');
+
+  
   console.log('props', props);
 
   return (
@@ -26,6 +26,9 @@ export default function Post(props) {
             <div
               dangerouslySetInnerHTML={{ __html: props.postContent || '' }}
             />
+            <div>
+
+            </div>
           </div>
           <div className="flex flex-wrap pt-2 gap-1 pb-2  text-gray-600">
             <div>Keywords:</div>
@@ -39,7 +42,7 @@ export default function Post(props) {
 
           <div>
             <div className=" text-gray-600">
-              Generated on {formattedDate} at {formattedTime}
+              Generated on {date} at {time}
             </div>
           </div>
         </div>
@@ -77,6 +80,7 @@ export const getServerSideProps = withPageAuthRequired({
     }
     return {
       props: {
+        id: ctx.params.postId,
         postContent: post.postContent,
         title: post.title,
         metaDescription: post.metaDescription,

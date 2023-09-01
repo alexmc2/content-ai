@@ -37,7 +37,6 @@ import {
   CardBody,
   CardFooter,
 } from '@material-tailwind/react';
-import { UserPopover } from './Popover';
 
 export const Sidebar = ({
   children,
@@ -50,8 +49,7 @@ export const Sidebar = ({
 
   const [collapsed, setCollapsed] = React.useState(false);
   const Icon = collapsed ? ChevronRightIcon : ChevronLeftIcon;
-  const [popover, setPopover] = React.useState(false);
-  const IconPop = popover ? ChevronRightIcon : ChevronRightIcon;
+
   const [open, setOpen] = React.useState(0);
 
   const router = useRouter();
@@ -96,7 +94,6 @@ export const Sidebar = ({
             >
               <Icon className="w-6 -h-6 mx-auto" />
             </button>
-           
           </div>
           <nav className="flex-grow ">
             <div
@@ -194,7 +191,7 @@ export const Sidebar = ({
                   )}
                 </Link>
               </Button>
-              <Button
+              <Button 
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
                 } px-2 mt-1 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
@@ -215,14 +212,13 @@ export const Sidebar = ({
           <div className=" flex items-center gap-2 py-0 border-t border-t-black/50 h-15 px-0">
             {!!user ? (
               <>
-                <Button
-                  onClick={() => setPopover(!popover)}
-                  className={`${
-                    collapsed ? 'mx-auto  ' : 'mx-3 w-full'
-                  } text-slate-800 px-2 mt-1 text-md bg-transparent hover:bg-gray-200 shadow-lg hover:shadow-sm`}
-                >
-                  <Popover placement="right">
-                    <PopoverHandler>
+                <Popover placement="top-start">
+                  <PopoverHandler>
+                    <Button
+                      className={`${
+                        collapsed ? 'mx-auto  ' : 'mx-3 w-full'
+                      } text-slate-800 px-2 mt-1 text-md bg-transparent hover:bg-gray-200 shadow-none `}
+                    >
                       <div className="flex items-center gap-3 ">
                         <Image
                           src={user.picture}
@@ -234,21 +230,22 @@ export const Sidebar = ({
                         {!collapsed && (
                           <div className=" text-slate-800">{user.name}</div>
                         )}
-                        {!!popover && (
-                          <IconPop className="w-6 -h-6 mx-auto text-transparent" />
-                        )}
                       </div>
-                    </PopoverHandler>
-                    <PopoverContent className="z-30 py-6  ">
+
                       <div className="mr-6 ">
-                        <div className="flex items-center gap-3 text-lg ">
-                          <FlagIcon className="w-6 -h-6" />
-                          <Link href="/profile">Profile</Link>
-                        </div>
+                        <div className="flex items-center gap-3 text-lg "></div>
                       </div>
-                    </PopoverContent>
-                  </Popover>
-                </Button>
+                    </Button>
+                  </PopoverHandler>
+                  <PopoverContent className="z-30">
+                    <div className="mr-6 ">
+                      <div className="flex items-center gap-3 text-lg ">
+                        <FlagIcon className="w-6 -h-6" />
+                        <Link href="/profile">Profile</Link>
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
                 {/* <UserPopover user={user} /> */}
               </>
             ) : (

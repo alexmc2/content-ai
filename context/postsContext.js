@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 
-
 export const PostsContext = React.createContext();
 
 export const PostsProvider = ({ children }) => {
@@ -25,18 +24,39 @@ export const PostsProvider = ({ children }) => {
     const json = await result.json();
     const postsResult = json.posts || [];
     console.log('postResult: ', postsResult);
-    setPosts(value => {
+    setPosts((value) => {
       const newPosts = [...value];
-     postsResult.forEach(post => {
-      const exists = newPosts.find(p => p._id === post._id);
-      if (!exists) {
-        newPosts.push(post);
+      postsResult.forEach((post) => {
+        const exists = newPosts.find((p) => p._id === post._id);
+        if (!exists) {
+          newPosts.push(post);
+        }
+      });
+      return newPosts;
+    });
+  }, []);
+
+  const deletePost = useCallback(async (postId) => {
+    try {
+      const response = await fetch('/api/deletePost', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ postId }),
+      });
+      const json = await response.json();
+      if (json.success) {
+        // Update the local state to remove the deleted post
+        setPosts((currentPosts) =>
+          currentPosts.filter((post) => post._id !== postId)
+        );
+      } else {
+        console.log('Failed to delete post on the server.');
       }
-    })
-    return newPosts;
-  })
-
-
+    } catch (e) {
+      console.log('Error deleting post:', e);
+    }
   }, []);
 
   return (
@@ -45,6 +65,7 @@ export const PostsProvider = ({ children }) => {
         posts,
         setPostsFromSSR,
         getPosts,
+        deletePost,
       }}
     >
       {children}
