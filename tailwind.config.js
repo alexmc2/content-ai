@@ -177,6 +177,9 @@ module.exports = withMT({
           900: '#581c87',
           950: '#2a1a5e',
         },
+        zIndex: {
+          negative: '-1',
+        },
       },
     },
   },

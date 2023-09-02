@@ -1,14 +1,39 @@
-import React, { useCallback, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useReducer, useCallback } from 'react';
 
 export const PostsContext = React.createContext();
 
+const initialState = {
+  posts: [],
+};
+
+const postsReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_POSTS':
+      return { ...state, posts: action.payload };
+    case 'ADD_POSTS':
+      const newPosts = [...state.posts];
+      action.payload.forEach((post) => {
+        const exists = newPosts.find((p) => p._id === post._id);
+        if (!exists) {
+          newPosts.push(post);
+        }
+      });
+      return { ...state, posts: newPosts };
+    case 'DELETE_POST':
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    default:
+      return state;
+  }
+};
+
 export const PostsProvider = ({ children }) => {
-  const [posts, setPosts] = useState([]);
+  const [state, dispatch] = useReducer(postsReducer, initialState);
 
   const setPostsFromSSR = useCallback((postsFromSSR = []) => {
-    console.log('postsFromSSR: ', postsFromSSR);
-    setPosts(postsFromSSR); // set posts from SSR
+    dispatch({ type: 'SET_POSTS', payload: postsFromSSR });
   }, []);
 
   const getPosts = useCallback(async ({ lastPostDate }) => {
@@ -17,23 +42,12 @@ export const PostsProvider = ({ children }) => {
       headers: {
         'content-type': 'application/json',
       },
-
       body: JSON.stringify({ lastPostDate }),
     });
 
     const json = await result.json();
     const postsResult = json.posts || [];
-    console.log('postResult: ', postsResult);
-    setPosts((value) => {
-      const newPosts = [...value];
-      postsResult.forEach((post) => {
-        const exists = newPosts.find((p) => p._id === post._id);
-        if (!exists) {
-          newPosts.push(post);
-        }
-      });
-      return newPosts;
-    });
+    dispatch({ type: 'ADD_POSTS', payload: postsResult });
   }, []);
 
   const deletePost = useCallback(async (postId) => {
@@ -47,10 +61,7 @@ export const PostsProvider = ({ children }) => {
       });
       const json = await response.json();
       if (json.success) {
-        // Update the local state to remove the deleted post
-        setPosts((currentPosts) =>
-          currentPosts.filter((post) => post._id !== postId)
-        );
+        dispatch({ type: 'DELETE_POST', payload: postId });
       } else {
         console.log('Failed to delete post on the server.');
       }
@@ -62,7 +73,7 @@ export const PostsProvider = ({ children }) => {
   return (
     <PostsContext.Provider
       value={{
-        posts,
+        posts: state.posts,
         setPostsFromSSR,
         getPosts,
         deletePost,

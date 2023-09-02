@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import { IconButton, Button} from '@material-tailwind/react';
+import { IconButton, Button } from '@material-tailwind/react';
 
 export const BurgerIcon = (props) => {
   const [openNav, setOpenNav] = React.useState(false);
@@ -13,11 +13,11 @@ export const BurgerIcon = (props) => {
   }, []);
 
   return (
-<Button
-      className="h-9 w-9 text-white bg-blue-900 rounded-md p-1 md:hidden"
+    <Button
+      className="h-9 w-9 text-white bg-blue-900 rounded-md p-1 md:hidden "
       onClick={props.onMenuButtonClick}
     >
-      <Bars3Icon  />
+      <Bars3Icon />
     </Button>
   );
 };

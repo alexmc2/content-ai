@@ -15,7 +15,7 @@ export const Layout = (props) => {
         shown={showSidebar}
         {...props} // Pass down all props from Layout to Sidebar
       >
-        <div className="absolute top-0 right-0 pr-4 pt-4 ">
+        <div className="fixed z-40 top-0 right-0 pr-4 pt-4 ">
           <BurgerIcon
             onMenuButtonClick={() => setShowSidebar((prev) => !prev)}
           />

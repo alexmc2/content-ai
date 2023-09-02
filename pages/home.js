@@ -31,7 +31,7 @@ export default function HomePage({ user }) {
             Hello, {user.name}!
           </Typography>
           <Typography className="sm:text-lg text-xl ">
-            Your account has been credited with 10 tokens. What are you going to
+            Your account has been credited with 10 tokens*. What are you going to
             generate today?
           </Typography>
         </CardBody>
@@ -39,6 +39,9 @@ export default function HomePage({ user }) {
           <Link href="/post/new">
             <Button className="bg-blue-900">New Post</Button>
           </Link>
+          <div className="prose text-sm mb-0 mt-8">
+            *You may need to refresh the page to activate your tokens.
+          </div>
         </CardFooter>
       </Card>
     </div>
@@ -94,7 +97,7 @@ export const getServerSideProps = withPageAuthRequired({
       };
     }
 
-    // // Convert _id object to string 
+    // // Convert _id object to string
     // if (userProfile && userProfile._id) {
     //   userProfile._id = userProfile._id.toString();
     // }

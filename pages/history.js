@@ -40,38 +40,45 @@ export const History = ({ posts: postsFromSSR }) => {
 
   const { setPostsFromSSR, posts, getPosts } = useContext(PostsContext);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState(null);
   const { deletePost } = useContext(PostsContext);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
- 
 
-
-  const handleOpen = () => setOpen(!open);
-
-  const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Date Created', ''];
+  const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Created', ''];
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);
   }, [postsFromSSR, setPostsFromSSR]);
 
-  const handleDeleteConfirm = async (postId) => {
+  const handleDeleteConfirm = async () => {
     try {
-      console.log("Deleting post with ID:", postId);
+      console.log('Deleting post with ID:', selectedPostId);
       const response = await fetch(`/api/deletePost`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
         },
-        body: JSON.stringify({ postId: postId }),
+        body: JSON.stringify({ postId: selectedPostId }),
       });
       const json = await response.json();
       if (json.success) {
-        deletePost(postId);
+        deletePost(selectedPostId);
+        handleClose(); // Close the dialog after deleting
       }
     } catch (e) {
       console.log('ERROR TRYING TO DELETE A POST: ', e);
       setError('Failed to delete the post. Please try again.');
     }
+  };
+
+  const handleOpen = (postId) => {
+    setSelectedPostId(postId);
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setSelectedPostId(null);
+    setOpen(false);
   };
 
   return (
@@ -176,29 +183,32 @@ export const History = ({ posts: postsFromSSR }) => {
                     </td>
                     <td className="p-4">
                       <Tooltip content="Delete Post">
-                        <IconButton onClick={handleOpen} variant="gradient">
+                        <IconButton
+                          onClick={() => handleOpen(post._id)}
+                          variant="gradient"
+                        >
                           <TrashIcon className="h-5 w-5" />
                         </IconButton>
                       </Tooltip>
 
-                      <Dialog open={open} handler={handleOpen}>
+                      <Dialog open={open} handler={handleClose}>
                         <DialogHeader>Are you sure?</DialogHeader>
                         <DialogBody divider>
                           This action is irreversible.
                         </DialogBody>
                         <DialogFooter>
                           <Button
-                            variant="text"
-                            color="red"
-                            onClick={handleOpen}
+                            variant="gradient"
+                            color="green"
+                            onClick={handleClose}
                             className="mr-1"
                           >
                             <span>Cancel</span>
                           </Button>
                           <Button
                             variant="gradient"
-                            color="green"
-                            onClick={() => handleDeleteConfirm(post._id)}
+                            color="red"
+                            onClick={handleDeleteConfirm}
                           >
                             <span>Confirm</span>
                           </Button>

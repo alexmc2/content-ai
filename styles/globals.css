@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.body-home {
+/* .body-home {
   @apply bg-cover;
-  background-image: url('/background7.webp');
+  background-image: url('/galaxy.webm');
   background-position-x: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
+} */
 body {
   /* @apply bg-gradient-to-b from-slate-950 to-slate-800; */
   @apply bg-gradient-to-b from-slate-100 to-slate-100;
@@ -31,8 +31,6 @@ body {
   li {
     @apply prose;
   }
-
-
 }
 
 /* h1,
@@ -83,8 +81,6 @@ body {
     @apply my-2;
   } */
 
-
-
 .opacity-0 {
   opacity: 1 !important;
 }
@@ -92,7 +88,6 @@ body {
 /* .w-full {
   width: 0% !important; 
 } */
-
 
 .animate-spin {
   animation: spin 2s linear infinite;
@@ -114,6 +109,3 @@ button {
 html {
   font-size: 110%;
 }
-
-/* Blurred backdrop for Material Tailwind Dialog */
-

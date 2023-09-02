@@ -26,23 +26,23 @@ export default function Post(props) {
             <div
               dangerouslySetInnerHTML={{ __html: props.postContent || '' }}
             />
-            <div>
+            <div className='py-6'>
 
             </div>
           </div>
-          <div className="flex flex-wrap pt-2 gap-1 pb-2  text-gray-600">
+          <div className="flex flex-row flex-wrap pt-8 gap-1 pb-3  text-gray-600 border-t border-t-black/50">
             <div>Keywords:</div>
-            {props.keywords.split(',').map((keyword, i, arr) => (
+            {props.keywords.split(',').map((keyword, i, array) => (
               <span key={i} className="bg-transparent">
                 {keyword}
-                {i !== arr.length - 1 ? ',' : ''}
+                {i !== array.length - 1 ? ',' : ''}
               </span>
             ))}
           </div>
 
           <div>
-            <div className=" text-gray-600">
-              Generated on {date} at {time}
+            <div className=" text-gray-600 pb-2">
+              Generated: {date}
             </div>
           </div>
         </div>
