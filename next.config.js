@@ -14,6 +14,18 @@ const nextConfig = {
       'replicate.com',
       'replicate.delivery',
       'pbxt.replicate.delivery',
+      'res.cloudinary.com',
+    ],
+
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'replicate.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'replicate.delivery',
+      },
     ],
   },
 };

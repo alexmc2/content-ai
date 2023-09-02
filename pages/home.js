@@ -22,7 +22,7 @@ export default function HomePage({ user }) {
 
   return (
     <div className="flex justify-center  p-4">
-      <Card className="max-w-xl w-full mx-4 mb-20 mt-24 p-3 ">
+      <Card className="max-w-xl w-full mx-4 mb-20 mt-2 ">
         <CardHeader color="blue-gray" className="relative">
           <img src="/background8.webp" alt="card-image" />
         </CardHeader>

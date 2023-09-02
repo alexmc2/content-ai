@@ -19,7 +19,10 @@ export default function Home() {
         muted
         loop
       >
-        <source src={require('../public/galaxy2.mp4')} type="video/mp4" />
+        <source
+          src="https://res.cloudinary.com/drbz4rq7y/video/upload/v1693663718/galaxy2_tdbfn2.mp4"
+          type="video/mp4"
+        />
       </video>
       <div className="relative z-10 text-white sm:px-10 px-7 text-center max-w-screen-md font-bold flex flex-col items-center">
         <div className="sm:text-7xl md:text-8xl text-5xl sm:py-5 py-4">
