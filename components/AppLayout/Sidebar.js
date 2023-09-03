@@ -2,7 +2,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
+
 import { Logo } from '../logo';
 import {
   ChevronLeftIcon,
@@ -57,11 +58,25 @@ export const Sidebar = ({
   const isOnTokensPage = router.asPath === '/token-topup';
   const isOnHistoryPage = router.asPath === '/history';
   const isOnImagePage = router.asPath === '/image';
-  const isOnHomePage = router.asPath === '/profile';
+  const isOnHomePage = router.asPath === '/home';
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
+
+  const handleHistoryClick = () => {
+    if (collapsed) {
+      setCollapsed(false);
+    } else {
+      handleOpen(3);
+    }
+  };
+
+  React.useEffect(() => {
+    if (collapsed) {
+      setOpen(0);
+    }
+  }, [collapsed]);
 
   const handleLogout = () => {
     // Redirect to the index page upon logging out
@@ -69,10 +84,10 @@ export const Sidebar = ({
   };
 
   return (
-    <div className="flex flex-col-[minmax(16px,280px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
+    <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
       <Card
         className={` fixed md:static z-20 h-full transition-width duration-500 ease-in-out rounded-none ${
-          collapsed ? 'w-16' : 'w-[280px]'
+          collapsed ? 'w-16' : 'w-[300px]'
         } ${shown ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div
@@ -173,28 +188,54 @@ export const Sidebar = ({
                   )}
                 </Link>
               </Button>
+
+              <Accordion open={open === 3}>
+                <AccordionHeader
+                  onClick={handleHistoryClick}
+                  className="border-none py-1  "
+                >
+                  <Button
+                    className={`w-full pl-2 ml-4 ${
+                      collapsed ? 'pl-1' : ''
+                    }    text-md text-base ${
+                      isOnHistoryPage ? 'bg-gray-100' : 'bg-transparent'
+                    } hover:bg-gray-200 focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm flex items-center gap-3`}
+                  >
+                    <div
+                      className={`flex items-center  gap-3 ${
+                        collapsed ? '' : ''
+                      }`}
+                    >
+                      <FolderIcon className="w-6 h-6   " />
+                      {!collapsed && 'History'}
+                      {!collapsed && (
+                        <ChevronDownIcon
+                          strokeWidth={2.5}
+                          className={`h-4 w-4 ${
+                            open === 3 ? 'rotate-180' : ''
+                          }`}
+                        />
+                      )}
+                    </div>
+                  </Button>
+                </AccordionHeader>
+
+                <AccordionBody className="flex flex-col  py-0">
+                  <List className="w-full pr-4 pl-12 ">
+                    <ListItem>
+                      <Link href="/history">Documents </Link>
+                    </ListItem>
+                    <ListItem>
+                      <Link href="/imageHistory">Images</Link>
+                    </ListItem>
+                  </List>
+                </AccordionBody>
+              </Accordion>
+
               <Button
                 className={`${
                   collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-2 mt-1 text-md ${
-                  isOnHistoryPage ? 'bg-gray-100' : 'bg-transparent'
-                } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
-              >
-                <Link href="/history">
-                  {collapsed ? (
-                    <FolderIcon className="w-6 -h-6" />
-                  ) : (
-                    <div className="flex items-center gap-3 ">
-                      <FolderIcon className="w-6 -h-6" />
-                      History
-                    </div>
-                  )}
-                </Link>
-              </Button>
-              <Button 
-                className={`${
-                  collapsed ? 'mx-auto  ' : 'mx-4'
-                } px-2 mt-1 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                } px-2 mt-0 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
               >
                 <Link href="/api/auth/logout">
                   {collapsed ? (

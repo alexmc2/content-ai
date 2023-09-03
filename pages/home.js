@@ -30,7 +30,7 @@ export default function HomePage({ user }) {
           <Typography variant="h5" color="blue-gray" className="my-2">
             Hello, {user.name}!
           </Typography>
-          <Typography className="sm:text-lg text-xl ">
+          <Typography className="sm:text-md text-lg ">
             Your account has been credited with 10 tokens*. What are you going to
             generate today?
           </Typography>

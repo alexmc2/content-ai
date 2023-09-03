@@ -11,8 +11,33 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function ImagePage() {
   const [prediction, setPrediction] = useState(null);
+  const [prompt, setPrompt] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
+
+  const saveImage = async (imageUrl) => {
+    try {
+      const response = await fetch('/api/saveImage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ imageUrl }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Image saved with ID:', data.imageId);
+
+        // router.push('/imageHistory');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Failed to save image.');
+      }
+    } catch (error) {
+      setError('An error occurred while saving the image.');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,9 +48,12 @@ export default function ImagePage() {
     if (e.target.prompt.value === 'dummy') {
       imageUrl =
         'https://res.cloudinary.com/drbz4rq7y/image/upload/v1693677797/replicate-prediction-yljh2ddbnfawxbfnetxcesptkm_iztsqn.png';
-      // router.push(
-      //   `/post/imageDisplay?imageUrl=${encodeURIComponent(imageUrl)}`
-      // );
+
+      setPrediction({
+        output: [imageUrl],
+        status: 'succeeded',
+      });
+
       return;
     }
 
@@ -85,17 +113,32 @@ export default function ImagePage() {
   };
 
   return (
-    <div className="flex justify-center py-10 ">
-      <Card className="bg-white/60 p-8 border border-sky-100 my-8 mx-auto max-w-screen-md flex flex-col w-full prose shadow-sm ">
+    <div className="flex justify-center items-center min-h-screen mx-2">
+      <Card className="bg-white/60 p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm ">
         <div className=" flex flex-col">
+          <div className="flex justify-between items-center mb-3 mt-2 text-md">
+            <div>Describe your desired image</div>
+
+            <div className="text-md text-gray-600">{prompt.length}/250</div>
+          </div>
           <form onSubmit={handleSubmit}>
             <Textarea
-              className="bg-white"
+              style={{ fontSize: '1.00rem' }}
+              className="bg-white text-2xl "
               type="text"
               name="prompt"
-              placeholder="Enter a prompt to display an image"
+              value={prompt}
+              placeholder='Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render'
+              onChange={(e) => setPrompt(e.target.value)}
+              maxLength={250}
             />
-            <Button type="submit"> Generate Image </Button>
+            <Button
+              className="mb-8 mt-3 text-md uppercase w-full bg-blue-900"
+              type="submit"
+              disabled={!prompt.trim()} // Disable the button if prompt is empty or just whitespace
+            >
+              Generate
+            </Button>
           </form>
         </div>
 
@@ -113,6 +156,14 @@ export default function ImagePage() {
                   src={prediction.output[prediction.output.length - 1]}
                   alt="output"
                 />
+                <Button
+                  className="my-4"
+                  onClick={() =>
+                    saveImage(prediction.output[prediction.output.length - 1])
+                  }
+                >
+                  Save Image
+                </Button>
               </div>
             )}
             <p>status: {prediction.status}</p>
