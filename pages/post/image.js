@@ -1,9 +1,10 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../../components/AppLayout/Layout';
+
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
 import { useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { Card, Button, Textarea } from '@material-tailwind/react';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -16,15 +17,15 @@ export default function ImagePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let imageUrl; // Declare imageUrl here
+    let imageUrl;
 
     // dummy for testing
     if (e.target.prompt.value === 'dummy') {
       imageUrl =
         'https://res.cloudinary.com/drbz4rq7y/image/upload/v1693677797/replicate-prediction-yljh2ddbnfawxbfnetxcesptkm_iztsqn.png';
-      router.push(
-        `/post/imageDisplay?imageUrl=${encodeURIComponent(imageUrl)}`
-      );
+      // router.push(
+      //   `/post/imageDisplay?imageUrl=${encodeURIComponent(imageUrl)}`
+      // );
       return;
     }
 
@@ -60,7 +61,27 @@ export default function ImagePage() {
     }
     imageUrl = prediction.output[prediction.output.length - 1];
 
-    router.push(`/imageDisplay?imageUrl=${encodeURIComponent(imageUrl)}`);
+    // Upload the AI-generated image to Cloudinary
+    const cloudinaryResponse = await fetch('/api/uploadToCloudinary', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ imageUrl }),
+    });
+
+    // const cloudinaryData = await cloudinaryResponse.json();
+
+    // if (cloudinaryResponse.ok) {
+    //   // Use the Cloudinary URL to display the image in the ImageDisplay page
+    //   router.push(
+    //     `/post/imageDisplay?imageUrl=${encodeURIComponent(
+    //       cloudinaryData.cloudinaryUrl
+    //     )}`
+    //   );
+    // } else {
+    //   setError('Failed to upload image to Cloudinary.');
+    // }
   };
 
   return (
@@ -85,7 +106,7 @@ export default function ImagePage() {
             {prediction.output && (
               <div>
                 <Image
-                  className="w-full object-center rounded-sm"
+                  className="w-full object-center "
                   layout="responsive"
                   width={500}
                   height={500}

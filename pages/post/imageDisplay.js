@@ -1,8 +1,9 @@
 import React from 'react';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../../components/AppLayout/Layout';
+
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { getAppProps } from '../../utils/getAppProps';
 import { Card } from '@material-tailwind/react';
 
@@ -21,7 +22,6 @@ export default function ImageDisplay() {
           width={500}
           height={500}
         />
-        {/* Other functionalities like download, share, etc. */}
       </Card>
     </div>
   );
