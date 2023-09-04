@@ -165,7 +165,16 @@ export default function ImagePage() {
                 </Button>
               </div>
             )}
-            <p className='mx-2'>status: {prediction.status}</p>
+            <p className="mx-2">
+              {prediction.status === 'starting' &&
+                'Starting image generation... This could take up to a couple of minutes.'}
+              {prediction.status === 'processing' &&
+                'Processing image... This could take up to a couple of minutes.'}
+              {prediction.status === 'succeeded' &&
+                'Image generation succeeded!'}
+              {prediction.status === 'failed' &&
+                'Image generation failed. Please try again.'}
+            </p>
           </div>
         )}
       </Card>

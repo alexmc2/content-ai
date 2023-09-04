@@ -1,7 +1,9 @@
 import '../styles/globals.css';
+import { useState } from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { PostsProvider } from '../context/postsContext';
-import { ImagesProvider } from '../context/imagesContext'; // Import the ImagesProvider
+import { ImagesProvider } from '../context/imagesContext';
+import { SidebarContext } from '../context/sidebarContext';
 
 import {
   DM_Sans,
@@ -30,18 +32,20 @@ const inter = Inter({
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <ThemeProvider>
       <UserProvider>
         <PostsProvider>
           <ImagesProvider>
-            {' '}
-            {/* Wrap your main component with ImagesProvider */}
-            <main
-              className={`${inter.variable} font-heading ${inter.variable} font-body`}
-            >
-              {getLayout(<Component {...pageProps} />, pageProps)}
-            </main>
+            <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
+              <main
+                className={`${inter.variable} font-heading ${inter.variable} font-body`}
+              >
+                {getLayout(<Component {...pageProps} />, pageProps)}
+              </main>
+            </SidebarContext.Provider>
           </ImagesProvider>
         </PostsProvider>
       </UserProvider>

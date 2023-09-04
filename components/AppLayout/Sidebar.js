@@ -64,6 +64,7 @@ export const Sidebar = ({
   const isOnHistoryPage = router.asPath === '/history';
   const isOnImagePage = router.asPath === '/imageHistory';
   const isOnHomePage = router.asPath === '/home';
+  const isOnNewImagePage = router.asPath === '/post/image';
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -163,7 +164,7 @@ export const Sidebar = ({
                     className={`${
                       collapsed ? 'mx-auto  ' : 'mx-4'
                     } px-2 mt-1 text-md ${
-                      isOnImagePage ? 'bg-gray-100' : 'bg-transparent'
+                      isOnNewImagePage ? 'bg-gray-100' : 'bg-transparent'
                     } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
                   >
                     <Link href="/post/image" legacyBehavior>

@@ -241,7 +241,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                         color="blue-gray"
                         className="text-md"
                       >
-                        {dayjs(post.created).format('MMMM D, YYYY h:mm A')}
+                        {dayjs(post.created).format('MMMM D, YYYY h:mm:ss A')}
                       </Typography>
                     </td>
                     <td className="p-4">
