@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../context/postsContext';
 import { useUser } from '@auth0/nextjs-auth0/client';
-
+import dayjs from 'dayjs';
 import { Paginate } from '../components/Paginate';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import { Layout } from '../components/AppLayout/Layout';
 import { useRouter } from 'next/router';
 import clientPromise from '../lib/mongodb';
 import { getAppProps } from '../utils/getAppProps';
+import DeleteDialog from '../components/DeleteDialog';
 
 import Link from 'next/link';
 import {
@@ -47,10 +48,14 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortDirection, setSortDirection] = useState('asc'); // 'asc' or 'desc'
+  const [sortColumn, setSortColumn] = useState(null); // 'title' or 'created'
+  const [isDialogOpen, setDialogOpen] = useState(false); // State to manage the dialog's open/close status
 
-
-  const postsPerPage = 10; 
-  const [totalPages, setTotalPages] = useState(Math.ceil(totalCount / postsPerPage));
+  const postsPerPage = 10;
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(totalCount / postsPerPage)
+  );
 
   const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Created', ''];
   useEffect(() => {
@@ -67,6 +72,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
       },
       body: JSON.stringify({ skip }), // Pass the skip value in the request body
     });
+
     const data = await result.json();
     if (data.posts) {
       // Update your posts state with the new posts
@@ -89,7 +95,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
       const json = await response.json();
       if (json.success) {
         deletePost(selectedPostId);
-        handleClose(); // Close the dialog after deleting
+        handleCloseDialog(); // Close the dialog after deleting
       }
     } catch (e) {
       console.log('ERROR TRYING TO DELETE A POST: ', e);
@@ -97,14 +103,39 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
     }
   };
 
-  const handleOpen = (postId) => {
+  const handleOpenDialog = (postId) => {
     setSelectedPostId(postId);
-    setOpen(true);
+    setDialogOpen(true);
   };
   const handleClose = () => {
     setSelectedPostId(null);
     setOpen(false);
   };
+  const handleCloseDialog = () => {
+    setSelectedPostId(null);
+    setDialogOpen(false);
+  };
+
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortDirection('asc');
+    }
+  };
+  const sortedPosts = [...posts].sort((a, b) => {
+    if (sortColumn === 'title') {
+      return sortDirection === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
+    } else if (sortColumn === 'created') {
+      return sortDirection === 'asc'
+        ? new Date(a.created) - new Date(b.created)
+        : new Date(b.created) - new Date(a.created);
+    }
+    return 0;
+  });
 
   return (
     <div className="overflow-auto h-full m-4">
@@ -121,7 +152,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                 </Typography> */}
               </div>
               <div className="flex shrink-0 flex-col gap-2 sm:flex-row items-center ">
-                <Link href="/post/new">
+                <Link href="/post/new" legacyBehavior>
                   <Button className="bg-blue-900">New Post</Button>
                 </Link>
               </div>
@@ -142,7 +173,15 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
-                      className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
+                      className={`cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50 ${
+                        head === 'Topic' || head === 'Keywords'
+                          ? 'hide-on-mobile'
+                          : ''
+                      }`}
+                      onClick={() => {
+                        if (head === 'Title') handleSort('title');
+                        if (head === 'Created') handleSort('created');
+                      }}
                     >
                       <Typography
                         variant="small"
@@ -150,32 +189,35 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                         className="flex items-center justify-between gap-2 leading-none opacity-70"
                       >
                         {head}
-                        {index !== TABLE_HEAD.length - 1 && (
-                          <ChevronUpDownIcon
-                            strokeWidth={2}
-                            className="h-4 w-4"
-                          />
-                        )}
+                        {index !== TABLE_HEAD.length - 1 &&
+                          head !== 'Topic' &&
+                          head !== 'Keywords' && (
+                            <ChevronUpDownIcon
+                              strokeWidth={2}
+                              className="h-4 w-4"
+                            />
+                          )}
                       </Typography>
                     </th>
                   ))}
                 </tr>
               </thead>
+
               <tbody>
-                {posts.map((post) => (
+                {sortedPosts.map((post) => (
                   <tr key={post._id}>
                     <td className="p-4">
-                      <Link href={`/post/${post._id}`}>
+                      <Link href={`/post/${post._id}`} legacyBehavior>
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="text-md"
+                          className="text-md cursor-pointer"
                         >
                           {post.title}
                         </Typography>
                       </Link>
                     </td>
-                    <td className="p-4">
+                    <td className="hide-on-mobile">
                       <Typography
                         variant="small"
                         color="blue-gray"
@@ -184,7 +226,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                         {post.topic}
                       </Typography>
                     </td>
-                    <td className="p-4">
+                    <td className="hide-on-mobile">
                       <Typography
                         variant="small"
                         color="blue-gray"
@@ -199,49 +241,30 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                         color="blue-gray"
                         className="text-md"
                       >
-                        {new Date(post.created).toString()}
+                        {dayjs(post.created).format('MMMM D, YYYY h:mm A')}
                       </Typography>
                     </td>
                     <td className="p-4">
                       <Tooltip content="Delete Post">
                         <IconButton
-                          onClick={() => handleOpen(post._id)}
+                          onClick={() => handleOpenDialog(post._id)}
                           variant="gradient"
                         >
                           <TrashIcon className="h-5 w-5" />
                         </IconButton>
                       </Tooltip>
-
-                      <Dialog open={open} handler={handleClose}>
-                        <DialogHeader>Are you sure?</DialogHeader>
-                        <DialogBody divider>
-                          This action is irreversible.
-                        </DialogBody>
-                        <DialogFooter>
-                          <Button
-                            variant="gradient"
-                            color="green"
-                            onClick={handleClose}
-                            className="mr-1"
-                          >
-                            <span>Cancel</span>
-                          </Button>
-                          <Button
-                            variant="gradient"
-                            color="red"
-                            onClick={handleDeleteConfirm}
-                          >
-                            <span>Confirm</span>
-                          </Button>
-                        </DialogFooter>
-                      </Dialog>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <DeleteDialog
+              open={isDialogOpen}
+              handleClose={handleCloseDialog}
+              handleDeleteConfirm={handleDeleteConfirm}
+            />
           </CardBody>
-          <Paginate totalPages={totalPages} currentPage={currentPage} />
+
           <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
             <Typography variant="small" color="blue-gray" className="text-md">
               Page {currentPage} of {totalPages}
@@ -252,7 +275,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                 size="sm"
                 onClick={() => {
                   setCurrentPage((prev) => {
-                    const newPage = prev - 1;
+                    const newPage = Math.max(1, prev - 1); // Ensure page doesn't go below 1
                     fetchPosts(newPage);
                     return newPage;
                   });
@@ -265,7 +288,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                 size="sm"
                 onClick={() => {
                   setCurrentPage((prev) => {
-                    const newPage = prev + 1;
+                    const newPage = Math.min(totalPages, prev + 1); // Ensure page doesn't exceed totalPages
                     fetchPosts(newPage);
                     return newPage;
                   });
@@ -292,13 +315,40 @@ export const getServerSideProps = withPageAuthRequired({
     const client = await clientPromise;
     const db = client.db('Content-AI');
 
-    const posts = await db.collection('posts').find().toArray();
-    const totalCount = await db.collection('posts').countDocuments(); // Get total post count
+    const userSession = await getSession(ctx.req, ctx.res); // Get the user's session
+    if (!userSession || !userSession.user) {
+      return {
+        notFound: true,
+      };
+    }
+    const auth0Id = userSession.user.sub; // Get the user's unique ID from the session
+
+    // Fetch the user from the users collection using the auth0Id
+    const user = await db.collection('users').findOne({
+      auth0Id: auth0Id,
+    });
+
+    if (!user) {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Fetch posts for the current user using the user's _id
+    const posts = await db
+      .collection('posts')
+      .find({ userId: user._id })
+      .toArray();
+
+    // Count posts for the current user using the user's _id
+    const totalCount = await db
+      .collection('posts')
+      .countDocuments({ userId: user._id });
 
     return {
       props: {
         posts: JSON.parse(JSON.stringify(posts)),
-        totalCount, // Passtotal count to the component
+        totalCount, // Pass total count to the component
         ...props,
       },
     };
@@ -306,6 +356,3 @@ export const getServerSideProps = withPageAuthRequired({
 });
 
 export default History;
-
-
-

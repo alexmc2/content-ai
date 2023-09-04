@@ -15,7 +15,7 @@ import {
 export default function HomePage({ user }) {
   if (!user)
     return (
-      <Link href="/api/auth/login">
+      <Link href="/api/auth/login" legacyBehavior>
         <div> Login </div>
       </Link>
     );
@@ -36,7 +36,7 @@ export default function HomePage({ user }) {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-          <Link href="/post/new">
+          <Link href="/post/new" legacyBehavior>
             <Button className="bg-blue-900">New Post</Button>
           </Link>
           <div className="prose text-sm mb-0 mt-8">

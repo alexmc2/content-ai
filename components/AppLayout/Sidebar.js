@@ -130,7 +130,7 @@ export const Sidebar = ({
                       isOnHomePage ? 'bg-gray-100' : 'bg-transparent'
                     } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
                   >
-                    <Link href="/home">
+                    <Link href="/home" legacyBehavior>
                       {collapsed ? (
                         <HomeIcon className="w-6 -h-6  " />
                       ) : (
@@ -148,7 +148,7 @@ export const Sidebar = ({
                       isOnNewPostPage ? 'bg-gray-100' : 'bg-transparent'
                     } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
                   >
-                    <Link href="/post/new">
+                    <Link href="/post/new" legacyBehavior>
                       {collapsed ? (
                         <PencilSquareIcon className="w-6 -h-6" />
                       ) : (
@@ -166,7 +166,7 @@ export const Sidebar = ({
                       isOnImagePage ? 'bg-gray-100' : 'bg-transparent'
                     } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
                   >
-                    <Link href="/post/image">
+                    <Link href="/post/image" legacyBehavior>
                       {collapsed ? (
                         <PhotoIcon className="w-6 -h-6 " />
                       ) : (
@@ -184,7 +184,7 @@ export const Sidebar = ({
                       isOnTokensPage ? 'bg-gray-100' : 'bg-transparent'
                     } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
                   >
-                    <Link href="/token-topup">
+                    <Link href="/token-topup" legacyBehavior>
                       {collapsed ? (
                         <CircleStackIcon className="w-6 -h-6" />
                       ) : (
@@ -251,7 +251,7 @@ export const Sidebar = ({
                       collapsed ? 'mx-auto  ' : 'mx-4'
                     } px-2 mt-0 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
                   >
-                    <Link href="/api/auth/logout">
+                    <Link href="/api/auth/logout" legacyBehavior>
                       {collapsed ? (
                         <PowerIcon className="w-6 -h-6" />
                       ) : (

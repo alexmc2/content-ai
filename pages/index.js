@@ -31,7 +31,7 @@ export default function Home() {
         <div className="sm:text-3xl text-xl px-2 w-full mb-5 font-light">
           An AI-powered platform for content and image creation
         </div>
-        <Link href="/home">
+        <Link href="/home" legacyBehavior>
           <Button className="px-20 text-lg sm:my-12 my-10 bg-blue-600/60">
             ENTER
           </Button>

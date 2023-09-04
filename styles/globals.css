@@ -109,3 +109,45 @@ button {
 html {
   font-size: 110%;
 }
+
+/* Default table view for larger screens */
+.table-row-card td {
+  display: table-cell;
+}
+
+/* Hide columns on mobile */
+@media (max-width: 640px) {
+  .hide-on-mobile {
+      display: none;
+  }
+
+  .table-row-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #eee;
+      margin-bottom: 15px;
+      border-radius: 5px;
+  }
+
+  .table-row-card td {
+      padding: 5px 0;
+  }
+
+  .table-row-card td.title {
+      flex: 2;
+      font-weight: bold;
+  }
+
+  .table-row-card td.date {
+      flex: 1;
+      color: #777;
+  }
+
+  .table-row-card td.actions {
+      flex: 0.5;
+  }
+}
+
+
