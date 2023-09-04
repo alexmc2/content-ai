@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../context/postsContext';
 import { useUser } from '@auth0/nextjs-auth0/client';
-// import moment from 'moment';
+
+import { Paginate } from '../components/Paginate';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../components/AppLayout/Layout';
 import { useRouter } from 'next/router';
@@ -35,7 +36,7 @@ import {
   DialogFooter,
 } from '@material-tailwind/react';
 
-export const History = ({ posts: postsFromSSR }) => {
+export const History = ({ posts: postsFromSSR, totalCount }) => {
   const { user } = useUser();
 
   const { setPostsFromSSR, posts, getPosts } = useContext(PostsContext);
@@ -45,11 +46,35 @@ export const History = ({ posts: postsFromSSR }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  const postsPerPage = 10; 
+  const [totalPages, setTotalPages] = useState(Math.ceil(totalCount / postsPerPage));
 
   const TABLE_HEAD = ['Title', 'Topic', 'Keywords', 'Created', ''];
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);
   }, [postsFromSSR, setPostsFromSSR]);
+
+  const fetchPosts = async (page) => {
+    console.log('Fetching posts for page:', page);
+    const skip = (page - 1) * 10; // Calculate the number of posts to skip
+    const result = await fetch('/api/getPosts', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ skip }), // Pass the skip value in the request body
+    });
+    const data = await result.json();
+    if (data.posts) {
+      // Update your posts state with the new posts
+      setPostsFromSSR(data.posts);
+      // Update the current page
+      setCurrentPage(page);
+    }
+  };
 
   const handleDeleteConfirm = async () => {
     try {
@@ -84,31 +109,27 @@ export const History = ({ posts: postsFromSSR }) => {
   return (
     <div className="overflow-auto h-full m-4">
       <div className="max-w-screen-xl mx-auto py-8">
-        <Card className="h-full w-full">
+        <Card className="h-full w-full p-6">
           <CardHeader floated={false} shadow={false} className="rounded-none">
             <div className="mb-8 flex items-center justify-between gap-8">
               <div>
                 <Typography variant="h5" color="blue-gray">
                   Posts History
                 </Typography>
-                <Typography color="gray" className="mt-1">
+                {/* <Typography color="gray" className="mt-1">
                   See information about all posts
-                </Typography>
+                </Typography> */}
               </div>
-              <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                <Button variant="outlined" size="sm">
-                  view all
-                </Button>
-
-                <Button className="flex items-center gap-3" size="sm">
-                  <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add Post
-                </Button>
+              <div className="flex shrink-0 flex-col gap-2 sm:flex-row items-center ">
+                <Link href="/post/new">
+                  <Button className="bg-blue-900">New Post</Button>
+                </Link>
               </div>
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <div className="w-full md:w-72">
                 <Input
-                  label="Search Posts"
+                  label="Search functionality coming soon"
                   icon={<MagnifyingGlassIcon className="h-5 w-5" />}
                 />
               </div>
@@ -178,7 +199,7 @@ export const History = ({ posts: postsFromSSR }) => {
                         color="blue-gray"
                         className="text-md"
                       >
-                        {post.created}
+                        {new Date(post.created).toString()}
                       </Typography>
                     </td>
                     <td className="p-4">
@@ -220,20 +241,35 @@ export const History = ({ posts: postsFromSSR }) => {
               </tbody>
             </table>
           </CardBody>
+          <Paginate totalPages={totalPages} currentPage={currentPage} />
           <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
             <Typography variant="small" color="blue-gray" className="text-md">
-              Page 1 of 10
+              Page {currentPage} of {totalPages}
             </Typography>
             <div className="flex gap-2">
-              <Button variant="outlined" size="sm">
+              <Button
+                variant="outlined"
+                size="sm"
+                onClick={() => {
+                  setCurrentPage((prev) => {
+                    const newPage = prev - 1;
+                    fetchPosts(newPage);
+                    return newPage;
+                  });
+                }}
+              >
                 Previous
               </Button>
               <Button
-                onClick={() => {
-                  getPosts({ lastPostDate: posts[posts.length - 1].created });
-                }}
                 variant="outlined"
                 size="sm"
+                onClick={() => {
+                  setCurrentPage((prev) => {
+                    const newPage = prev + 1;
+                    fetchPosts(newPage);
+                    return newPage;
+                  });
+                }}
               >
                 Next
               </Button>
@@ -257,10 +293,12 @@ export const getServerSideProps = withPageAuthRequired({
     const db = client.db('Content-AI');
 
     const posts = await db.collection('posts').find().toArray();
+    const totalCount = await db.collection('posts').countDocuments(); // Get total post count
 
     return {
       props: {
         posts: JSON.parse(JSON.stringify(posts)),
+        totalCount, // Passtotal count to the component
         ...props,
       },
     };
@@ -268,3 +306,6 @@ export const getServerSideProps = withPageAuthRequired({
 });
 
 export default History;
+
+
+

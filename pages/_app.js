@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { PostsProvider } from '../context/postsContext';
+import { ImagesProvider } from '../context/imagesContext'; // Import the ImagesProvider
 
 import {
   DM_Sans,
@@ -33,11 +34,15 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider>
       <UserProvider>
         <PostsProvider>
-        <main
-          className={`${inter.variable} font-heading ${inter.variable} font-body`}
-        >
-          {getLayout(<Component {...pageProps} />, pageProps)}
-        </main>
+          <ImagesProvider>
+            {' '}
+            {/* Wrap your main component with ImagesProvider */}
+            <main
+              className={`${inter.variable} font-heading ${inter.variable} font-body`}
+            >
+              {getLayout(<Component {...pageProps} />, pageProps)}
+            </main>
+          </ImagesProvider>
         </PostsProvider>
       </UserProvider>
     </ThemeProvider>

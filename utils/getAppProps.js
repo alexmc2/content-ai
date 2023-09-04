@@ -13,6 +13,7 @@ export const getAppProps = async (ctx) => {
     return {
       availableTokens: 0,
       posts: [],
+      images: [],
     };
   }
 
@@ -27,6 +28,23 @@ export const getAppProps = async (ctx) => {
     })
     .toArray();
 
+  // Fetch all images for the user
+
+  const images = await db
+    .collection('images')
+    .find({
+      userId: user._id,
+    })
+    .toArray();
+
+  console.log(images); // Check the fetched images
+
+  const serialisedImages = images.map(({ created, _id, userId, ...rest }) => ({
+    _id: _id.toString(),
+    created: created.toString(),
+    ...rest,
+  }));
+
   return {
     availableTokens: user.availableTokens,
     posts: posts.map(({ created, _id, userId, ...rest }) => ({
@@ -34,6 +52,7 @@ export const getAppProps = async (ctx) => {
       created: created.toString(),
       ...rest,
     })),
+    images: serialisedImages,
     postId: ctx.params?.postId || null,
   };
 };

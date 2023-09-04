@@ -1,11 +1,12 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../../components/AppLayout/Layout';
-
+import { ImageSavedAlert } from '../../components/Alert';
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
 import { useState } from 'react';
 import Image from 'next/legacy/image';
-import { Card, Button, Textarea } from '@material-tailwind/react';
+
+import { Card, Button, Textarea, Alert } from '@material-tailwind/react';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -14,6 +15,7 @@ export default function ImagePage() {
   const [prompt, setPrompt] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
+  const [showAlert, setShowAlert] = useState(false);
 
   const saveImage = async (imageUrl) => {
     try {
@@ -28,6 +30,8 @@ export default function ImagePage() {
       if (response.ok) {
         const data = await response.json();
         console.log('Image saved with ID:', data.imageId);
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 4000);
 
         // router.push('/imageHistory');
       } else {
@@ -47,7 +51,7 @@ export default function ImagePage() {
     // dummy for testing
     if (e.target.prompt.value === 'dummy') {
       imageUrl =
-        'https://res.cloudinary.com/drbz4rq7y/image/upload/v1693677797/replicate-prediction-yljh2ddbnfawxbfnetxcesptkm_iztsqn.png';
+        'https://res.cloudinary.com/drbz4rq7y/image/upload/v1693703361/rbkoqgzlw8e91h3o2iwl.png';
 
       setPrediction({
         output: [imageUrl],
@@ -98,18 +102,11 @@ export default function ImagePage() {
       body: JSON.stringify({ imageUrl }),
     });
 
-    // const cloudinaryData = await cloudinaryResponse.json();
+    const cloudinaryData = await cloudinaryResponse.json();
 
-    // if (cloudinaryResponse.ok) {
-    //   // Use the Cloudinary URL to display the image in the ImageDisplay page
-    //   router.push(
-    //     `/post/imageDisplay?imageUrl=${encodeURIComponent(
-    //       cloudinaryData.cloudinaryUrl
-    //     )}`
-    //   );
-    // } else {
-    //   setError('Failed to upload image to Cloudinary.');
-    // }
+    if (!cloudinaryResponse.ok) {
+      setError('Failed to upload image to Cloudinary.');
+    }
   };
 
   return (
@@ -128,7 +125,7 @@ export default function ImagePage() {
               type="text"
               name="prompt"
               value={prompt}
-              placeholder='Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render'
+              placeholder="Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render"
               onChange={(e) => setPrompt(e.target.value)}
               maxLength={250}
             />
@@ -149,15 +146,17 @@ export default function ImagePage() {
             {prediction.output && (
               <div>
                 <Image
-                  className="w-full object-center "
+                  className="w-full object-center object-cover rounded-lg shadow-md  "
                   layout="responsive"
                   width={500}
                   height={500}
                   src={prediction.output[prediction.output.length - 1]}
                   alt="output"
                 />
+                {showAlert && <ImageSavedAlert className="" />}
+
                 <Button
-                  className="my-4"
+                  className="mt-4 mx-2"
                   onClick={() =>
                     saveImage(prediction.output[prediction.output.length - 1])
                   }
@@ -166,7 +165,7 @@ export default function ImagePage() {
                 </Button>
               </div>
             )}
-            <p>status: {prediction.status}</p>
+            <p className='mx-2'>status: {prediction.status}</p>
           </div>
         )}
       </Card>

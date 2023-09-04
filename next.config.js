@@ -17,6 +17,7 @@ const nextConfig = {
       'pbxt.replicate.delivery',
       'res.cloudinary.com',
     ],
+    target: 'serverless',
 
     remotePatterns: [
       {
@@ -28,9 +29,8 @@ const nextConfig = {
         hostname: 'replicate.delivery',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
 };
 
 module.exports = withVideos(nextConfig);
-
-

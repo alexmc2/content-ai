@@ -82,7 +82,7 @@ export const getServerSideProps = withPageAuthRequired({
         picture: user.picture,
         sid: user.sid,
         updated_at: user.updated_at,
-        availableTokens: 10,
+        availableTokens: 20,
       });
       userProfile = {
         auth0Id: user.sub,
@@ -93,7 +93,7 @@ export const getServerSideProps = withPageAuthRequired({
         picture: user.picture,
         sid: user.sid,
         updated_at: user.updated_at,
-        availableTokens: 10,
+        availableTokens: 20,
       };
     }
 
