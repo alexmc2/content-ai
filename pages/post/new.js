@@ -3,7 +3,13 @@ import { Layout } from '../../components/AppLayout/Layout';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
-import { Button, Spinner, Card, Textarea, Input} from '@material-tailwind/react';
+import {
+  Button,
+  Spinner,
+  Card,
+  Textarea,
+  Input,
+} from '@material-tailwind/react';
 
 export default function NewPost(props) {
   const router = useRouter();
@@ -32,31 +38,41 @@ export default function NewPost(props) {
   return (
     <div className="flex justify-center items-center h-screen">
       {loading ? (
-        <div className="text-gray-700 mx-auto">
-          <Spinner className="h-16 w-16 text-white mb-6 mx-auto" />
-          Generating your article. This may take a few minutes.
+        <div className="text-gray-700 mx-auto text-center px-4">
+          <Spinner className="h-8 w-8 sm:h-12 sm:w-12 md:h-16 md:w-16 text-white mb-4 mx-auto" />
+          <p className="text-md sm:text-base md:text-lg">
+            Generating your article. This may take a few minutes.
+          </p>
         </div>
       ) : (
-        <Card className="bg-white/60 p-8 border border-sky-100 my-8 mx-8 w-full prose shadow-none ">
+        <Card className="bg-white/60 p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm ">
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <div className="text-md mb-2 ">
+            <div className=" flex flex-col">
+              <div className="flex justify-between items-center mb-3 mt-2 text-md">
                 <div>Describe your topic</div>
+                <div className="text-md text-gray-600">{topic.length}/250</div>
               </div>
-              
+
               <Textarea
-                className=" border border-sky-100 h-24 w-full py-2 px-3 text-gray-900 bg-white"
+                style={{ fontSize: '1.00rem' }}
+                className="bg-white text-2xl border "
+                type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                maxLength={150}
+                maxLength={250}
               />
             </div>
-            <div className="my-4">
-              <div className="text-md block mb-2 ">
+            <div className=" flex flex-col">
+              <div className="flex justify-between items-center mb-3 mt-2 text-md">
                 <div>Primary keywords</div>
+                <div className="text-md text-gray-600">
+                  {keywords.length}/120
+                </div>
               </div>
               <Input
-                className="resize-none border border-sky-100 w-full py-2 px-3 text-gray-900 leading-tight rounded bg-white  "
+                style={{ fontSize: '1.00rem' }}
+                className="bg-white text-2xl "
+                type="text"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
                 maxLength={150}

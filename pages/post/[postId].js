@@ -7,28 +7,27 @@ import { faHashtag } from '@fortawesome/free-solid-svg-icons';
 import { getAppProps } from '../../utils/getAppProps';
 import { Card } from '@material-tailwind/react';
 
-
 export default function Post(props) {
   const [date, time] = props.postCreated.split(',');
 
-  
   console.log('props', props);
 
   return (
-    <div className="flex m-2 sm:m-6 h-screen py-2 sm:py-10">
-      <div className="sm:max-w-screen-auto max-w-auto mx-auto py-8  ">
-        <div className="bg-white sm:px-20 py-10 sm:my-2 my-16 px-8 border rounded-md  ">
-          <div className="prose">
-            <h1 className="pt-10">{props.title}</h1>
+    // <div className="flex justify-center items-center m-2 sm:m-6 py-2 sm:py-10">
+    //   <div className="sm:max-w-screen-auto max-w-auto mx-auto py-12">
+      <div className="overflow-auto h-full">
+      <div className="max-w-screen-lg mx-auto sm:px-10 px-4">
+        <div className="bg-white sm:px-20 py-10 sm:my-2 my-16 px-10 border rounded-md">
+          <div className="prose sm:mt-8 mt-2">
+            {/* <h1 className="pt-10">{props.title}</h1>
 
-            <p className="pb-10">{props.metaDescription}</p>
+            <p className="pb-10">{props.metaDescription}</p> */}
 
             <div
+              className=""
               dangerouslySetInnerHTML={{ __html: props.postContent || '' }}
             />
-            <div className='py-6'>
-
-            </div>
+            <div className="py-6 "></div>
           </div>
           <div className="flex flex-row flex-wrap pt-8 gap-1 pb-3  text-gray-600 border-t border-t-black/50">
             <div>Keywords:</div>
@@ -41,9 +40,7 @@ export default function Post(props) {
           </div>
 
           <div>
-            <div className=" text-gray-600 pb-2">
-              Generated: {date}
-            </div>
+            <div className=" text-gray-600 pb-2">Generated: {date}</div>
           </div>
         </div>
       </div>
