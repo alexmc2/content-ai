@@ -13,8 +13,8 @@ const ImageGallery = ({ images }) => {
   }));
   const slides = images.map((item) => ({
     src: item.imageUrl,
-    width: 1000, // or any other standard value
-    height: 1000, // same as width since they are square
+    width: 1000,
+    height: 1000, 
   }));
 
   return (

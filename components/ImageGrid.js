@@ -8,7 +8,7 @@ function ImageGrid({ images, setSelectedImg }) {
       
 
       <div className="grid sm:grid-cols-3 sm:gap-8 grid-cols-1 gap-4 m-8">
-        {/* Added m-8 for margin */}
+        
         {images &&
           images.map((image, index) => (
             <motion.div

@@ -147,9 +147,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                 <Typography variant="h5" color="blue-gray">
                   Posts History
                 </Typography>
-                {/* <Typography color="gray" className="mt-1">
-                  See information about all posts
-                </Typography> */}
+            
               </div>
               <div className="flex shrink-0 flex-col gap-2 sm:flex-row items-center ">
                 <Link href="/post/new" legacyBehavior>

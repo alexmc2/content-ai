@@ -30,7 +30,7 @@ export default function HomePage({ user }) {
             Hello, {user.name}!
           </Typography>
           <Typography className="sm:text-base text-lg ">
-            Your account has been credited with 20 tokens*. Each document or image generated
+            Your account has been credited with 20 tokens*. Each API call
             deducts one token but you can acquire more on the tokens page. Thank
             you for visiting my app!
           </Typography>
