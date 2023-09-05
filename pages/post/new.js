@@ -56,6 +56,7 @@ export default function NewPost(props) {
               <Textarea
                 style={{ fontSize: '1.00rem' }}
                 className="bg-white text-2xl border "
+                placeholder='Provide the AI with 1-2 sentences describing your topic.'
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}

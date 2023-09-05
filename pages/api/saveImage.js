@@ -11,10 +11,14 @@ export default withApiAuthRequired(async function saveImage(req, res) {
     auth0Id: user.sub,
   });
 
-  const { imageUrl } = req.body;
+  const { imageUrl, prompt } = req.body;
 
   if (!imageUrl) {
     res.status(422).send('Image URL is required.');
+    return;
+  }
+  if (!prompt) {
+    res.status(422).send('Prompt is required.');
     return;
   }
 
@@ -22,7 +26,9 @@ export default withApiAuthRequired(async function saveImage(req, res) {
 
   const image = await db.collection('images').insertOne({
     imageUrl,
+    prompt,
     userId: userProfile._id,
+
     created: currentDate,
   });
 

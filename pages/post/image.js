@@ -1,12 +1,15 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../../components/AppLayout/Layout';
 import { ImageSavedAlert } from '../../components/Alert';
+import { ClipboardAlert } from '../../components/ClipboardAlert';
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
 import { useState } from 'react';
 import Image from 'next/legacy/image';
+import { ShareIcon, FolderIcon } from '@heroicons/react/24/outline';
 
 import { Card, Button, Textarea, Alert } from '@material-tailwind/react';
+import { Share } from '@next/font/google';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -16,15 +19,16 @@ export default function ImagePage() {
   const [error, setError] = useState(null);
   const router = useRouter();
   const [showAlert, setShowAlert] = useState(false);
+  const [showClipboardAlert, setShowClipboardAlert] = useState(false);
 
-  const saveImage = async (imageUrl) => {
+  const saveImage = async (imageUrl, prompt) => {
     try {
       const response = await fetch('/api/saveImage', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imageUrl }),
+        body: JSON.stringify({ imageUrl, prompt }),
       });
 
       if (response.ok) {
@@ -145,6 +149,16 @@ export default function ImagePage() {
           <div>
             {prediction.output && (
               <div>
+                <p className="mx-2 mb-2">
+                  {prediction.status === 'starting' &&
+                    'Starting image generation... This could take up to a couple of minutes.'}
+                  {prediction.status === 'processing' &&
+                    'Processing image... This could take up to a couple of minutes.'}
+                  {prediction.status === 'succeeded' &&
+                    'Image generation succeeded!'}
+                  {prediction.status === 'failed' &&
+                    'Image generation failed. Please try again.'}
+                </p>
                 <Image
                   className="w-full object-center object-cover rounded-lg shadow-md  "
                   layout="responsive"
@@ -154,27 +168,36 @@ export default function ImagePage() {
                   alt="output"
                 />
                 {showAlert && <ImageSavedAlert className="" />}
+                {showClipboardAlert && <ClipboardAlert className="" />}
 
-                <Button
-                  className="mt-4 mx-2"
-                  onClick={() =>
-                    saveImage(prediction.output[prediction.output.length - 1])
-                  }
-                >
-                  Save Image
-                </Button>
+                <div className="flex mt-4 ">
+                  <Button
+                    className="flex-1 mx-2  bg-blue-900" // Add flex-1 and adjust margins
+                    onClick={() =>
+                      saveImage(
+                        prediction.output[prediction.output.length - 1],
+                        prompt
+                      )
+                    }
+                  >
+                    Save Image
+                  </Button>
+                  <Button
+                    className="flex-1 mx-2 flex items-center justify-center"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        prediction.output[prediction.output.length - 1]
+                      );
+                      setShowClipboardAlert(true); // Show the clipboard alert
+                      setTimeout(() => setShowClipboardAlert(false), 4000); // Hide the clipboard alert after 4 seconds
+                    }}
+                  >
+                    <ShareIcon className="h-5 w-5 mr-2 " />
+                    Share
+                  </Button>
+                </div>
               </div>
             )}
-            <p className="mx-2">
-              {prediction.status === 'starting' &&
-                'Starting image generation... This could take up to a couple of minutes.'}
-              {prediction.status === 'processing' &&
-                'Processing image... This could take up to a couple of minutes.'}
-              {prediction.status === 'succeeded' &&
-                'Image generation succeeded!'}
-              {prediction.status === 'failed' &&
-                'Image generation failed. Please try again.'}
-            </p>
           </div>
         )}
       </Card>

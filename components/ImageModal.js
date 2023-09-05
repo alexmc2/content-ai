@@ -15,15 +15,19 @@ function ImageModal({ selectedImg, setSelectedImg }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 backdrop"
+      className="fixed inset-0 flex items-center justify-center backdrop backdrop-filter backdrop-blur-md"
       onClick={handleClick}
     >
       <motion.div
         initial={{ y: '-100vh' }}
         animate={{ y: '0' }}
-        className="flex max-w-3/5 max-h-4/5 rounded-lg shadow-lg bg-transparent"
+        className="flex max-w-3/5 max-h-4/5  bg-transparent backdrop backdrop-filter backdrop-blur-md"
       >
-        <img src={selectedImg} alt="enlarged pic" className="sm:w-2/3 sm:h-2/3 object-cover mx-auto my-auto border-8 rounded-sm border-white" />
+        <img
+          src={selectedImg}
+          alt="enlarged pic"
+          className="sm:w-2/3 sm:h-2/3 object-cover mx-auto my-auto border-8 rounded-sm border-white"
+        />
       </motion.div>
     </motion.div>
   );
