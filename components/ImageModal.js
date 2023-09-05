@@ -1,14 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SidebarContext } from '../context/sidebarContext';
+import { ImageCard } from './ImageCard';
 
 function ImageModal({ selectedImg, setSelectedImg }) {
-  const { collapsed } = useContext(SidebarContext); // Use the context
+  const [showClipboardAlert, setShowClipboardAlert] = useState(false);
 
   const handleClick = (e) => {
     if (e.target.classList.contains('backdrop')) {
       setSelectedImg(null);
     }
+  };
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(selectedImg.imageUrl);
+    setShowClipboardAlert(true);
+    setTimeout(() => setShowClipboardAlert(false), 4000);
   };
 
   return (
@@ -18,17 +24,12 @@ function ImageModal({ selectedImg, setSelectedImg }) {
       className="fixed inset-0 flex items-center justify-center backdrop backdrop-filter backdrop-blur-md"
       onClick={handleClick}
     >
-      <motion.div
-        initial={{ y: '-100vh' }}
-        animate={{ y: '0' }}
-        className="flex max-w-3/5 max-h-4/5  bg-transparent backdrop backdrop-filter backdrop-blur-md"
-      >
-        <img
-          src={selectedImg}
-          alt="enlarged pic"
-          className="sm:w-2/3 sm:h-2/3 object-cover mx-auto my-auto border-8 rounded-sm border-white"
-        />
-      </motion.div>
+      <ImageCard
+        imageUrl={selectedImg.imageUrl}
+        prompt={selectedImg.prompt}
+        onShare={handleShare}
+        showClipboardAlert={showClipboardAlert}
+      />
     </motion.div>
   );
 }

@@ -23,16 +23,16 @@ export default function HomePage({ user }) {
   return (
     <div className="flex justify-center  p-4">
       <Card className="max-w-xl w-full mx-auto mb-20 mt-20 ">
-        <CardHeader color="blue-gray" className="relative">
-          <img src="/background8.webp" alt="card-image" />
-        </CardHeader>
+        <img src="/background8.webp" alt="card-image" />
+
         <CardBody>
           <Typography variant="h5" color="blue-gray" className="my-2">
             Hello, {user.name}!
           </Typography>
-          <Typography className="sm:text-md text-lg ">
-            Your account has been credited with 10 tokens*. What are you going to
-            generate today?
+          <Typography className="sm:text-base text-lg ">
+            Your account has been credited with 20 tokens*. Each document or image generated
+            deducts one token but you can acquire more on the tokens page. Thank
+            you for visiting my app!
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">

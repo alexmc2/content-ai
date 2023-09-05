@@ -138,7 +138,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
   });
 
   return (
-    <div className="overflow-auto h-full m-4">
+    <div className="overflow-auto h-full my-9 m-4">
       <div className="max-w-screen-xl mx-auto py-8">
         <Card className="h-full w-full p-6">
           <CardHeader floated={false} shadow={false} className="rounded-none">

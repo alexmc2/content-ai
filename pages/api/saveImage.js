@@ -32,6 +32,17 @@ export default withApiAuthRequired(async function saveImage(req, res) {
     created: currentDate,
   });
 
+  await db.collection('users').updateOne(
+    {
+      auth0Id: user.sub,
+    },
+    {
+      $inc: {
+        availableTokens: -1,
+      },
+    }
+  );
+
   res.status(200).json({
     imageId: image.insertedId,
   });

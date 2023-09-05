@@ -19,7 +19,7 @@ const ImageGallery = ({ images }) => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col md:grid md:grid-cols-3 h-full gap-5 flex-wrap mx-2 md:mx-0">
+      <div className="flex flex-col md:grid md:grid-cols-3 h-full gap-6 flex-wrap mx-2 md:mx-0">
         {galleryTab.map((x, index) => {
           return (
             <div key={index}>
