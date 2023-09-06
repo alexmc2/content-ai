@@ -53,10 +53,10 @@ export default function NewPost(props) {
   return (
     <div className="flex justify-center items-center h-screen">
     {loading ? (
-      <div className="text-gray-700 mx-auto text-center p-6 sm:max-w-screen-md max-w-screen-sm">
+      <div className="text-gray-700 mx-auto text-center p-6 sm:max-w-screen-sm max-w-screen-sm">
         <Spinner className="h-16 w-16 sm:h-12 sm:w-12 md:h-16 md:w-16 lg:h-18 lg:w-18 text-white mb-4 mx-auto" />
         <p className="text-md sm:text-base md:text-lg px-10">
-          Generating your article. This may take a few minutes.
+          Generating your article... This may take up to a couple of minutes.
         </p>
       </div>
       ) : (

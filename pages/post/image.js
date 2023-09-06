@@ -169,9 +169,9 @@ export default function ImagePage() {
           <div>
             <p className="mx-2 mb-2">
               {prediction.status === 'starting' &&
-                'Starting image generation... This could take up to a couple of minutes.'}
+                'Starting image generation... This may take up to a couple of minutes.'}
               {prediction.status === 'processing' &&
-                'Processing image... This could take up to a couple of minutes.'}
+                'Processing image... This may take up to a couple of minutes.'}
               {prediction.status === 'succeeded' &&
                 'Image generation succeeded!'}
               {prediction.status === 'failed' &&

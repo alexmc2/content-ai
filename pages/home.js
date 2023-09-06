@@ -92,6 +92,7 @@ export const getServerSideProps = withPageAuthRequired({
       await db.collection('users').insertOne({
         auth0Id: user.sub,
         email: user.email,
+        username: user.username, 
         email_verified: user.email_verified,
         name: user.name,
         nickname: user.nickname,
@@ -103,6 +104,7 @@ export const getServerSideProps = withPageAuthRequired({
       userProfile = {
         auth0Id: user.sub,
         email: user.email,
+        username: user.username, 
         email_verified: user.email_verified,
         name: user.name,
         nickname: user.nickname,
