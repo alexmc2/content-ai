@@ -14,7 +14,6 @@ export default function TokenTopup() {
     const result = await fetch(`/api/addTokens`, {
       method: 'POST',
     });
-
     const json = await result.json();
     console.log('RESULT: ', json);
     window.location.href = json.session.url;
@@ -44,10 +43,7 @@ export default function TokenTopup() {
             You can acquire more tokens by clicking the button below. Real money
             payments are not implemented, but you can use the test card number
             4242 4242 4242 4242 with any future expiration date and any CVC to
-            add 10 tokens to your account. <br></br>
-            <br></br>Your thoughts, feedback, and bug reports are welcome! You
-            can contact me at alex_mcgarry@hotmail.com or WhatsApp on 07793 565
-            433. Thank you for your interest!
+            add 10 tokens to your account.
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">

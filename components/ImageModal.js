@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { ImageCard } from './ImageCard';
+import DeleteDialog from './DeleteDialog';
+import { ImageDeletedAlert } from './ImageDeletedAlert';
+import { ImagesContext } from '../context/imagesContext';
 
 function ImageModal({ selectedImg, setSelectedImg }) {
   const [showClipboardAlert, setShowClipboardAlert] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const { deleteImage } = useContext(ImagesContext);
 
   const handleClick = (e) => {
-    if (e.target.classList.contains('backdrop')) {
+    if (e.target === e.currentTarget) {
       setSelectedImg(null);
     }
   };
@@ -15,6 +21,21 @@ function ImageModal({ selectedImg, setSelectedImg }) {
     navigator.clipboard.writeText(selectedImg.imageUrl);
     setShowClipboardAlert(true);
     setTimeout(() => setShowClipboardAlert(false), 4000);
+  };
+
+  const handleDelete = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    await deleteImage(selectedImg._id); //Call deleteImage function here
+
+    setShowDeleteDialog(false);
+    setShowDeleteAlert(true);
+    setTimeout(() => {
+      setShowDeleteAlert(false);
+      setSelectedImg(null); // Close modal after deletion
+    }, 4000);
   };
 
   return (
@@ -28,7 +49,15 @@ function ImageModal({ selectedImg, setSelectedImg }) {
         imageUrl={selectedImg.imageUrl}
         prompt={selectedImg.prompt}
         onShare={handleShare}
+        onDelete={handleDelete}
         showClipboardAlert={showClipboardAlert}
+        showDeleteAlert={showDeleteAlert}
+      />
+
+      <DeleteDialog
+        open={showDeleteDialog}
+        handleClose={() => setShowDeleteDialog(false)}
+        handleDeleteConfirm={handleDeleteConfirm}
       />
     </motion.div>
   );

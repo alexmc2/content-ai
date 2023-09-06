@@ -10,7 +10,7 @@ import { Card } from '@material-tailwind/react';
 export default function Post(props) {
   const [date, time] = props.postCreated.split(',');
 
-  console.log('props', props);
+
 
   return (
     // <div className="flex justify-center items-center m-2 sm:m-6 py-2 sm:py-10">

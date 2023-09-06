@@ -63,7 +63,6 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
   }, [postsFromSSR, setPostsFromSSR]);
 
   const fetchPosts = async (page) => {
-    console.log('Fetching posts for page:', page);
     const skip = (page - 1) * 10; // Calculate the number of posts to skip
     const result = await fetch('/api/getPosts', {
       method: 'POST',
@@ -138,16 +137,15 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
   });
 
   return (
-    <div className="overflow-auto h-full my-9 m-4">
-      <div className="max-w-screen-xl mx-auto py-8">
-        <Card className="h-full w-full p-6">
+    <div className="overflow-auto h-full my-9 m-4 ">
+      <div className="max-w-screen-2xl mx-auto py-8">
+        <Card className="h-full w-full flex  p-6">
           <CardHeader floated={false} shadow={false} className="rounded-none">
             <div className="mb-8 flex items-center justify-between gap-8">
               <div>
                 <Typography variant="h5" color="blue-gray">
                   Posts History
                 </Typography>
-            
               </div>
               <div className="flex shrink-0 flex-col gap-2 sm:flex-row items-center ">
                 <Link href="/post/new" legacyBehavior>
@@ -156,22 +154,23 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <div className="w-full md:w-72">
+              <div className="w-full md:w-72 ">
                 <Input
-                  label="Search functionality coming soon"
+                  style={{ font: '2px' }}
+                  label="Search function coming soon"
                   icon={<MagnifyingGlassIcon className="h-5 w-5" />}
                 />
               </div>
             </div>
           </CardHeader>
-          <CardBody className="overflow-none px-0">
-            <table className="mt-4 w-full  table-auto text-left">
-              <thead>
-                <tr>
+          <CardBody className="overflow-none px-4 py-4 overflow-auto">
+            <table className="mt-4 w-full table-auto text-left ">
+              <thead className="w-full">
+                <tr className="">
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
-                      className={`cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50 ${
+                      className={`cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 py-4 transition-colors hover:bg-blue-gray-50 ${
                         head === 'Topic' || head === 'Keywords'
                           ? 'hide-on-mobile'
                           : ''
@@ -184,7 +183,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                       <Typography
                         variant="small"
                         color="blue-gray"
-                        className="flex items-center justify-between gap-2 leading-none opacity-70"
+                        className="flex items-center justify-between gap-3 leading-none opacity-70 px-4"
                       >
                         {head}
                         {index !== TABLE_HEAD.length - 1 &&
@@ -201,15 +200,15 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody className="gap-3">
                 {sortedPosts.map((post) => (
                   <tr key={post._id}>
-                    <td className="p-4">
+                    <td className="">
                       <Link href={`/post/${post._id}`} legacyBehavior>
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="text-md cursor-pointer"
+                          className="text-md cursor-pointer px-4"
                         >
                           {post.title}
                         </Typography>
@@ -239,7 +238,7 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
                         color="blue-gray"
                         className="text-md"
                       >
-                        {dayjs(post.created).format('MMMM D, YYYY h:mm:ss A')}
+                        {dayjs(post.created).format('MMMM D, YYYY h:mm A')}
                       </Typography>
                     </td>
                     <td className="p-4">
@@ -263,17 +262,25 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
             />
           </CardBody>
 
-          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-            <Typography variant="small" color="blue-gray" className="text-md">
-              Page {currentPage} of {totalPages}
+          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4 px-3">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="text-md px-1"
+            >
+              {totalPages > 0
+                ? `Page ${currentPage} of ${totalPages}`
+                : 'Page 1 of 1'}
             </Typography>
-            <div className="flex gap-2">
+
+            <div className="flex gap-2 py-2">
               <Button
                 variant="outlined"
                 size="sm"
+                disabled={currentPage === 1 || totalPages === 0}
                 onClick={() => {
                   setCurrentPage((prev) => {
-                    const newPage = Math.max(1, prev - 1); // Ensure page doesn't go below 1
+                    const newPage = Math.max(1, prev - 1);
                     fetchPosts(newPage);
                     return newPage;
                   });
@@ -284,9 +291,10 @@ export const History = ({ posts: postsFromSSR, totalCount }) => {
               <Button
                 variant="outlined"
                 size="sm"
+                disabled={currentPage === totalPages || totalPages === 0}
                 onClick={() => {
                   setCurrentPage((prev) => {
-                    const newPage = Math.min(totalPages, prev + 1); // Ensure page doesn't exceed totalPages
+                    const newPage = Math.min(totalPages, prev + 1);
                     fetchPosts(newPage);
                     return newPage;
                   });

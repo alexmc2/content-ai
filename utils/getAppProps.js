@@ -37,7 +37,7 @@ export const getAppProps = async (ctx) => {
     })
     .toArray();
 
-  console.log(images); // Check the fetched images
+
 
   const serialisedImages = images.map(({ created, _id, userId, ...rest }) => ({
     _id: _id.toString(),

@@ -1,7 +1,9 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Layout } from '../../components/AppLayout/Layout';
 import { ImageSavedAlert } from '../../components/Alert';
+import { imagePrompts } from '../../components/ImagePromps';
 import { ClipboardAlert } from '../../components/ClipboardAlert';
+
 import { useRouter } from 'next/router';
 import { getAppProps } from '../../utils/getAppProps';
 import { useState } from 'react';
@@ -20,6 +22,7 @@ export default function ImagePage() {
   const router = useRouter();
   const [showAlert, setShowAlert] = useState(false);
   const [showClipboardAlert, setShowClipboardAlert] = useState(false);
+  const [promptIndex, setPromptIndex] = useState(0);
 
   const saveImage = async (imageUrl, prompt) => {
     try {
@@ -113,95 +116,110 @@ export default function ImagePage() {
     }
   };
 
+  const setNextPrompt = () => {
+    if (promptIndex < imagePrompts.length - 1) {
+      setPrompt(imagePrompts[promptIndex + 1]);
+      setPromptIndex(promptIndex + 1);
+    } else {
+      // Reset to the first prompt if we've reached the end of the array
+      setPrompt(imagePrompts[0]);
+      setPromptIndex(0);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen my-6 mx-2">
-      <Card className="bg-white/60 p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm ">
-        <div className=" flex flex-col">
-          <div className="flex justify-between items-center mb-3 mt-2 text-md">
-            <div>Describe your desired image</div>
-
-            <div className="text-md text-gray-600">{prompt.length}/250</div>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <Textarea
-              style={{ fontSize: '1.00rem' }}
-              className="bg-white text-2xl "
-              type="text"
-              name="prompt"
-              value={prompt}
-              placeholder="Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render"
-              onChange={(e) => setPrompt(e.target.value)}
-              maxLength={250}
-            />
-            <Button
-              className="mb-8 mt-3 text-md uppercase w-full bg-blue-900"
-              type="submit"
-              disabled={!prompt.trim()} // Disable the button if prompt is empty or just whitespace
-            >
-              Generate
-            </Button>
-          </form>
+    <Card className="bg-white/60 p-8 border border-sky-100 my-auto mx-auto max-w-screen-md flex w-full prose shadow-sm ">
+      <div className=" flex flex-col">
+      <Button
+          className="mb-3 mt-0 w-52 py-2 text-sm uppercase border border-gray-400 text-gray-600 bg-white hover:shadow-sm shadow-none"
+          onClick={setNextPrompt}
+        >
+          Try an example prompt
+        </Button>
+        <div className="flex justify-between items-center mb-3 mt-2 text-md">
+          <div>Describe your desired image</div>
+          <div className="text-sm text-gray-600">{prompt.length}/250</div>
         </div>
+     
+        <form onSubmit={handleSubmit}>
+          <Textarea
+            style={{ fontSize: '1.00rem' }}
+            className="bg-white text-2xl "
+            type="text"
+            name="prompt"
+            value={prompt}
+            placeholder="Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render"
+            onChange={(e) => setPrompt(e.target.value)}
+            maxLength={250}
+          />
+          <Button
+            className="mb-3 mt-2 text-md py-2 uppercase w-full bg-blue-900"
+            type="submit"
+            disabled={!prompt.trim()} // Disable the button if prompt is empty or just whitespace
+          >
+            Generate
+          </Button>
+        </form>
+      </div>
 
         {error && <div>{error}</div>}
 
         {prediction && (
-  <div>
-    {/* Display status messages */}
-    <p className="mx-2 mb-2">
-      {prediction.status === 'starting' &&
-        'Starting image generation... This could take up to a couple of minutes.'}
-      {prediction.status === 'processing' &&
-        'Processing image... This could take up to a couple of minutes.'}
-      {prediction.status === 'succeeded' &&
-        'Image generation succeeded!'}
-      {prediction.status === 'failed' &&
-        'Image generation failed. Please try again.'}
-    </p>
+          <div>
+            <p className="mx-2 mb-2">
+              {prediction.status === 'starting' &&
+                'Starting image generation... This could take up to a couple of minutes.'}
+              {prediction.status === 'processing' &&
+                'Processing image... This could take up to a couple of minutes.'}
+              {prediction.status === 'succeeded' &&
+                'Image generation succeeded!'}
+              {prediction.status === 'failed' &&
+                'Image generation failed. Please try again.'}
+            </p>
 
-    {/* Render the image if available */}
-    {prediction.output && (
-      <div>
-        <Image
-          className="w-full object-center object-cover rounded-lg shadow-md"
-          layout="responsive"
-          width={500}
-          height={500}
-          src={prediction.output[prediction.output.length - 1]}
-          alt="output"
-        />
-        {showAlert && <ImageSavedAlert className="" />}
-        {showClipboardAlert && <ClipboardAlert className="" />}
+            {prediction.output && (
+              <div>
+                <Image
+                  className="w-full object-center object-cover rounded-lg shadow-md"
+                  layout="responsive"
+                  width={500}
+                  height={500}
+                  src={prediction.output[prediction.output.length - 1]}
+                  alt="output"
+                />
+                {showAlert && <ImageSavedAlert className="" />}
+                {showClipboardAlert && <ClipboardAlert className="" />}
 
-        <div className="flex mt-4 ">
-          <Button
-            className="flex-1 mx-2  bg-blue-900"
-            onClick={() =>
-              saveImage(
-                prediction.output[prediction.output.length - 1],
-                prompt
-              )
-            }
-          >
-            Save Image
-          </Button>
-          <Button
-            className="flex-1 mx-2 flex items-center justify-center"
-            onClick={() => {
-              navigator.clipboard.writeText(
-                prediction.output[prediction.output.length - 1]
-              );
-              setShowClipboardAlert(true);
-              setTimeout(() => setShowClipboardAlert(false), 4000);
-            }}
-          >
-            <ShareIcon className="h-5 w-5 mr-2 " />
-            Share
-          </Button>
-        </div>
-      </div>
-    )}
-  </div>
+                <div className="flex mt-4 gap-3 ">
+                  <Button
+                    className="flex-1 text-sm  bg-blue-900"
+                    onClick={() =>
+                      saveImage(
+                        prediction.output[prediction.output.length - 1],
+                        prompt
+                      )
+                    }
+                  >
+                    Save Image
+                  </Button>
+                  <Button
+                    className="flex-1 text-sm flex items-center justify-center"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        prediction.output[prediction.output.length - 1]
+                      );
+                      setShowClipboardAlert(true);
+                      setTimeout(() => setShowClipboardAlert(false), 4000);
+                    }}
+                  >
+                    <ShareIcon className="h-5 w-5 mr-2 " />
+                    Share
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </Card>
     </div>

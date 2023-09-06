@@ -1,0 +1,297 @@
+[
+  {
+    "_id": {
+      "$oid": "64f688d41e37f86edbd4365c"
+    },
+    "imageUrl": "https://res.cloudinary.com/drbz4rq7y/image/upload/v1693765736/cdidt0xbawnlkrx6s85j.png",
+    "prompt": "dummy",
+    "userId": {
+      "$oid": "64f081e7a33b1fb10406ba3a"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+
+  {
+    "_id": {
+      "$oid": "64f69e631e37f86edbd4365f"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/3eevFRZbO4vqEEi8yBUfwgEfuaUXHwutQ0KOcSL2AqMk4TEGB/out-0.png",
+    "prompt": "A beautiful painting of a building on a cliff by Jim Burns",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f69eab1e37f86edbd43660"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/349sJleoQepH10kq9bbMa6tV1tnzR8MOJQV6Y8Glrte0EKCjA/out-0.png",
+    "prompt": "Dolphins migrating against a sunset, modern oil painting, unreal engine, octane render, hyper realistic and detailed",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f6a04b1e37f86edbd43661"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/lZlH6beTQhxjBayjn56ityJ9syynEKHzAulXug40RlmIkiwIA/out-0.png",
+    "prompt": "drone photograph of Casa Milà in golden hour, natural sunlight, professional photography, 8k, high resolution, highly detailed",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f6a1721e37f86edbd43662"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/8SBeicty0cz8YSUXoQyoURcYrS1pD4OD5MNMawTn2pl0miwIA/out-0.png",
+    "prompt": "adult jaguar with black fur and bronze markings around the eyes and pale grey eyes, studio lighting, trending, acclaimed",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f732234715b56ffcce4f44"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/Ebdb9MseM4XWYiGGWcedmwlB1M6O8frkgf5MC7cZbLixA5EGB/out-0.png",
+    "prompt": "Scientist exploring an alien jungle on Venus, hyper-realistic, intricate details, 4k render, Lumion.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f7325a4715b56ffcce4f45"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/rSVYd61EidJRGxE3iyvAE8N7HPCPgvdYZKllthKZQ71TkTYE/out-0.png",
+    "prompt": "Sorceress casting a spell under a full moon, gothic, detailed attire, graphite sketch, intricate patterns, inspired by the works of H.R. Giger.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f73a084715b56ffcce4f48"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/qHH8d0rTbXo4Nd3VeRlQtafQtT4uVWxTwA99sFBY4Yh5vOhRA/out-0.png",
+    "prompt": "Photograph of a street musician, playing a saxophone, passersby stopping to listen, capturing the magic of impromptu performances.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f745404715b56ffcce4f4a"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/bLLbgZnoRCZeGi2kG9TtrzjTiPBPQYd8DK5LUG7gRJekcPhRA/out-0.png",
+    "prompt": "Photograph of a marathon, runners pushing their limits, spectators cheering, capturing the essence of endurance and determination, realistic, 4k render.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": []
+  },
+  {
+    "_id": {
+      "$oid": "64f755cc4715b56ffcce4f4c"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/23fwVfePel8eHnSLxNn0ewVfIc0ind0n0x4ff6Aoe98f53DKMC/out-0.png",
+    "prompt": "Detailed drawing of a wristwatch, showcasing the intricate mechanics, leather strap, inspired by luxury watch advertisements.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f76f168c22889b3b85b9a4"
+    },
+    "imageUrl": "https://res.cloudinary.com/drbz4rq7y/image/upload/v1693931665/l0iuhc1vm6cww1iozdmu.png",
+    "prompt": "70mm detailed photograph of a chameleon on a vibrant flower, Canon EOS 5D, outdoors, vibrant colors, depth of field, sharp.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f774682725bc36d6791c10"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/ETlrKqth1Qo3OBRJRrfeFtBJzfsfsKyPgCks59sPNXkthJFGB/out-0.png",
+    "prompt": "Scientist exploring an alien jungle on Venus, hyper-realistic, intricate details, 4k render.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+
+  {
+    "_id": {
+      "$oid": "64f7813a2725bc36d6791c15"
+    },
+    "imageUrl": "https://res.cloudinary.com/drbz4rq7y/image/upload/v1693765736/cdidt0xbawnlkrx6s85j.png",
+    "prompt": "dummy",
+    "userId": {
+      "$oid": "64f72a784715b56ffcce4f43"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+
+  {
+    "_id": {
+      "$oid": "64f79a8a9ca823aac22301a1"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/aeRSscszpixMcqoj7ofLp3gHac4e0eUdqdKALu1FIE2EETFGB/out-0.png",
+    "prompt": "Artistic rendition of a lighthouse during a storm, inspired by the works of Thomas Kinkade.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64f7ab089ca823aac22301a6"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/15b9y3YOY2oTChKvOH4g0AwdfIDOQKfJn6oCB70UClWfnrCjA/out-0.png",
+    "prompt": "Oil painting of a mountain hiking trail, backpackers ascending, panoramic view of valleys below, embodying adventure and exploration.",
+    "userId": {
+      "$oid": "64f7aab29ca823aac22301a5"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f7acf29ca823aac22301a7"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/T06m9Vvcc7JKBRIpvhWfKoJjDI9QEC2FpWs60smdBWV19qwIA/out-0.png",
+    "prompt": "Aerial shot of the Eiffel Tower during twilight, natural hues, professional shot, 4k, crisp details.",
+    "userId": {
+      "$oid": "64f7aab29ca823aac22301a5"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f7b46b9ca823aac22301aa"
+    },
+    "imageUrl": "https://res.cloudinary.com/drbz4rq7y/image/upload/v1693765736/cdidt0xbawnlkrx6s85j.png",
+    "prompt": "dummy",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  },
+  {
+    "_id": {
+      "$oid": "64f7c5ff9ca823aac22301ac"
+    },
+    "imageUrl": "https://pbxt.replicate.delivery/ngQWa3ASXq4OAdTJFqerHswX7bU5FrHJLTOfd0d26Xg4fuCjA/out-0.png",
+    "prompt": "Digital painting of a serene lake with reflections of the northern lights, calm waters.",
+    "userId": {
+      "$oid": "64f78c7d0c465c78d93d663f"
+    },
+    "created": {
+      "$date": "2023-09-05T03:20:03.203Z"
+    },
+    "isSample": true,
+    "addedByUsers": [],
+    "hiddenForUsers": ["user1ID", "user3ID"]
+  }
+]

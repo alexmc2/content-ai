@@ -2,17 +2,19 @@ import Link from 'next/link';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import { getAppProps } from '../utils/getAppProps';
 import clientPromise from '../lib/mongodb';
+import { useExtendedUser } from '../context/userContext';
 import { Layout } from '../components/AppLayout/Layout';
 import {
   Card,
-  CardHeader,
   CardBody,
-  Typography,
   CardFooter,
+  Typography,
   Button,
 } from '@material-tailwind/react';
+import { PhotoIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
-export default function HomePage({ user }) {
+export default function HomePage() {
+  const { user } = useExtendedUser();
   if (!user)
     return (
       <Link href="/api/auth/login" legacyBehavior>
@@ -21,28 +23,42 @@ export default function HomePage({ user }) {
     );
 
   return (
-    <div className="flex justify-center  p-4">
-      <Card className="max-w-xl w-full mx-auto mb-20 mt-20 ">
-        <img src="/background8.webp" alt="card-image" />
-
+    <div className="flex justify-center items-center h-screen mx-2 my-5 ">
+      <Card className="bg-white/90 px-8 pb-10 flex  border-sky-100 mx-auto max-w-screen-md w-full prose shadow-sm ">
         <CardBody>
-          <Typography variant="h5" color="blue-gray" className="my-2">
+          <img
+            src="/robot.png"
+            alt="Robot Icon"
+            className="mx-auto h-16 w-16"
+          />
+          <Typography variant="h5" color="blue-gray" className="mb-2">
             Hello, {user.name}!
           </Typography>
-          <Typography className="sm:text-base text-lg ">
-            Your account has been credited with 20 tokens*. Each API call
-            deducts one token but you can acquire more on the tokens page. Thank
-            you for visiting my app!
+          <Typography className="mb-0">
+            Welcome to Vertex AI. Your account has been credited with 20 tokens.
+            Each document or image generated deducts one token but you can
+            acquire more on the tokens page. <br></br>
+            <br></br>This app was developed as a portfolio practice project and
+            your thoughts, feedback, and bug reports are welcome! You can
+            contact me at alex_mcgarry@hotmail.com or WhatsApp on 07793 565 433.
+            Thank you for visiting and enjoy generating some AI content!
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0">
+        <div className="flex mt-1 gap-3 px-6">
           <Link href="/post/new" legacyBehavior>
-            <Button className="bg-blue-900">New Post</Button>
+            <Button className="flex-1 gap-1 sm:text-sm text-xs flex items-center justify-center bg-blue-900 ">
+              <PencilSquareIcon className="w-5 -h-5 hide-on-mobile" />
+              New Post
+            </Button>
           </Link>
-          <div className="prose text-sm mb-0 mt-8">
-            *You may need to refresh the page to activate your tokens.
-          </div>
-        </CardFooter>
+
+          <Link href="/post/image" legacyBehavior>
+            <Button className="flex-1 gap-1 sm:text-sm text-xs flex items-center justify-center ">
+              <PhotoIcon className="w-5 -h-5 hide-on-mobile " />
+              New Image
+            </Button>
+          </Link>
+        </div>
       </Card>
     </div>
   );
@@ -96,11 +112,6 @@ export const getServerSideProps = withPageAuthRequired({
         availableTokens: 20,
       };
     }
-
-    // // Convert _id object to string
-    // if (userProfile && userProfile._id) {
-    //   userProfile._id = userProfile._id.toString();
-    // }
 
     return {
       props: {

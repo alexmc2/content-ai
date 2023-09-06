@@ -4,8 +4,10 @@ import { getAppProps } from '../utils/getAppProps';
 
 export default function Success() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-slate-800 to-sky-700">
-      <div className="text-white text-6xl ">Thank you for your purchase</div>
+    <div className="flex justify-center items-center h-screen">
+      <div className="bg-white p-8 border my-8 rounded-md mx-8 w-full max-w-xl">
+        <h1>Thank you for your purchase</h1>
+      </div>
     </div>
   );
 }

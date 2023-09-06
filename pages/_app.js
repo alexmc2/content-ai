@@ -4,6 +4,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { PostsProvider } from '../context/postsContext';
 import { ImagesProvider } from '../context/imagesContext';
 import { SidebarContext } from '../context/sidebarContext';
+import { ExtendedUserProvider } from '../context/userContext';
 
 import {
   DM_Sans,
@@ -37,17 +38,19 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider>
       <UserProvider>
-        <PostsProvider>
-          <ImagesProvider>
-            <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
-              <main
-                className={`${inter.variable} font-heading ${inter.variable} font-body`}
-              >
-                {getLayout(<Component {...pageProps} />, pageProps)}
-              </main>
-            </SidebarContext.Provider>
-          </ImagesProvider>
-        </PostsProvider>
+        <ExtendedUserProvider>
+          <PostsProvider>
+            <ImagesProvider>
+              <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
+                <main
+                  className={`${inter.variable} font-heading ${inter.variable} font-body`}
+                >
+                  {getLayout(<Component {...pageProps} />, pageProps)}
+                </main>
+              </SidebarContext.Provider>
+            </ImagesProvider>
+          </PostsProvider>
+        </ExtendedUserProvider>
       </UserProvider>
     </ThemeProvider>
   );

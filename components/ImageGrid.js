@@ -5,10 +5,7 @@ import { Card } from '@material-tailwind/react';
 function ImageGrid({ images, setSelectedImg }) {
   return (
     <div>
-      
-
-      <div className="grid sm:grid-cols-3 sm:gap-8 grid-cols-1 gap-4 m-8">
-        
+      <div className="grid sm:grid-cols-3 sm:gap-8 sm:m-8 grid-cols-1 gap-6 m-6">
         {images &&
           images.map((image, index) => (
             <motion.div
