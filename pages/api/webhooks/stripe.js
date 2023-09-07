@@ -27,8 +27,8 @@ const handler = async (req, res) => {
         stripe,
         endpointSecret,
       });
-    } catch (e) {
-      console.log('ERROR: ', e);
+    } catch (error) {
+      console.log('ERROR: ', error);
     }
 
     switch (event.type) {

@@ -206,7 +206,7 @@ export const Sidebar = ({
                         className={`w-full pl-2 ml-4 ${
                           collapsed ? 'pl-1' : ''
                         }    text-md text-base bg-transparent
-                        hover:bg-gray-200 focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm flex items-center gap-3`}
+                        hover:bg-gray-200 focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-none hover: flex items-center gap-3`}
                       >
                         <div
                           className={`flex items-center  gap-3 ${

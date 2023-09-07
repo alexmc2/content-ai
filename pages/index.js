@@ -26,14 +26,14 @@ export default function Home() {
       </video>
       <div className="relative z-10 text-white sm:px-2 md:px-3 px-4 text-center sm:max-w-screen-md max-w-screen-sm font-bold flex flex-col items-center">
         <div className="flex flex-col justify-center items-center w-full">
-          <span className="sm:text-7xl md:text-8xl lg:text-8xl text-5xl sm:py-5 py-4 flex-grow text-center">
+          <span className="sm:text-7xl md:text-xl lg:text-8xl text-5xl sm:py-5 py-4 flex-grow text-center">
             VERTEX AI
           </span>
           <span className="sm:text-2xl text-xl sm:px-6 px-11 w-full mb-5 font-light flex-grow text-center">
             AI-powered content and image creation
           </span>
         </div>
-        <Link href="/home" legacyBehavior>
+        <Link href="/home">
           <Button className="px-20 text-lg sm:my-12 my-10 bg-blue-600/60">
             ENTER
           </Button>
