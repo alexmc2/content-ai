@@ -24,11 +24,15 @@ export default function NewPost(props) {
     setLoading(true); // Start loading
 
     const response = await fetch(`/api/generatePost`, {
+      
       method: 'POST',
       headers: {
         'content-type': 'application/json',
       },
+      
+      
       body: JSON.stringify({ topic, keywords }),
+      
     });
     const json = await response.json();
     console.log('response: ', json);
