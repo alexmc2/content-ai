@@ -34,24 +34,5 @@ export default async function handler(req, res) {
 
   console.log('user: ', user);
 
-  // Update the MongoDB database to add tokens for the user
-  const client = await clientPromise;
-  const db = client.db('Content-AI');
-  const auth0Id = user.sub;
-
-  try {
-    await db.collection('users').updateOne(
-      { auth0Id },
-      {
-        $inc: { availableTokens: 10 },
-        $setOnInsert: { auth0Id },
-      },
-      { upsert: true }
-    );
-    console.log('Tokens added for user:', auth0Id);
-  } catch (error) {
-    console.error('Error adding tokens:', error);
-  }
-
   res.status(200).json({ session: checkoutSession });
 }

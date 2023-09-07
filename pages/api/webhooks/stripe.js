@@ -17,8 +17,6 @@ const stripe = stripeInit(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const handler = async (req, res) => {
-  console.log('Webhook received'); // This will let us know if Stripe is hitting our endpoint
-
   if (req.method === 'POST') {
     let event;
     try {
@@ -27,38 +25,41 @@ const handler = async (req, res) => {
         stripe,
         endpointSecret,
       });
-      console.log('Stripe verified:', event.type); // This will log the event type
     } catch (e) {
-      console.error('Stripe verification failed:', e);
-      return res.status(400).send('Webhook Error: Verification failed.');
+      console.log('ERROR: ', e);
     }
 
-    if (event.type === 'payment_intent.succeeded') {
-      const paymentIntent = event.data.object;
-      const auth0Id = paymentIntent.metadata.sub;
+    switch (event.type) {
+      case 'payment_intent.succeeded': {
+        const client = await clientPromise;
+        const db = client.db('Content-AI');
 
-      const client = await clientPromise;
-      const db = client.db('Content-AI');
+        const paymentIntent = event.data.object;
+        const auth0Id = paymentIntent.metadata.sub;
 
-      try {
-        const updateResult = await db.collection('users').updateOne(
-          { auth0Id },
+        console.log('AUTH 0 ID: ', paymentIntent);
+
+        const userProfile = await db.collection('users').updateOne(
           {
-            $inc: { availableTokens: 10 },
-            $setOnInsert: { auth0Id },
+            auth0Id,
           },
-          { upsert: true }
+          {
+            $inc: {
+              availableTokens: 10,
+            },
+            $setOnInsert: {
+              auth0Id,
+            },
+          },
+          {
+            upsert: true,
+          }
         );
-        console.log('Update result:', updateResult); // This will log the result of the update operation
-        return res.status(200).json({ received: true });
-      } catch (e) {
-        console.error('Database update failed:', e);
-        return res.status(500).send('Database Error: Update failed.');
       }
-    } else {
-      console.log('Unhandled event type:', event.type);
-      return res.status(400).send('Unhandled event type.');
+      default:
+        console.log('UNHANDLED EVENT: ', event.type);
     }
+    res.status(200).json({ received: true });
   }
 };
 
