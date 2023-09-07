@@ -4,7 +4,7 @@ import verifyStripe from '@webdeveducation/next-verify-stripe';
 import clientPromise from '../../../lib/mongodb';
 
 const cors = Cors({
-  allowMethods: ['POST', 'HEAD'],
+  allowMethods: ['POST', 'GET', 'HEAD'],
 });
 
 export const config = {
