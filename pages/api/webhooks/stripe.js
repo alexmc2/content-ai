@@ -13,6 +13,8 @@ export const config = {
   },
 };
 
+
+console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
 const stripe = stripeInit(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
