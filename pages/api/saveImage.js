@@ -29,7 +29,7 @@ export default withApiAuthRequired(async function saveImage(req, res) {
     prompt,
     userId: userProfile._id,
 
-    created: currentDate,
+    created: currentDate.toDateString(),
   });
 
   await db.collection('users').updateOne(

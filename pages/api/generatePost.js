@@ -1,6 +1,10 @@
+export const config = {
+  runtime: 'edge',
+};
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { Configuration, OpenAIApi } from 'openai';
 import clientPromise from '../../lib/mongodb';
+
 
 export default withApiAuthRequired(async function handler(req, res) {
   try {
@@ -15,10 +19,10 @@ export default withApiAuthRequired(async function handler(req, res) {
       return res.status(403).json({ error: 'No available tokens.' });
     }
 
-    const config = new Configuration({
+    const openAIConfig = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    const openai = new OpenAIApi(config);
+    const openai = new OpenAIApi(openAIConfig);
 
     const { topic, keywords } = req.body;
 
@@ -26,7 +30,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       return res.status(422).json({ error: 'Topic or keywords missing.' });
     }
 
-    const postContentResult = await openai.createChatCompletion({
+    const stream = await OpenAIStream({
       model: 'gpt-3.5-turbo',
       messages: [
         {
@@ -44,8 +48,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       temperature: 0.8,
     });
 
-    const postContent =
-      postContentResult.data.choices[0]?.message.content || '';
+    const postContent = await streamToText(stream);
     console.time(postContent);
 
     const titleResult = await openai.createChatCompletion({
