@@ -30,7 +30,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       return res.status(422).json({ error: 'Topic or keywords missing.' });
     }
 
-    const stream = await OpenAIStream({
+    const postContentResult = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [
         {
@@ -48,7 +48,8 @@ export default withApiAuthRequired(async function handler(req, res) {
       temperature: 0.8,
     });
 
-    const postContent = await streamToText(stream);
+    const postContent =
+      postContentResult.data.choices[0]?.message.content || '';
     console.time(postContent);
 
     const titleResult = await openai.createChatCompletion({
