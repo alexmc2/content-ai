@@ -90,12 +90,12 @@ export const Sidebar = ({
   };
 
   return (
-    <div className="flex flex-col-[minmax(16px,300px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
+    <div className="flex flex-col-[minmax(16px,285px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
       {isClient && ( // <-- Conditionally render based on isClient
         <>
           <Card
             className={` fixed md:static z-20 h-full transition-width duration-500 ease-in-out rounded-none ${
-              collapsed ? 'w-16' : 'w-[300px]'
+              collapsed ? 'w-16' : 'w-[285px]'
             } ${shown ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <div
