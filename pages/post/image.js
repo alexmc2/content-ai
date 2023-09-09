@@ -128,40 +128,42 @@ export default function ImagePage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen my-6 mx-2">
-    <Card className="bg-white/60 p-8 border border-sky-100 my-auto mx-auto max-w-screen-md flex w-full prose shadow-sm ">
-      <div className=" flex flex-col">
-      <Button
-          className="mb-3 mt-0 w-52 py-2 text-sm uppercase border border-gray-400 text-gray-600 bg-white hover:shadow-sm shadow-none"
-          onClick={setNextPrompt}
-        >
-          Try an example prompt
-        </Button>
-        <div className="flex justify-between items-center mb-3 mt-2 text-md">
-          <div>Describe your desired image</div>
-          <div className="text-sm text-gray-600">{prompt.length}/250</div>
+    <div className="flex justify-center items-center min-h-screen sm:my-8 my-16 mx-2">
+      <Card className="bg-white p-8 border border-sky-100 min-h-screen mx-auto max-w-screen-md flex w-full prose shadow-sm ">
+        <div className=" flex flex-col">
+          <div className="flex flex-col mb-3 mt-2 text-md">
+            <div>Describe your desired image</div>
+            <Button
+              className="my-3 w-52 py-1 text-sm uppercase border border-gray-400 text-gray-600 bg-white hover:shadow-sm shadow-none"
+              onClick={setNextPrompt}
+            >
+              Try an example prompt
+            </Button>
+            <div className="text-sm mt-3 text-gray-600">
+              {prompt.length}/250
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <Textarea
+              style={{ fontSize: '1.00rem' }}
+              className="bg-white text-2xl h-44 md:h-32 lg:h-32"
+              type="text"
+              name="prompt"
+              value={prompt}
+              placeholder="Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render"
+              onChange={(e) => setPrompt(e.target.value)}
+              maxLength={250}
+            />
+            <Button
+              className="mb-3 mt-2 text-md py-2 uppercase w-full bg-blue-900"
+              type="submit"
+              disabled={!prompt.trim()} // Disable the button if prompt is empty or just whitespace
+            >
+              Generate
+            </Button>
+          </form>
         </div>
-     
-        <form onSubmit={handleSubmit}>
-          <Textarea
-            style={{ fontSize: '1.00rem' }}
-            className="bg-white text-2xl "
-            type="text"
-            name="prompt"
-            value={prompt}
-            placeholder="Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render"
-            onChange={(e) => setPrompt(e.target.value)}
-            maxLength={250}
-          />
-          <Button
-            className="mb-3 mt-2 text-md py-2 uppercase w-full bg-blue-900"
-            type="submit"
-            disabled={!prompt.trim()} // Disable the button if prompt is empty or just whitespace
-          >
-            Generate
-          </Button>
-        </form>
-      </div>
 
         {error && <div>{error}</div>}
 

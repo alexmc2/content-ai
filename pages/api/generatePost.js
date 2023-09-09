@@ -36,7 +36,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         },
         {
           role: 'user',
-          content: `Write a very long and detailed article about ${topic}, that targets the following comma-separated keywords: ${keywords}. Use descriptive examples where appropriate. Use references to support scientific claims. 
+          content: `Write a very long and detailed article about ${topic}, that targets the following comma-separated keywords: ${keywords}. Your response should be 1,000 words or more. Use descriptive examples where appropriate. Use references to support scientific claims. 
         The response should be formatted in SEO-friendly HTML,
         limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`,
         },
