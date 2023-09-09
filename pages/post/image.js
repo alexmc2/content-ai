@@ -128,18 +128,18 @@ export default function ImagePage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen sm:my-8 my-16 mx-2">
+    <div className="flex justify-center items-center min-h-screen  m-2">
       <Card className="bg-white p-8 border border-sky-100 min-h-screen mx-auto max-w-screen-md flex w-full prose shadow-sm ">
         <div className=" flex flex-col">
-          <div className="flex flex-col mb-3 mt-2 text-md">
+          <div className="flex flex-col pt-10 mb-3 mt-2 text-md">
             <div>Describe your desired image</div>
             <Button
-              className="my-3 w-52 py-1 text-sm uppercase border border-gray-400 text-gray-600 bg-white hover:shadow-sm shadow-none"
+              className="my-3 w-52 py-1 text-sm uppercase border border-gray-400 text-gray-600 bg-slate-100 hover:shadow-sm shadow-none"
               onClick={setNextPrompt}
             >
               Try an example prompt
             </Button>
-            <div className="text-sm mt-3 text-gray-600">
+            <div className="text-sm mt-3 -mb-2  text-gray-600">
               {prompt.length}/250
             </div>
           </div>
@@ -147,11 +147,11 @@ export default function ImagePage() {
           <form onSubmit={handleSubmit}>
             <Textarea
               style={{ fontSize: '1.00rem' }}
-              className="bg-white text-2xl h-44 md:h-32 lg:h-32"
+              className="bg-slate-100 text-2xl h-48 md:h-32 lg:h-32"
               type="text"
               name="prompt"
               value={prompt}
-              placeholder="Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render"
+              placeholder="Provide the AI with descriptive sentence describing your image."
               onChange={(e) => setPrompt(e.target.value)}
               maxLength={250}
             />
@@ -203,7 +203,7 @@ export default function ImagePage() {
                       )
                     }
                   >
-                    Save Image
+                    Save
                   </Button>
                   <Button
                     className="flex-1 text-sm flex items-center justify-center"
@@ -215,7 +215,7 @@ export default function ImagePage() {
                       setTimeout(() => setShowClipboardAlert(false), 4000);
                     }}
                   >
-                    <ShareIcon className="h-5 w-5 mr-2 " />
+                    <ShareIcon className="h-5 w-5 mr-2 hide-on-mobile   " />
                     Share
                   </Button>
                 </div>
@@ -235,6 +235,15 @@ ImagePage.getLayout = function getLayout(page, pageProps) {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
     const props = await getAppProps(ctx);
+
+    if (!props.availableTokens || props.availableTokens <= 0) {
+      return {
+        redirect: {
+          destination: '/token-topup', // Redirect to  page to top up tokens
+          permanent: false,
+        },
+      };
+    }
     return {
       props,
     };

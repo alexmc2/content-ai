@@ -1,5 +1,6 @@
 export const imagePrompts = [
   'Gnome village during autumn, surrounded by colorful trees, highly detailed, Blender, Cycles render.',
+  'Dynamic photography portrait of a robot, golden ornate armor, elegant, digital painting, octane 4k render',
   'Detailed drawing of a wristwatch, showcasing the intricate mechanics, leather strap, inspired by luxury watch advertisements.',
   'Scientist exploring an alien jungle on Venus, hyper-realistic, intricate details, 4k render.',
   'Artistic rendition of a lighthouse during a storm, inspired by the works of Thomas Kinkade.',

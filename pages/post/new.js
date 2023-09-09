@@ -24,15 +24,12 @@ export default function NewPost(props) {
     setLoading(true); // Start loading
 
     const response = await fetch(`/api/generatePost`, {
-      
       method: 'POST',
       headers: {
         'content-type': 'application/json',
       },
-      
-      
+
       body: JSON.stringify({ topic, keywords }),
-      
     });
     const json = await response.json();
     console.log('response: ', json);
@@ -55,32 +52,34 @@ export default function NewPost(props) {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-    {loading ? (
-      <div className="text-gray-700 mx-auto text-center p-6 sm:max-w-screen-sm max-w-screen-sm  ">
-        <Spinner className="h-16 w-16 sm:h-12 sm:w-12 md:h-16 md:w-16 lg:h-18 lg:w-18 text-white mb-4 mx-auto" />
-        <p className="text-md sm:text-base md:text-lg px-10">
-          Generating your article... This may take up to a couple of minutes.
-        </p>
-      </div>
+    <div className="flex justify-center items-center min-h-screen  m-2">
+      {loading ? (
+        <div className="text-gray-700 mx-auto text-center p-6 sm:max-w-screen-sm max-w-screen-sm  ">
+          <Spinner className="h-16 w-16 sm:h-12 sm:w-12 md:h-16 md:w-16 lg:h-18 lg:w-18 text-white mb-4 mx-auto" />
+          <p className="text-md sm:text-base md:text-lg px-10">
+            Generating your article... This may take up to a couple of minutes.
+          </p>
+        </div>
       ) : (
-        <Card className="bg-white p-8 border border-sky-100 sm:mt-28 mx-1 min-h-screen max-w-screen-md flex w-full prose shadow-sm ">
+        <Card className="bg-white p-8 border border-sky-100 min-h-screen mx-auto max-w-screen-md flex w-full prose shadow-sm ">
           <form onSubmit={handleSubmit}>
             <div className=" flex flex-col">
-              <div className="flex flex-col mb-3 mt-2 sm:pt-0 pt-10 text-md">
+              <div className="flex flex-col pt-10 mb-3 mt-2 text-md">
                 <div>Describe your topic</div>
-            <Button
-                className="mb-3 w-52 mt-3 py-1 text-sm uppercase border border-gray-400 text-gray-600 bg-white hover:shadow-sm shadow-none"
-                onClick={setNextPrompt}
-              >
-                Try an example prompt
-              </Button>
-                <div className="text-sm text-gray-600">{topic.length}/250</div>
+                <Button
+                  className="my-3 w-52 py-1 text-sm uppercase border border-gray-400 text-gray-600 bg-slate-100 hover:shadow-sm shadow-none"
+                  onClick={setNextPrompt}
+                >
+                  Try an example prompt
+                </Button>
+                <div className="text-sm -mb-2 mt-3  text-gray-600">
+                  {topic.length}/250
+                </div>
               </div>
-            
+
               <Textarea
                 style={{ fontSize: '1.00rem' }}
-                className="bg-white text-2xl border "
+                className="bg-slate-100 text-2xl h-48 md:h-32 lg:h-32"
                 placeholder="Provide the AI with 1-2 sentences describing your topic."
                 type="text"
                 value={topic}
@@ -89,15 +88,15 @@ export default function NewPost(props) {
               />
             </div>
             <div className=" flex flex-col">
-              <div className="flex flex-col  mb-3 mt-4 text-md">
+              <div className="flex flex-col  pt-4 mb-3 mt-4 text-md">
                 <div>Primary keywords</div>
-                <div className="text-sm mt-3 text-gray-600">
+                <div className="text-sm mt-3 -mb-2 text-gray-600 pt-4">
                   {keywords.length}/120
                 </div>
               </div>
               <Textarea
                 style={{ fontSize: '1.00rem' }}
-                className="bg-white text-2xl"
+                className="bg-slate-100 text-2xl h-32 md:h-28 lg:h-28"
                 type="text"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
@@ -126,10 +125,10 @@ export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
     const props = await getAppProps(ctx);
 
-    if (!props.availableTokens) {
+    if (!props.availableTokens || props.availableTokens <= 0) {
       return {
         redirect: {
-          destination: '/token-topup',
+          destination: '/token-topup', // Redirect to  page to top up tokens
           permanent: false,
         },
       };

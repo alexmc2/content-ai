@@ -21,7 +21,7 @@ export function ClipboardAlert() {
   return (
     <Alert
       icon={<Icon />}
-      className="rounded-ls border-1-5 mt-3 mx-auto border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946] whitespace-nowrap" // Use "whitespace-nowrap" instead of "flex-nowrap"
+      className="rounded-ls border-1-5 mt-3  border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946] " // Use "whitespace-nowrap" instead of "flex-nowrap"
     >
       Image copied to clipboard.
     </Alert>

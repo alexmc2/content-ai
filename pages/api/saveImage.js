@@ -1,5 +1,3 @@
-// pages/api/saveImage.js
-
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import clientPromise from '../../lib/mongodb';
 
@@ -29,19 +27,8 @@ export default withApiAuthRequired(async function saveImage(req, res) {
     prompt,
     userId: userProfile._id,
 
-    created: currentDate.toDateString(),
+    created: currentDate,
   });
-
-  await db.collection('users').updateOne(
-    {
-      auth0Id: user.sub,
-    },
-    {
-      $inc: {
-        availableTokens: -1,
-      },
-    }
-  );
 
   res.status(200).json({
     imageId: image.insertedId,

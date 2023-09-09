@@ -45,20 +45,26 @@ function ImageModal({ selectedImg, setSelectedImg }) {
       className="fixed inset-0 flex items-center justify-center backdrop backdrop-filter backdrop-blur-md"
       onClick={handleClick}
     >
-      <ImageCard
-        imageUrl={selectedImg.imageUrl}
-        prompt={selectedImg.prompt}
-        onShare={handleShare}
-        onDelete={handleDelete}
-        showClipboardAlert={showClipboardAlert}
-        showDeleteAlert={showDeleteAlert}
-      />
-
-      <DeleteDialog
-        open={showDeleteDialog}
-        handleClose={() => setShowDeleteDialog(false)}
-        handleDeleteConfirm={handleDeleteConfirm}
-      />
+      <div
+        className="absolute inset-0 bg-black opacity-20"
+        onClick={handleClick}
+      ></div>
+      <div onClick={(e) => e.stopPropagation()}>
+        {/* Prevents the modal from closing when its content is clicked */}
+        <ImageCard
+          imageUrl={selectedImg.imageUrl}
+          prompt={selectedImg.prompt}
+          onShare={handleShare}
+          onDelete={handleDelete}
+          showClipboardAlert={showClipboardAlert}
+          showDeleteAlert={showDeleteAlert}
+        />
+        <DeleteDialog
+          open={showDeleteDialog}
+          handleClose={() => setShowDeleteDialog(false)}
+          handleDeleteConfirm={handleDeleteConfirm}
+        />
+      </div>
     </motion.div>
   );
 }
