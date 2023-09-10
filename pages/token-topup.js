@@ -56,7 +56,7 @@ export default function TokenTopup() {
       }}
     >
       <div className="flex flex-col justify-center items-center h-screen mx-2">
-        <Card className="bg-white/60 p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm z-0">
+        <Card className="bg-white p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm z-0">
           <CardBody>
             {' '}
             <svg
@@ -85,24 +85,22 @@ export default function TokenTopup() {
               password: NEpul&5N 
             </Typography> */}
 
-          <Typography variant="h5" color="blue-gray" className="mb-2">
+          <Typography variant="h5" color="blue-gray" className="mb-2 ">
             This app is still in development.
           </Typography>
           <Typography>
-            <div>
-              You can acquire more tokens by clicking the button below. Real
-              money payments are not implemented, but you can use the following
-              test account to add 10 tokens to your account. <br></br> <br></br>
-              <strong>Email:</strong>
-              <span style={{ wordBreak: 'break-all' }}>
-                {` sb-d3kyy27040456@personal.example.com`}
-              </span>
-              <br></br>
-              <strong>Password:</strong> NEpul&5N
-            </div>
+            You can acquire more tokens by clicking the button below. Real money
+            payments are not implemented, but you can use the following test
+            account to add 10 tokens to your account. <br></br> <br></br>
+            <strong>Email:</strong>
+            <span style={{ wordBreak: 'break-all' }}>
+              {` sb-d3kyy27040456@personal.example.com`}
+            </span>
+            <br></br>
+            <strong>Password:</strong> NEpul&5N
           </Typography>
-        </Card>
-        <Card className="bg-white/60 p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm z-0">
+          {/* </Card>
+        <Card className="bg-white/60 p-8 border border-sky-100 mt-8 mx-auto max-w-screen-md flex w-full prose shadow-sm z-0"> */}
           <PayPalButtons
             style={{
               color: 'gold',
@@ -112,6 +110,7 @@ export default function TokenTopup() {
             }}
             createOrder={paypalCreateOrder}
             onApprove={(data) => paypalCaptureOrder(data.orderID)}
+            className='mt-8'
           />
         </Card>
       </div>
