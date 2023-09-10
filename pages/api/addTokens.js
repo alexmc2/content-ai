@@ -1,5 +1,5 @@
 import { getSession } from '@auth0/nextjs-auth0';
-import client from '../../utils/paypal';
+import client from '../../utils/paypal/index';
 import paypal from '@paypal/checkout-server-sdk';
 import clientPromise from '../../lib/mongodb';
 

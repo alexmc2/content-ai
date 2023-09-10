@@ -1,4 +1,4 @@
-import client from '../../utils/paypal';
+import client from '../../../utils/paypal/index';
 import paypal from '@paypal/checkout-server-sdk';
 import clientPromise from '../../../lib/mongodb';
 
@@ -46,7 +46,6 @@ export default async function Handler(req, res) {
       userID: req.body.user_id,
       status: 'CREATED',
       amount: parseFloat(req.body.order_price),
-     
     };
     await ordersCollection.insertOne(order);
 
