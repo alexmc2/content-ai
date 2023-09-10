@@ -204,9 +204,9 @@ export const Sidebar = ({
                     >
                       <Button
                         className={`w-full pl-2 ml-4 ${
-                          collapsed ? 'pl-1' : ''
+                          collapsed ? 'pl-1 hover:bg-transparent' : ''
                         }    text-md text-base bg-transparent
-                        hover:bg-gray-200 focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-none hover: flex items-center gap-3`}
+                        hover:bg-gray-200 focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-none  flex items-center gap-3`}
                       >
                         <div
                           className={`flex items-center  gap-3 ${
