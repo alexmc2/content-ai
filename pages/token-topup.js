@@ -111,6 +111,7 @@ export default function TokenTopup() {
             createOrder={paypalCreateOrder}
             onApprove={(data) => paypalCaptureOrder(data.orderID)}
             className='mt-8'
+            onClick={handleClick}
           />
         </Card>
       </div>
