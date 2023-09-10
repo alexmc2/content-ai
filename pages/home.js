@@ -24,7 +24,7 @@ export default function HomePage() {
 
   return (
     <div className="flex justify-center items-center h-screen mx-2 my-5 ">
-      <Card className="bg-white/90 px-8 pb-10 flex  border-sky-100 mx-auto max-w-screen-md w-full prose shadow-sm ">
+      <Card className="bg-white/90 px-2 pb-10 flex  border-sky-100 mx-auto max-w-screen-md w-full prose shadow-sm ">
         <CardBody>
           <img
             src="/robot.png"
