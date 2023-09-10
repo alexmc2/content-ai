@@ -35,7 +35,7 @@ function ImageModal({ selectedImg, setSelectedImg }) {
     setTimeout(() => {
       setShowDeleteAlert(false);
       setSelectedImg(null); // Close modal after deletion
-    }, 4000);
+    }, 3000);
   };
 
   return (

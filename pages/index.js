@@ -34,7 +34,7 @@ export default function Home() {
           </span>
         </div>
         <Link href="/home">
-          <Button className="px-20 text-lg sm:my-12 my-10 bg-blue-600/60">
+          <Button className="sm:px-16 px-10 sm:text-lg text-md sm:my-12 my-10 bg-blue-600/60">
             ENTER
           </Button>
         </Link>

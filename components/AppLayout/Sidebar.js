@@ -90,12 +90,12 @@ export const Sidebar = ({
   };
 
   return (
-    <div className="flex flex-col-[minmax(16px,285px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
+    <div className="flex flex-col-[minmax(16px,275px)_1fr] h-screen max-h-screen transition-all duration-500 ease-in-out">
       {isClient && ( // <-- Conditionally render based on isClient
         <>
           <Card
             className={` fixed md:static z-20 h-full transition-width duration-500 ease-in-out rounded-none ${
-              collapsed ? 'w-16' : 'w-[285px]'
+              collapsed ? 'w-16' : 'w-[275px]'
             } ${shown ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <div
@@ -105,7 +105,7 @@ export const Sidebar = ({
             >
               <div
                 className={classNames({
-                  'flex items-center border-b border-b-slate-600  transition-none': true,
+                  'flex items-center border-b border-b-slate-400  transition-none': true,
                   'p-4  justify-between': !collapsed,
                   'py-4 justify-center': collapsed,
                 })}
@@ -129,7 +129,7 @@ export const Sidebar = ({
                       collapsed ? 'mx-auto  ' : 'mx-4'
                     } px-2 mt-5 text-md ${
                       isOnHomePage ? 'bg-gray-100' : 'bg-transparent'
-                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-sm`}
                   >
                     <Link href="/home" legacyBehavior>
                       {collapsed ? (
@@ -147,7 +147,7 @@ export const Sidebar = ({
                       collapsed ? 'mx-auto  ' : 'mx-4'
                     } px-2 mt-1 text-md ${
                       isOnNewPostPage ? 'bg-gray-100' : 'bg-transparent'
-                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-sm`}
                   >
                     <Link href="/post/new" legacyBehavior>
                       {collapsed ? (
@@ -165,7 +165,7 @@ export const Sidebar = ({
                       collapsed ? 'mx-auto  ' : 'mx-4'
                     } px-2 mt-1 text-md ${
                       isOnNewImagePage ? 'bg-gray-100' : 'bg-transparent'
-                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-sm`}
                   >
                     <Link href="/post/image" legacyBehavior>
                       {collapsed ? (
@@ -183,7 +183,7 @@ export const Sidebar = ({
                       collapsed ? 'mx-auto  ' : 'mx-4'
                     } px-2 mt-1 text-md ${
                       isOnTokensPage ? 'bg-gray-100' : 'bg-transparent'
-                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                    } hover:bg-gray-200  focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-sm`}
                   >
                     <Link href="/token-topup" legacyBehavior>
                       {collapsed ? (
@@ -206,7 +206,7 @@ export const Sidebar = ({
                         className={`w-full pl-2 ml-4 ${
                           collapsed ? 'pl-1' : ''
                         }    text-md text-base bg-transparent
-                        hover:bg-gray-200 focus:bg-slate-100 text-slate-950 font-bold shadow-none hover:shadow-none hover: flex items-center gap-3`}
+                        hover:bg-gray-200 focus:bg-slate-100 text-slate-800 font-bold shadow-none hover:shadow-none hover: flex items-center gap-3`}
                       >
                         <div
                           className={`flex items-center  gap-3 ${
@@ -250,7 +250,7 @@ export const Sidebar = ({
                   <Button
                     className={`${
                       collapsed ? 'mx-auto  ' : 'mx-4'
-                    } px-2 mt-0 text-md bg-transparent hover:bg-red-400 text-slate-950 font-bold shadow-none hover:shadow-sm`}
+                    } px-2 mt-0 text-md bg-transparent hover:bg-red-400 text-slate-800 font-bold shadow-none hover:shadow-sm`}
                   >
                     <Link href="/api/auth/logout" legacyBehavior>
                       {collapsed ? (
