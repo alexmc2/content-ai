@@ -41,10 +41,12 @@ export default async function Handler(req, res) {
     const client = await clientPromise;
     const db = client.db('Content-AI');
     const ordersCollection = db.collection('orders');
+    const currentDate = new Date();
     const order = {
       orderID: response.result.id,
       userID: req.body.user_id,
       status: 'CREATED',
+      created: currentDate,
       amount: parseFloat(req.body.order_price),
     };
     await ordersCollection.insertOne(order);

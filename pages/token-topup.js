@@ -11,15 +11,6 @@ import {
 } from '@material-tailwind/react';
 
 export default function TokenTopup() {
-  const handleClick = async () => {
-    const result = await fetch(`/api/addTokens`, {
-      method: 'POST',
-    });
-    const json = await result.json();
-    console.log('RESULT: ', json);
-    window.location.href = json.session.url;
-  };
-
   const paypalCreateOrder = async () => {
     try {
       let response = await fetch('/api/addTokens', {
@@ -35,15 +26,23 @@ export default function TokenTopup() {
 
   const paypalCaptureOrder = async (orderID) => {
     try {
-      await fetch('/api/paypal/captureOrder', {
+      const response = await fetch('/api/paypal/captureOrder', {
         method: 'POST',
         body: JSON.stringify({ orderID }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
+      // Check if the response is successful
+      if (response.ok) {
+        // Redirect to the Success page
+        window.location.href = '/success';
+      } else {
+        console.error('Error capturing PayPal order:', await response.text());
+      }
     } catch (err) {
-      console.log('Error capturing PayPal order:', err);
+      console.error('Error capturing PayPal order:', err);
     }
   };
 
@@ -110,8 +109,7 @@ export default function TokenTopup() {
             }}
             createOrder={paypalCreateOrder}
             onApprove={(data) => paypalCaptureOrder(data.orderID)}
-            className='mt-8'
-            onClick={handleClick}
+            className="mt-8"
           />
         </Card>
       </div>
