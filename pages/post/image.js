@@ -147,7 +147,7 @@ export default function ImagePage() {
           <form onSubmit={handleSubmit}>
             <Textarea
               style={{ fontSize: '1.00rem' }}
-              className="bg-slate-100 text-2xl h-52 md:h-32 lg:h-32"
+              className="bg-slate-100 text-2xl h-48 md:h-32 lg:h-32"
               type="text"
               name="prompt"
               value={prompt}

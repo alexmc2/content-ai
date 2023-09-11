@@ -81,7 +81,7 @@ export default function NewPost(props) {
 
               <Textarea
                 style={{ fontSize: '1.00rem' }}
-                className="bg-slate-100 text-2xl h-52 md:h-32 lg:h-32"
+                className="bg-slate-100 text-2xl h-40 md:h-32 lg:h-32"
                 placeholder="Provide the AI with 1-2 sentences describing your topic."
                 type="text"
                 value={topic}
@@ -98,7 +98,7 @@ export default function NewPost(props) {
               </div>
               <Textarea
                 style={{ fontSize: '1.00rem' }}
-                className="bg-slate-100 text-2xl h-36 md:h-28 lg:h-28"
+                className="bg-slate-100 text-2xl h-40 md:h-28 lg:h-28"
                 type="text"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
