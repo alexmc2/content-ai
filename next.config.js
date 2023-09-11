@@ -17,7 +17,7 @@ const nextConfig = {
       'pbxt.replicate.delivery',
       'res.cloudinary.com',
     ],
-    target: 'serverless',
+
 
     remotePatterns: [
       {

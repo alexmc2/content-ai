@@ -32,7 +32,9 @@ export default function NewPost(props) {
       body: JSON.stringify({ topic, keywords }),
     });
     const json = await response.json();
-    console.log('response: ', json);
+    console.log('Generate Post API Response:', json);
+    
+
     if (json.postId) {
       router.push(`/post/${json.postId}`);
     }
@@ -79,7 +81,7 @@ export default function NewPost(props) {
 
               <Textarea
                 style={{ fontSize: '1.00rem' }}
-                className="bg-slate-100 text-2xl h-48 md:h-32 lg:h-32"
+                className="bg-slate-100 text-2xl h-52 md:h-32 lg:h-32"
                 placeholder="Provide the AI with 1-2 sentences describing your topic."
                 type="text"
                 value={topic}
@@ -88,15 +90,15 @@ export default function NewPost(props) {
               />
             </div>
             <div className=" flex flex-col">
-              <div className="flex flex-col  pt-4 mb-3 mt-4 text-md">
+              <div className="flex flex-col  mb-2 mt-2 text-md">
                 <div>Primary keywords</div>
-                <div className="text-sm mt-3 -mb-2 text-gray-600 pt-4">
+                <div className="text-sm  my-2 -mb-1 text-gray-600 ">
                   {keywords.length}/120
                 </div>
               </div>
               <Textarea
                 style={{ fontSize: '1.00rem' }}
-                className="bg-slate-100 text-2xl h-32 md:h-28 lg:h-28"
+                className="bg-slate-100 text-2xl h-36 md:h-28 lg:h-28"
                 type="text"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}

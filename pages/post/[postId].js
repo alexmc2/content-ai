@@ -10,12 +10,10 @@ import { Card } from '@material-tailwind/react';
 export default function Post(props) {
   const [date, time] = props.postCreated.split(',');
 
-
-
   return (
     // <div className="flex justify-center items-center m-2 sm:m-6 py-2 sm:py-10">
     //   <div className="sm:max-w-screen-auto max-w-auto mx-auto py-12">
-      <div className="overflow-auto h-full">
+    <div className="overflow-auto h-full">
       <div className="max-w-screen-lg mx-auto sm:px-10 px-4">
         <div className="bg-white sm:px-20 py-10 sm:my-2 my-16 px-10 border rounded-md">
           <div className="prose sm:mt-8 mt-2">
@@ -66,6 +64,7 @@ export const getServerSideProps = withPageAuthRequired({
       _id: new ObjectId(ctx.params.postId),
       userId: user._id,
     });
+    console.log('Fetched Post:', post);
 
     if (!post) {
       return {
