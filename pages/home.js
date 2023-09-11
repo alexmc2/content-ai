@@ -38,6 +38,9 @@ export default function HomePage() {
             Welcome to Vertex AI. Your account has been credited with 20 tokens.
             Each document or image generated deducts one token but you can
             acquire more on the tokens page. <br></br>
+            <Typography variant="h5" color="blue-gray" className="mb-2"><br></br>
+            How it works
+          </Typography>
             <br></br>This app was developed as a portfolio practice project and
             your thoughts, feedback, and bug reports are welcome! You can
             contact me at alex_mcgarry@hotmail.com or WhatsApp on 07793 565 433.
@@ -99,7 +102,7 @@ export const getServerSideProps = withPageAuthRequired({
         picture: user.picture,
         sid: user.sid,
         updated_at: user.updated_at,
-        availableTokens: 30,
+        availableTokens: 20,
       });
       userProfile = {
         auth0Id: user.sub,
@@ -111,7 +114,7 @@ export const getServerSideProps = withPageAuthRequired({
         picture: user.picture,
         sid: user.sid,
         updated_at: user.updated_at,
-        availableTokens: 30,
+        availableTokens: 20,
       };
     }
 
