@@ -55,7 +55,7 @@ export const Sidebar = ({
 }) => {
   const { user } = useUser();
   const [isClient, setIsClient] = useState(false); //  state for tracking client-side rendering
-  const displayName = user ? truncateString(user.name, 12) : ''; // Truncate
+  const displayName = user ? truncateString(user.name, 16) : ''; // Truncate
 
   useEffect(() => {
     setIsClient(true); // <-- Set isClient to true once the component is mounted
