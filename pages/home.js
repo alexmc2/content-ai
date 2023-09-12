@@ -78,7 +78,7 @@ export default function HomePage() {
             image generated deducts one token but you can acquire more on the
             tokens page. <br></br>
             <br></br>
-            Please be aware that the Open AI post generator is a bit on the slow
+            Please be aware that the Open AI API is a bit on the slow
             side and can take around 30 seconds to return a result. I&apos;m
             currently exploring ways to boost this speed and stream the API
             response (word-by-word) with edge functions. Stay tuned for updates!
