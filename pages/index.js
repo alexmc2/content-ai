@@ -12,33 +12,42 @@ export default function Home() {
   console.log('User:', user);
 
   return (
-    <div className="w-screen h-screen overflow-hidden flex justify-center items-center">
-      <video
-        className="fixed top-0 left-0 min-w-full min-h-full z-negative object-cover"
-        autoPlay
-        muted
-        loop
-      >
-        <source
-          src="https://res.cloudinary.com/drbz4rq7y/video/upload/v1693663718/galaxy2_tdbfn2.mp4"
-          type="video/mp4"
-        />
-      </video>
-      <div className="relative z-10 text-white sm:px-2 md:px-3 px-4 text-center sm:max-w-screen-md max-w-screen-sm font-bold flex flex-col items-center">
-        <div className="flex flex-col justify-center items-center w-full">
-          <span className="sm:text-6xl md:text-7xl lg:text-8xl text-5xl sm:py-5 py-4 flex-grow text-center">
-            VERTEX AI
-          </span>
-          <span className="sm:text-2xl text-xl sm:px-6 px-11 w-full mb-5 font-light flex-grow text-center">
-            AI-powered content and image creation
-          </span>
+    <div className="min-h-screen overflow-x-hidden overflow-y-auto flex flex-col justify-between items-center">
+      <div className="relative w-full h-screen flex flex-col justify-center items-center">
+        <video
+          className="absolute top-0 left-0 max-w-full min-w-full min-h-full z-negative object-cover"
+          autoPlay
+          muted
+          loop
+        >
+          <source
+            src="https://res.cloudinary.com/drbz4rq7y/video/upload/v1693663718/galaxy2_tdbfn2.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="relative z-10 text-white sm:px-2 md:px-3 px-4 text-center sm:max-w-screen-md max-w-screen-sm font-bold flex flex-col items-center">
+          <div className="flex flex-col justify-center items-center w-full">
+            <span className="sm:text-6xl md:text-7xl lg:text-8xl text-5xl sm:py-5 py-4 flex-grow text-center">
+              VERTEX AI
+            </span>
+            <span className="sm:text-2xl text-xl sm:px-6 px-11 w-full mb-5 font-light flex-grow text-center">
+              AI-powered content and image creation
+            </span>
+          </div>
+          <Link href="/home">
+            <Button className="sm:px-16 px-10 sm:text-lg text-md sm:my-12 my-10 bg-blue-600/60">
+              ENTER
+            </Button>
+          </Link>
         </div>
-        <Link href="/home">
-          <Button className="sm:px-16 px-10 sm:text-lg text-md sm:my-12 my-10 bg-blue-600/60">
-            ENTER
-          </Button>
-        </Link>
+      </div>
+      <div className="w-full bg-black text-white h-auto py-9 text-center z-50">
+        <Link href="/privacy">Privacy Policy</Link> | <Link href="/terms">Terms of Service</Link>
       </div>
     </div>
   );
 }
+
+
+
+{/* <FooterWithSocialLinks /> */}
