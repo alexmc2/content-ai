@@ -61,7 +61,7 @@ export default function TermsOfService() {
 
           <h2>6. Disclaimers</h2>
           <p>
-            Vertex-AI is provided "as is" without any warranties, either express
+            Vertex-AI is provided &apos;as is&apos; without any warranties, either express
             or implied. We do not guarantee that it will always be safe, secure,
             or error-free, nor do we guarantee that it will always function
             without disruptions, delays, or imperfections.
