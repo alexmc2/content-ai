@@ -41,7 +41,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div className="w-full bg-black text-white h-auto py-9 text-center z-50">
+      <div className="w-full bg-black text-white/80 h-auto py-5 text-center z-50">
         <Link href="/privacy">Privacy Policy</Link> | <Link href="/terms">Terms of Service</Link>
       </div>
     </div>
