@@ -39,6 +39,13 @@ import {
   CardFooter,
 } from '@material-tailwind/react';
 
+function truncateString(str, num) {
+  if (str.length <= num) {
+    return str;
+  }
+  return str.slice(0, num) + '...';
+}
+
 export const Sidebar = ({
   children,
   availableTokens,
@@ -48,6 +55,7 @@ export const Sidebar = ({
 }) => {
   const { user } = useUser();
   const [isClient, setIsClient] = useState(false); //  state for tracking client-side rendering
+  const displayName = user ? truncateString(user.name, 12) : ''; // Truncate
 
   useEffect(() => {
     setIsClient(true); // <-- Set isClient to true once the component is mounted
@@ -284,7 +292,9 @@ export const Sidebar = ({
                               className="rounded-full p-0"
                             />
                             {!collapsed && (
-                              <div className=" text-slate-800">{user.name}</div>
+                              <div className=" text-slate-800">
+                                {displayName}
+                              </div>
                             )}
                           </div>
 
