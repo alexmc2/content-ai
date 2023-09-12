@@ -71,7 +71,7 @@ export default function HomePage() {
             button on the sidebar. New posts are automatically saved to your
             document history, and images can be saved by clicking the
             &apos;Save&apos; button after the image has been generated. A sample
-            gallery images can be found in your images history.
+            image gallery can be found in your images history.
             <br></br>
             <br></br>
             Your account has been credited with 20 tokens. Each document or
