@@ -61,7 +61,7 @@ export default function Privacy() {
               Alex McGarry.
             </li>
             <li>
-              (b) Our contractual obligation to provide services you've signed
+              (b) Our contractual obligation to provide services you&apos;ve signed
               up for.
             </li>
             <li>
@@ -104,7 +104,7 @@ export default function Privacy() {
             </li>
           </ul>
           <p>
-            To exercise these rights, contact Alex McGarry. There's no charge
+            To exercise these rights, contact Alex McGarry. There&apos;s no charge
             for these requests, and we aim to respond within a month.
           </p>
 
@@ -123,3 +123,4 @@ export default function Privacy() {
     </div>
   );
 }
+
