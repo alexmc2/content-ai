@@ -4,7 +4,6 @@ An AI content generator built with Next.js and Tailwind CSS. Powered by [OpenAI]
 
 IN PROGRESS!
 
-![MP4](https://res.cloudinary.com/drbz4rq7y/video/upload/v1693663718/galaxy2_tdbfn2.mp4)
 
 ![Screenshot1](https://user-images.githubusercontent.com/119585058/267405123-942be1de-8829-42c4-8ceb-1d84f10a6015.png)
 
