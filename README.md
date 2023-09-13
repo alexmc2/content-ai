@@ -27,7 +27,7 @@ Welcome to Vertex-AI, an AI-powered content generator built using:
    npm install
    ```
 
-3. **Set up your environment variables in a .env file in the root directory:**
+3. **Set up your environment variables in a .env.local file in the root directory:**
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key
