@@ -80,7 +80,7 @@ export default function HomePage() {
             </Typography>
             <br></br>
             Vertex AI harnesses the capabilities of OpenAI&apos;s GPT-3.5-turbo
-            API for written content and Stability AI&apos;s powerful new SDXL
+            model for written content and Stability AI&apos;s powerful new SDXL
             1.0 model for image generation. Click the &apos;New Post&apos; or
             &apos;New Image&apos; buttons to get started. <br></br>
             <br></br>
