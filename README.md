@@ -11,7 +11,6 @@ Welcome to Vertex-AI, an AI-powered content generator built using:
 ![Cloudinary](https://img.shields.io/badge/-Cloudinary-3A5F70?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![PayPal](https://img.shields.io/badge/-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)
 
-
 ## Installation & Getting Started
 
 1. **Clone the repository:**
@@ -20,7 +19,7 @@ Welcome to Vertex-AI, an AI-powered content generator built using:
    git clone https://github.com/alexmc2/content-ai.git
    cd content-ai
 
-
+   ```
 
 2. **Navigate to the root directory and install dependencies:**
 
@@ -30,7 +29,7 @@ Welcome to Vertex-AI, an AI-powered content generator built using:
 
 3. **Set up your environment variables in a .env file in the root directory:**
 
-   ```bash
+```bash
 OPENAI_API_KEY=your_openai_api_key
 AUTH0_SECRET=your_auth0_secret
 AUTH0_BASE_URL=your_auth0_base_url
@@ -48,7 +47,6 @@ PAYPAL_CLIENT_SECRET=your_paypal_client_secret
 NEXT_PUBLIC_PAYPAL_CLIENT_ID=your_next_public_paypal_client_id
 MONGO_DATA_API_KEY=your_mongo_data_api_key
 ```
-
 
 ## Screenshots
 
