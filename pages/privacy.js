@@ -43,7 +43,7 @@ export default function Privacy() {
           <ul>
             <li>Provide AI-powered content and image generation services.</li>
             <li>Personalize your platform experience.</li>
-            <li>Track usage and offer relevant features.</li>
+           
           </ul>
           <p>
             We may share this data with third-party services like Auth0 for
@@ -58,7 +58,7 @@ export default function Privacy() {
           <ul>
             <li>
               (a) Your consent, which you can withdraw at any time by contacting
-              Alex McGarry.
+              the website owner.
             </li>
             <li>
               (b) Our contractual obligation to provide services you&apos;ve signed

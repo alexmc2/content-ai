@@ -14,9 +14,25 @@ import {
 } from '@material-tailwind/react';
 import { PhotoIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
+
+function getDisplayName(user) {
+  if (!user || !user.name) {
+    return ""; 
+  }
+  
+  // Check if the name is an email
+  if (user.name.includes('@')) {
+    const [prefix] = user.name.split('@');
+    return prefix;
+  }
+  
+  return user.name;
+}
+
 async function populateUserGalleryWithSampleImages(userId) {
   const client = await clientPromise;
   const db = client.db('Content-AI');
+  
 
   // Fetch all sample images
   const sampleImages = await db.collection('sampleImages').find({}).toArray();
@@ -37,10 +53,11 @@ async function populateUserGalleryWithSampleImages(userId) {
 
 export default function HomePage() {
   const { user } = useExtendedUser();
+  const displayName = user ? getDisplayName(user) : "";
   if (!user)
     return (
       <Link href="/api/auth/login">
-        <div> Login </div>
+        <div className='text-transparent'> Login </div>
       </Link>
     );
 
@@ -53,7 +70,7 @@ export default function HomePage() {
             alt="Robot Icon"
             className="mx-auto h-16 w-16"
           />
-          <Typography variant="h5">Hello, {user.name}!</Typography>
+          <Typography variant="h5">Hello, {displayName}!</Typography>
           <Typography className="mb-0">
             Welcome to Vertex AI - an app for AI-powered text and image
             generation <br></br>

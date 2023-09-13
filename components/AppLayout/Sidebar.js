@@ -39,12 +39,21 @@ import {
   CardFooter,
 } from '@material-tailwind/react';
 
-function truncateString(str, num) {
-  if (str.length <= num) {
-    return str;
+function getDisplayName(user) {
+  if (!user || !user.name) {
+    return ""; 
   }
-  return str.slice(0, num) + '...';
+  
+  // Check if the name is an email
+  if (user.name.includes('@')) {
+    const [prefix] = user.name.split('@');
+    return prefix;
+  }
+  
+  return user.name;
 }
+
+
 
 export const Sidebar = ({
   children,
@@ -55,7 +64,10 @@ export const Sidebar = ({
 }) => {
   const { user } = useUser();
   const [isClient, setIsClient] = useState(false); //  state for tracking client-side rendering
-  const displayName = user ? truncateString(user.name, 16) : ''; // Truncate
+  const displayName = user ? getDisplayName(user) : "";
+
+
+
 
   useEffect(() => {
     setIsClient(true); // <-- Set isClient to true once the component is mounted

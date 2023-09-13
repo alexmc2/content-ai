@@ -42,12 +42,13 @@ export default function Home() {
         </div>
       </div>
       <div className="w-full bg-black text-white/80 h-auto py-5 text-center z-50">
-        <Link href="/privacy">Privacy Policy</Link> | <Link href="/terms">Terms of Service</Link>
+        <Link href="/privacy">Privacy Policy</Link> |{' '}
+        <Link href="/terms">Terms of Service</Link>
       </div>
     </div>
   );
 }
 
-
-
-{/* <FooterWithSocialLinks /> */}
+{
+  /* <FooterWithSocialLinks /> */
+}
