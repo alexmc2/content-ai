@@ -4,12 +4,13 @@
 
 Welcome to Vertex-AI, an AI-powered content generator built using:
 
-- ![Next.js Logo](https://img.shields.io/badge/-Next.js-black?logo=next.js) 
-- ![TailwindCSS Logo](https://img.shields.io/badge/-TailwindCSS-black?logo=tailwind-css) 
-- ![MongoDB Logo](https://img.shields.io/badge/-MongoDB-black?logo=mongodb) 
-- ![Auth0 Logo](https://img.shields.io/badge/-Auth0-black?logo=auth0)
-- ![Cloudinary Logo](https://img.shields.io/badge/-Cloudinary-black?logo=cloudinary)
-- ![PayPal Logo](https://img.shields.io/badge/-PayPal-black?logo=paypal)
+![Next.js](https://img.shields.io/badge/-Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![MongoDB](https://img.shields.io/badge/-MongoDB-13aa52?style=for-the-badge&logo=mongodb&logoColor=white)
+![Auth0](https://img.shields.io/badge/-Auth0-EB5424?style=for-the-badge&logo=auth0&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/-Cloudinary-3A5F70?style=for-the-badge&logo=cloudinary&logoColor=white)
+![PayPal](https://img.shields.io/badge/-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)
+
 
 ## Installation & Getting Started
 
@@ -29,7 +30,7 @@ Welcome to Vertex-AI, an AI-powered content generator built using:
 
 3. **Set up your environment variables in a .env file in the root directory:**
 
-   ```env
+   ```bash
 OPENAI_API_KEY=your_openai_api_key
 AUTH0_SECRET=your_auth0_secret
 AUTH0_BASE_URL=your_auth0_base_url
