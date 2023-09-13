@@ -14,25 +14,23 @@ import {
 } from '@material-tailwind/react';
 import { PhotoIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
-
 function getDisplayName(user) {
   if (!user || !user.name) {
-    return ""; 
+    return '';
   }
-  
+
   // Check if the name is an email
   if (user.name.includes('@')) {
     const [prefix] = user.name.split('@');
     return prefix;
   }
-  
+
   return user.name;
 }
 
 async function populateUserGalleryWithSampleImages(userId) {
   const client = await clientPromise;
   const db = client.db('Content-AI');
-  
 
   // Fetch all sample images
   const sampleImages = await db.collection('sampleImages').find({}).toArray();
@@ -53,11 +51,11 @@ async function populateUserGalleryWithSampleImages(userId) {
 
 export default function HomePage() {
   const { user } = useExtendedUser();
-  const displayName = user ? getDisplayName(user) : "";
+  const displayName = user ? getDisplayName(user) : '';
   if (!user)
     return (
       <Link href="/api/auth/login">
-        <div className='text-transparent'> Login </div>
+        <div className="text-transparent"> Login </div>
       </Link>
     );
 
@@ -84,6 +82,10 @@ export default function HomePage() {
             1.0 model for image generation. Click the &apos;New Post&apos; or
             &apos;New Image&apos; buttons to get started. <br></br>
             <br></br>
+            The app works on both desktop and mobile devices. On mobile devices,
+            you can toggle the sidebar visibility by clicking the menu icon in
+            the top right hand corner. <br></br>
+            <br></br>
             You can view your generated content by clicking on the history
             button on the sidebar. New posts are automatically saved to your
             document history, and images can be saved by clicking the
@@ -103,8 +105,8 @@ export default function HomePage() {
             <br></br>
             <br></br>This app was developed as a portfolio practice project and
             your thoughts, feedback, and bug reports are welcome! You can
-            contact me at alexandramcgarryx@gmail.com or WhatsApp on 07793 565 433.
-            Thank you for visiting and enjoy generating some AI content!
+            contact me at alexandramcgarryx@gmail.com or WhatsApp on 07793 565
+            433. Thank you for visiting and enjoy generating some AI content!
           </Typography>
         </CardBody>
         <div className="flex mt-1 gap-3 px-6">
