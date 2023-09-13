@@ -14,6 +14,8 @@ class MyDocument extends Document {
             property="og:description"
             content="Web application that utilises Open AI’s GPT-3.5-turbo API and more."
           />
+          <meta property="og:type" content="website" />
+
           <meta
             property="og:image"
             content="https://res.cloudinary.com/drbz4rq7y/image/upload/v1694375394/uswf7yaq5bmuwhoz7fhz.jpg"
