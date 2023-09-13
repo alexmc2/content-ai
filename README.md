@@ -47,6 +47,7 @@ PAYPAL_CLIENT_ID=your_paypal_client_id
 PAYPAL_CLIENT_SECRET=your_paypal_client_secret
 NEXT_PUBLIC_PAYPAL_CLIENT_ID=your_next_public_paypal_client_id
 MONGO_DATA_API_KEY=your_mongo_data_api_key
+```
 
 
 ## Screenshots
