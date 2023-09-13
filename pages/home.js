@@ -71,7 +71,7 @@ export default function HomePage() {
           <Typography variant="h5">Hello, {displayName}!</Typography>
           <Typography className="mb-0">
             Welcome to Vertex AI - an app for AI-powered text and image
-            generation <br></br>
+            generation. <br></br>
             <Typography variant="h5">
               <br></br>
               How it works
