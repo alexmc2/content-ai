@@ -50,7 +50,6 @@ MONGO_DATA_API_KEY=your_mongo_data_api_key
 
 ## Screenshots
 
-![Screenshot1](https://user-images.githubusercontent.com/119585058/267405123-942be1de-8829-42c4-8ceb-1d84f10a6015.png)
 
 ![Screenshot1](https://user-images.githubusercontent.com/119585058/267405123-942be1de-8829-42c4-8ceb-1d84f10a6015.png)
 
