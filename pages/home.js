@@ -98,12 +98,12 @@ export default function HomePage() {
             Please be aware that the Open AI API is a bit on the slow side and
             can take around 30 seconds to generate a response. I&apos;m
             currently exploring ways to boost this speed and stream the API
-            response (word-by-word) by incorporating edge functions into my
+            response (word-by-word) by integrating edge functions into my
             current tech stack. Stay tuned for updates!
             <br></br>
             <br></br>This app was developed as a portfolio practice project and
             your thoughts, feedback, and bug reports are welcome! You can
-            contact me at alex_mcgarry@hotmail.com or WhatsApp on 07793 565 433.
+            contact me at alexandramcgarryx@gmail.com or WhatsApp on 07793 565 433.
             Thank you for visiting and enjoy generating some AI content!
           </Typography>
         </CardBody>
