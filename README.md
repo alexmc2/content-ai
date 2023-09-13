@@ -1,9 +1,56 @@
-# AI Content Generator
+# Vertex-AI: AI-powered Content and Image Generator
 
-An AI content generator built with Next.js and Tailwind CSS. Powered by [OpenAI](https://https://openai.com/)
+![Status](https://img.shields.io/badge/status-in%20progress-yellow)
 
-IN PROGRESS!
+Welcome to Vertex-AI, an AI-powered content generator built using:
 
+- ![Next.js Logo](https://img.shields.io/badge/-Next.js-black?logo=next.js) 
+- ![TailwindCSS Logo](https://img.shields.io/badge/-TailwindCSS-black?logo=tailwind-css) 
+- ![MongoDB Logo](https://img.shields.io/badge/-MongoDB-black?logo=mongodb) 
+- ![Auth0 Logo](https://img.shields.io/badge/-Auth0-black?logo=auth0)
+- ![Cloudinary Logo](https://img.shields.io/badge/-Cloudinary-black?logo=cloudinary)
+- ![PayPal Logo](https://img.shields.io/badge/-PayPal-black?logo=paypal)
+
+## Installation & Getting Started
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/alexmc2/content-ai.git
+   cd content-ai
+
+
+
+2. **Navigate to the root directory and install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up your environment variables in a .env file in the root directory:**
+
+   ```env
+OPENAI_API_KEY=your_openai_api_key
+AUTH0_SECRET=your_auth0_secret
+AUTH0_BASE_URL=your_auth0_base_url
+AUTH0_ISSUER_BASE_URL=your_auth0_issuer_base_url
+AUTH0_CLIENT_ID=your_auth0_client_id
+AUTH0_CLIENT_SECRET=your_auth0_client_secret
+MONGODB_URI=your_mongodb_uri
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+REPLICATE_API_TOKEN=your_replicate_api_token
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+PAYPAL_CLIENT_ID=your_paypal_client_id
+PAYPAL_CLIENT_SECRET=your_paypal_client_secret
+NEXT_PUBLIC_PAYPAL_CLIENT_ID=your_next_public_paypal_client_id
+MONGO_DATA_API_KEY=your_mongo_data_api_key
+
+
+## Screenshots
+
+![Screenshot1](https://user-images.githubusercontent.com/119585058/267405123-942be1de-8829-42c4-8ceb-1d84f10a6015.png)
 
 ![Screenshot1](https://user-images.githubusercontent.com/119585058/267405123-942be1de-8829-42c4-8ceb-1d84f10a6015.png)
 
