@@ -16,7 +16,7 @@ class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://asset.cloudinary.com/drbz4rq7y/27c0e3319a01b5ade2b01c0c5f8d4ea0"
+            content="https://res.cloudinary.com/drbz4rq7y/image/upload/c_scale,h_1200,q_100,r_8,w_880/v1694618769/Screenshot_from_2023-09-13_16-24-33_fjjliv.png"
           />
           <meta
             property="og:url"
@@ -35,7 +35,7 @@ class MyDocument extends Document {
           />
           <meta
             name="twitter:image"
-            content="https://asset.cloudinary.com/drbz4rq7y/27c0e3319a01b5ade2b01c0c5f8d4ea0"
+            content="https://res.cloudinary.com/drbz4rq7y/image/upload/c_scale,h_1200,q_100,r_8,w_880/v1694618769/Screenshot_from_2023-09-13_16-24-33_fjjliv.png"
           />
           {/* ... other head elements */}
         </Head>
