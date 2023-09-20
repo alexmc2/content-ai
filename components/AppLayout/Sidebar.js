@@ -132,7 +132,7 @@ export const Sidebar = ({
               >
                 {!collapsed && <Logo />}
                 <button
-                  className=" hover:bg-slate-200 w-10 h-10 rounded-full opacity-0 md:opacity-100"
+                  className=" hover:bg-slate-200 w-10 h-10 rounded-full opacity-0 md:opacity-100 hide-on-mobile"
                   onClick={() => setCollapsed(!collapsed)}
                 >
                   <Icon className="w-6 -h-6 mx-auto" />
