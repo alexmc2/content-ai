@@ -83,19 +83,22 @@ export default function HomePage() {
             &apos;New Image&apos; buttons to get started. <br></br>
             <br></br>
             The app works on both desktop and mobile devices. On mobile devices,
-            you can toggle the sidebar visibility by clicking the menu icon in
-            the top right hand corner. <br></br>
+            you can toggle the sidebar visibility by clicking the blue hamburger
+            menu icon in the top right hand corner of the page. <br></br>
             <br></br>
             You can view your generated content by clicking on the history
             button on the sidebar. New posts are automatically saved to your
             document history, and images can be saved by clicking the
-            &apos;Save&apos; button after the image has been generated. A sample
-            image gallery can be found in your images history.
+            &apos;Save&apos; button immediately after the image has been
+            generated. A sample image gallery can be found in your images
+            history.
             <br></br>
             <br></br>
-            Your account has been credited with 20 tokens. Each document or
-            image generated deducts one token but you can acquire more on the
-            tokens page. <br></br>
+            Your account has been credited with 20 tokens and each document or
+            image generated deducts one token. This is an experiemental app and
+            PayPal functionality is implemented in sandbox mode to emulate a
+            real app in production. You can acquire more tokens by using the
+            test PayPal account provided on the token top-up page.<br></br>
             <br></br>
             Please be aware that the Open AI API is a bit on the slow side and
             can take around 30 seconds to generate a response. I&apos;m
@@ -105,8 +108,8 @@ export default function HomePage() {
             <br></br>
             <br></br>This app was developed as a portfolio practice project and
             your thoughts, feedback, and bug reports are welcome! You can
-            contact me at alexandramcgarryx@gmail.com or WhatsApp on 07793 565
-            433. Thank you for visiting and enjoy generating some AI content!
+            contact me at alexandramcgarryx@gmail.com. Thank you for visiting
+            and enjoy generating some AI content!
           </Typography>
         </CardBody>
         <div className="flex mt-1 gap-3 px-6">

@@ -77,8 +77,7 @@ export const Sidebar = ({
   }, []);
 
   useEffect(() => {
-    setIsClient(true); // <-- Set isClient to true once the component is mounted
-  }, []);
+    setIsClient(true); 
 
   const [collapsed, setCollapsed] = React.useState(false);
   const Icon = collapsed ? ChevronRightIcon : ChevronLeftIcon;
