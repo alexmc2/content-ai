@@ -90,15 +90,15 @@ export default function HomePage() {
             button on the sidebar. New posts are automatically saved to your
             document history, and images can be saved by clicking the
             &apos;Save&apos; button immediately after the image has been
-            generated. A sample image gallery can be found in your images
-            history.
+            generated. A sample gallery of AI images and prompts can be found in
+            your images history.
             <br></br>
             <br></br>
             Your account has been credited with 20 tokens and each document or
-            image generated deducts one token. This is an experiemental app and
-            PayPal functionality is implemented in sandbox mode to emulate a
+            image generated deducts one token. This app is still in development
+            and PayPal functionality is implemented in sandbox mode to emulate a
             real app in production. You can acquire more tokens by using the
-            test PayPal account provided on the token top-up page.<br></br>
+            test PayPal account on the token top-up page.<br></br>
             <br></br>
             Please be aware that the Open AI API is a bit on the slow side and
             can take around 30 seconds to generate a response. I&apos;m
