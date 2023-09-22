@@ -41,19 +41,17 @@ import {
 
 function getDisplayName(user) {
   if (!user || !user.name) {
-    return ""; 
+    return '';
   }
-  
+
   // Check if the name is an email
   if (user.name.includes('@')) {
     const [prefix] = user.name.split('@');
     return prefix;
   }
-  
+
   return user.name;
 }
-
-
 
 export const Sidebar = ({
   children,
@@ -64,10 +62,19 @@ export const Sidebar = ({
 }) => {
   const { user } = useUser();
   const [isClient, setIsClient] = useState(false); //  state for tracking client-side rendering
-  const displayName = user ? getDisplayName(user) : "";
+  const displayName = user ? getDisplayName(user) : '';
+  const [tokens, setTokens] = useState(availableTokens);
 
+  useEffect(() => {
+    // Function to fetch the latest token count
+    const fetchTokens = async () => {
+      const response = await fetch('/getUserData');
+      const data = await response.json();
+      setTokens(data.tokens);
+    };
 
-
+    fetchTokens();
+  }, []);
 
   useEffect(() => {
     setIsClient(true); // <-- Set isClient to true once the component is mounted
