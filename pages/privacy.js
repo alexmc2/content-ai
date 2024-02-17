@@ -6,7 +6,7 @@ export default function Privacy() {
     <div className="flex justify-center items-center min-h-screen m-2">
       <Card className="bg-white p-10 border border-sky-100 min-h-screen mx-auto max-w-screen-md flex w-full prose shadow-sm ">
         <div className="flex flex-col">
-          <h1>Vertex-AI Privacy Policy</h1>
+          <h1>Content-AI Privacy Policy</h1>
 
           <h2>The type of personal information we collect</h2>
           <p>We currently collect and process the following information:</p>
@@ -35,7 +35,7 @@ export default function Privacy() {
             Most personal information we process is provided by you when you:
           </p>
           <ul>
-            <li>Register an account on Vertex-AI.</li>
+            <li>Register an account on Content-AI.</li>
             <li>Generate content or images using our AI tools.</li>
             <li>Upload images to our platform.</li>
           </ul>
@@ -43,7 +43,6 @@ export default function Privacy() {
           <ul>
             <li>Provide AI-powered content and image generation services.</li>
             <li>Personalize your platform experience.</li>
-           
           </ul>
           <p>
             We may share this data with third-party services like Auth0 for
@@ -61,8 +60,8 @@ export default function Privacy() {
               the website owner.
             </li>
             <li>
-              (b) Our contractual obligation to provide services you&apos;ve signed
-              up for.
+              (b) Our contractual obligation to provide services you&apos;ve
+              signed up for.
             </li>
             <li>
               (f) Our legitimate interest in enhancing our platform and offering
@@ -104,8 +103,8 @@ export default function Privacy() {
             </li>
           </ul>
           <p>
-            To exercise these rights, contact Alex McGarry. There&apos;s no charge
-            for these requests, and we aim to respond within a month.
+            To exercise these rights, contact Alex McGarry. There&apos;s no
+            charge for these requests, and we aim to respond within a month.
           </p>
 
           <h2>Contact</h2>
@@ -123,4 +122,3 @@ export default function Privacy() {
     </div>
   );
 }
-

@@ -70,14 +70,14 @@ export default function HomePage() {
           />
           <Typography variant="h5">Hello, {displayName}!</Typography>
           <Typography className="mb-0">
-            Welcome to Vertex AI - an app for AI-powered text and image
+            Welcome to Content AI - an app for AI-powered text and image
             generation. <br></br>
             <Typography variant="h5">
               <br></br>
               How it works
             </Typography>
             <br></br>
-            Vertex AI harnesses the capabilities of OpenAI&apos;s GPT-3.5-turbo
+            Content AI harnesses the capabilities of OpenAI&apos;s GPT-3.5-turbo
             model for written content and Stability AI&apos;s powerful new SDXL
             1.0 model for image generation. Click the &apos;New Post&apos; or
             &apos;New Image&apos; buttons to get started. <br></br>

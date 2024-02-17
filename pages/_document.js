@@ -8,13 +8,12 @@ class MyDocument extends Document {
           {/* Open Graph Tags */}
           <meta
             property="og:title"
-            content="Vertex-AI: AI-powered content and image generator"
+            content="Content-AI: AI-powered content and image generator"
           />
           <meta
             property="og:description"
             content="Web application that utilises Open AI’s GPT-3.5-turbo API and more."
           />
-      
 
           <meta
             property="og:image"
@@ -29,7 +28,7 @@ class MyDocument extends Document {
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
-            content="Vertex-AI: AI-powered content and image generator"
+            content="Content-AI: AI-powered content and image generator"
           />
           <meta
             name="twitter:description"

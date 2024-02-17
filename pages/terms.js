@@ -6,12 +6,12 @@ export default function TermsOfService() {
     <div className="flex justify-center items-center min-h-screen m-2">
       <Card className="bg-white p-10 border border-sky-100 min-h-screen mx-auto max-w-screen-md flex w-full prose shadow-sm ">
         <div className="flex flex-col">
-          <h1>Vertex-AI Terms of Service</h1>
+          <h1>Content-AI Terms of Service</h1>
           <p>Last Updated: 12th September, 2023</p>
 
           <h2>1. Introduction</h2>
           <p>
-            Welcome to Vertex-AI. By using our app, you agree to these Terms of
+            Welcome to Content-AI. By using our app, you agree to these Terms of
             Service. Please read them carefully.
           </p>
 
@@ -61,15 +61,15 @@ export default function TermsOfService() {
 
           <h2>6. Disclaimers</h2>
           <p>
-            Vertex-AI is provided &apos;as is&apos; without any warranties, either express
-            or implied. We do not guarantee that it will always be safe, secure,
-            or error-free, nor do we guarantee that it will always function
-            without disruptions, delays, or imperfections.
+            Content-AI is provided &apos;as is&apos; without any warranties,
+            either express or implied. We do not guarantee that it will always
+            be safe, secure, or error-free, nor do we guarantee that it will
+            always function without disruptions, delays, or imperfections.
           </p>
 
           <h2>7. Limitation of Liability</h2>
           <p>
-            To the fullest extent permitted by applicable law, Vertex-AI shall
+            To the fullest extent permitted by applicable law, Content-AI shall
             not be liable for any indirect, incidental, special, consequential,
             or punitive damages, or any loss of profits or revenues, whether
             incurred directly or indirectly, or any loss of data, use, goodwill,
