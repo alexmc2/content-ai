@@ -21,7 +21,7 @@ class MyDocument extends Document {
           />
           <meta
             property="og:url"
-            content="https://content-ai-brown.vercel.app"
+            content="https://content-ai-zeta.vercel.app/"
           />
 
           {/* Twitter Card Tags */}

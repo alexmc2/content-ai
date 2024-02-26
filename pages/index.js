@@ -21,7 +21,7 @@ export default function Home() {
           loop
         >
           <source
-            src="https://res.cloudinary.com/drbz4rq7y/video/upload/v1693663718/galaxy2_tdbfn2.mp4"
+            src="https://res.cloudinary.com/drbz4rq7y/video/upload/v1708964774/1118295_microscopic_structure_flare_3840x2160_hz78ry.mp4"
             type="video/mp4"
           />
         </video>
